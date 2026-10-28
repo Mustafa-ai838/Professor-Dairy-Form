@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+
+{% block title %}ریورڈ اور جانوروں کا انتظام (Herd Management){% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+
+  <!-- ہیڈر ٹائٹل اور بٹن -->
+  <div class="flex flex-wrap items-center justify-between gap-4">
+    <div>
+      <h2 class="text-2xl font-bold text-[#1B5E20] urdu-font">ماڈیول 1: ریورڈ و جانوروں کا کھاتہ (Herd Management)</h2>
+      <p class="text-xs text-gray-500">فارم کے تمام جانوروں، نسل، عمر، وزن، پیداواری صلاحیت اور حالت کا تفصیلی ریکارڈ</p>
+    </div>
+    <button onclick="document.getElementById('addAnimalModal').classList.remove('hidden')" class="btn-farm-primary urdu-font">
+      <span>➕</span>
+      <span>نیا جانور شامل کریں (Add Animal)</span>
+    </button>
+  </div>
+
+  <!-- کاؤنٹرز / سمری کارڈز -->
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+    <div class="glass-card p-3.5 text-center border-b-4 border-b-emerald-600">
+      <div class="text-xs text-gray-500 font-semibold urdu-font">کل فعال جانور</div>
+      <div class="text-2xl font-bold text-gray-800 mt-1">{{ counts.total }}</div>
+    </div>
+    <div class="glass-card p-3.5 text-center border-b-4 border-b-blue-600">
+      <div class="text-xs text-gray-500 font-semibold urdu-font">دودھ والی (Milking)</div>
+      <div class="text-2xl font-bold text-blue-800 mt-1">{{ counts.doodh_wali }}</div>
+    </div>
+    <div class="glass-card p-3.5 text-center border-b-4 border-b-amber-500">
+      <div class="text-xs text-gray-500 font-semibold urdu-font">خشک (Dry Cows)</div>
+      <div class="text-2xl font-bold text-amber-700 mt-1">{{ counts.dry }}</div>
+    </div>
+    <div class="glass-card p-3.5 text-center border-b-4 border-b-purple-600">
+      <div class="text-xs text-gray-500 font-semibold urdu-font">گابھن (Pregnant)</div>
+      <div class="text-2xl font-bold text-purple-800 mt-1">{{ counts.gabhan }}</div>
+    </div>
+    <div class="glass-card p-3.5 text-center border-b-4 border-b-teal-600">
+      <div class="text-xs text-gray-500 font-semibold urdu-font">بچھڑے / کٹڑے (Calves)</div>
+      <div class="text-2xl font-bold text-teal-800 mt-1">{{ counts.bachra }}</div>
+    </div>
+    <div class="glass-card p-3.5 text-center border-b-4 border-b-rose-600">
+      <div class="text-xs text-gray-500 font-semibold urdu-font">افزائشی بیل (Bulls)</div>
+      <div class="text-2xl font-bold text-rose-800 mt-1">{{ counts.bail }}</div>
+    </div>
+  </div>
+
+  <!-- فلٹرز -->
+  <div class="glass-card p-4 flex flex-wrap items-center justify-between gap-3">
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="text-xs font-bold text-gray-600 urdu-font">قسم کے لحاظ سے فلٹر:</span>
+      <a href="{{ url_for('herd', filter_qism='All', filter_halat=filter_halat) }}" class="px-3 py-1 rounded-full text-xs font-semibold {% if filter_qism == 'All' %}bg-[#1B5E20] text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
+        تمام
+      </a>
+      <a href="{{ url_for('herd', filter_qism='Doodh wali', filter_halat=filter_halat) }}" class="px-3 py-1 rounded-full text-xs font-semibold {% if filter_qism == 'Doodh wali' %}bg-[#1B5E20] text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
+        دودھ والی
+      </a>
+      <a href="{{ url_for('herd', filter_qism='Dry', filter_halat=filter_halat) }}" class="px-3 py-1 rounded-full text-xs font-semibold {% if filter_qism == 'Dry' %}bg-[#1B5E20] text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
+        خشک
+      </a>
+      <a href="{{ url_for('herd', filter_qism='Gabhan', filter_halat=filter_halat) }}" class="px-3 py-1 rounded-full text-xs font-semibold {% if filter_qism == 'Gabhan' %}bg-[#1B5E20] text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
+        گابھن
+      </a>
+      <a href="{{ url_for('herd', filter_qism='Bachra', filter_halat=filter_halat) }}" class="px-3 py-1 rounded-full text-xs font-semibold {% if filter_qism == 'Bachra' %}bg-[#1B5E20] text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
+        بچھڑا / کٹی
+      </a>
+      <a href="{{ url_for('herd', filter_qism='Bail', filter_halat=filter_halat) }}" class="px-3 py-1 rounded-full text-xs font-semibold {% if filter_qism == 'Bail' %}bg-[#1B5E20] text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
+        بیل / سانڈ
+      </a>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <span class="text-xs font-bold text-gray-600 urdu-font">حالت:</span>
+      <a href="{{ url_for('herd', filter_qism=filter_qism, filter_halat='Faal') }}" class="px-2.5 py-1 text-xs rounded-lg {% if filter_halat == 'Faal' %}bg-emerald-100 text-emerald-800 font-bold{% else %}text-gray-500{% endif %}">فعال (Active)</a>
+      <a href="{{ url_for('herd', filter_qism=filter_qism, filter_halat='Farokht') }}" class="px-2.5 py-1 text-xs rounded-lg {% if filter_halat == 'Farokht' %}bg-amber-100 text-amber-800 font-bold{% else %}text-gray-500{% endif %}">فروخت شدہ (Sold)</a>
+      <a href="{{ url_for('herd', filter_qism=filter_qism, filter_halat='Maut') }}" class="px-2.5 py-1 text-xs rounded-lg {% if filter_halat == 'Maut' %}bg-red-100 text-red-800 font-bold{% else %}text-gray-500{% endif %}">فوت شدہ (Died)</a>
+    </div>
+  </div>
+
+  <!-- جانوروں کی فہرست ٹیبل -->
+  <div class="glass-card overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="farm-table">
+        <thead>
+          <tr>
+            <th>ٹیگ نمبر (Tag)</th>
+            <th>نسل (Breed)</th>
+            <th>عمر (Age)</th>
+            <th>وزن (Weight)</th>
+            <th>قسم (Category)</th>
+            <th>صلاحیت (L/Day)</th>
+            <th>قیمت خرید (PKR)</th>
+            <th>حالت (Status)</th>
+            <th>تفصیل / نوٹس</th>
+            <th class="text-center">ایکشن</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for animal in animals %}
+          <tr>
+            <td class="font-bold text-[#1B5E20]">{{ animal.tag_no }}</td>
+            <td class="font-medium">{{ animal.nasal }}</td>
+            <td>{{ animal.umer }}</td>
+            <td><strong>{{ animal.wazan }}</strong> کلو</td>
+            <td>
+              <span class="badge-cream font-bold">
+                {% if animal.qism == 'Doodh wali' %}🥛 دودھ والی
+                {% elif animal.qism == 'Dry' %}🍂 خشک
+                {% elif animal.qism == 'Gabhan' %}🤰 گابھن
+                {% elif animal.qism == 'Bachra' %}🌱 بچھڑا/کٹی
+                {% elif animal.qism == 'Bail' %}🐂 بیل/سانڈ
+                {% else %}{{ animal.qism }}{% endif %}
+              </span>
+            </td>
+            <td>{% if animal.doodh_capacity > 0 %}{{ animal.doodh_capacity }} لیٹر{% else %}-{% endif %}</td>
+            <td>{{ "{:,.0f}".format(animal.kharid_qemat) }}</td>
+            <td>
+              <span class="px-2 py-0.5 rounded-full text-xs font-semibold
+                {% if animal.halat == 'Faal' %}bg-emerald-100 text-emerald-800
+                {% elif animal.halat == 'Farokht' %}bg-amber-100 text-amber-800
+                {% elif animal.halat == 'Maut' %}bg-red-100 text-red-800
+                {% else %}bg-gray-100 text-gray-800{% endif %}">
+                {% if animal.halat == 'Faal' %}فعال (Active)
+                {% elif animal.halat == 'Farokht' %}فروخت شدہ
+                {% elif animal.halat == 'Maut' %}فوت شدہ
+                {% else %}{{ animal.halat }}{% endif %}
+              </span>
+            </td>
+            <td class="text-xs text-gray-500 max-w-xs truncate">{{ animal.notes or '-' }}</td>
+            <td class="text-center">
+              <form method="POST" action="{{ url_for('delete_animal', id=animal.id) }}" onsubmit="return confirm('کیا آپ واقعی اس جانور کا ریکارڈ ختم کرنا چاہتے ہیں؟');" class="inline">
+                <button type="submit" class="text-red-500 hover:text-red-700 text-xs font-bold p-1">
+                  حذف 🗑️
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="10" class="text-center py-8 text-gray-400 urdu-font">کوئی جانور موجود نہیں ہے</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- نیا جانور شامل کرنے کا ماڈل (Modal) -->
+<div id="addAnimalModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+  <div class="glass-card max-w-2xl w-full p-6 bg-white overflow-y-auto max-h-[90vh]">
+    <div class="flex items-center justify-between border-b pb-3 mb-4">
+      <h3 class="text-lg font-bold text-[#1B5E20] urdu-font">نیا جانور شامل کریں (Add Animal)</h3>
+      <button onclick="document.getElementById('addAnimalModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700 text-xl font-bold">&times;</button>
+    </div>
+
+    <form method="POST" action="{{ url_for('herd') }}" class="space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">ٹیگ نمبر (Tag No)*:</label>
+          <input type="text" name="tag_no" required placeholder="مثال: PK-110" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">نسل (Breed)*:</label>
+          <select name="nasal" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
+            <option value="ساہیوال گائے (Sahiwal)">ساہیوال گائے (Sahiwal)</option>
+            <option value="نیلی راوی بھینس (Nili Ravi)">نیلی راوی بھینس (Nili Ravi)</option>
+            <option value="چولستانی گائے (Cholistani)">چولستانی گائے (Cholistani)</option>
+            <option value="فریزن کراس (Friesian Cross)">فریزن کراس (Friesian Cross)</option>
+            <option value="جرسی گائے (Jersey)">جرسی گائے (Jersey)</option>
+            <option value="کنڈی بھینس (Kundi)">کنڈی بھینس (Kundi)</option>
+            <option value="دیسی / دیگر نسل">دیسی / دیگر نسل</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">عمر (Age):</label>
+          <input type="text" name="umer" placeholder="مثال: 3 سال یا 8 ماہ" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">وزن کلوگرام (Weight Kg):</label>
+          <input type="number" step="0.5" name="wazan" placeholder="420" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">قسم (Category)*:</label>
+          <select name="qism" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
+            <option value="Doodh wali">دودھ والی (Milking)</option>
+            <option value="Dry">خشک (Dry)</option>
+            <option value="Gabhan">گابھن (Pregnant)</option>
+            <option value="Bachra">بچھڑا / کٹا (Calf)</option>
+            <option value="Bail">افزائشی بیل / سانڈ (Bull)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">دودھ کی گنجائش (L/Day):</label>
+          <input type="number" step="0.5" name="doodh_capacity" placeholder="18" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">قیمت خرید (PKR):</label>
+          <input type="number" name="kharid_qemat" placeholder="250000" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">فارم آمد تاریخ:</label>
+          <input type="date" name="tarikh_dakhla" value="{{ today_date }}" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">اضافی تفصیل یا نوٹس:</label>
+        <textarea name="notes" rows="2" placeholder="جانور کی خاص بات، ویکسین یا شجرہ نسب..." class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]"></textarea>
+      </div>
+
+      <div class="flex justify-end gap-2 pt-3 border-t">
+        <button type="button" onclick="document.getElementById('addAnimalModal').classList.add('hidden')" class="px-4 py-2 border rounded-xl text-gray-600 hover:bg-gray-100 urdu-font">منسوخ کریں</button>
+        <button type="submit" class="btn-farm-primary urdu-font">محفوظ کریں (Save)</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

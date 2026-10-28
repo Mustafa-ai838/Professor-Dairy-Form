@@ -1,0 +1,6 @@
+{
+  "name": "Dairy Farm Management System",
+  "description": "مکمل ڈیری فارم مینجمنٹ سسٹم - Complete Urdu Dairy Farm Management System with Herd, Milk Production, Income, Expenses, Feed, Health, and Khata Management in Python Flask and SQLite.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

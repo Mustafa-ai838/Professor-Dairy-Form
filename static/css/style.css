@@ -1,0 +1,245 @@
+/*
+  ڈیری فارم مینجمنٹ سسٹم - اسٹائل شیٹ (CSS)
+  رنگ: 
+  - #1B5E20 (Deep Emerald Green - پرائمری رنگ)
+  - #FFF8E1 (Cream / Warm Pearl - بیک گراؤنڈ اور کارڈز)
+  - #FF8F00 (Amber / Gold Accent - نمایاں بٹنز اور مارکرز)
+*/
+
+:root {
+  --primary: #1B5E20;
+  --primary-dark: #0d3813;
+  --primary-light: #2e7d32;
+  --cream: #FFF8E1;
+  --cream-light: #fffdf6;
+  --amber: #FF8F00;
+  --amber-dark: #e65100;
+  --bg-main: #f4f6f0;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --text-dark: #1f2937;
+  --text-muted: #4b5563;
+  --border-color: #e5e7eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  direction: rtl; /* دائیں سے بائیں اردو لے آؤٹ */
+  text-align: right;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* اردو فونٹ کے لیے خصوصی کلاس */
+.urdu-font {
+  font-family: 'Noto Nastaliq Urdu', serif;
+  line-height: 1.8;
+}
+
+/* گلاس مورفزم کارڈز */
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(27, 94, 32, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease-in-out;
+}
+
+.glass-card:hover {
+  box-shadow: 0 8px 30px rgba(27, 94, 32, 0.08);
+  border-color: rgba(27, 94, 32, 0.25);
+}
+
+/* نیویگیشن بار اور سائڈبار */
+.sidebar {
+  width: 280px;
+  background: linear-gradient(180deg, #1B5E20 0%, #0d3813 100%);
+  color: white;
+  min-height: 100vh;
+  padding: 1.5rem 1rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.main-content {
+  margin-right: 280px;
+  padding: 2rem;
+  flex: 1;
+}
+
+@media (max-width: 992px) {
+  .sidebar {
+    width: 100%;
+    position: relative;
+    min-height: auto;
+  }
+  .main-content {
+    margin-right: 0;
+    padding: 1rem;
+  }
+}
+
+.nav-link-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  color: #e2f1e4;
+  text-decoration: none;
+  border-radius: 10px;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.nav-link-custom:hover, .nav-link-custom.active {
+  background: rgba(255, 248, 225, 0.18);
+  color: #ffffff;
+  border-right: 4px solid var(--amber);
+}
+
+/* بٹنز کے اسٹائل */
+.btn-farm-primary {
+  background-color: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-farm-primary:hover {
+  background-color: var(--primary-light);
+  color: #ffffff;
+}
+
+.btn-farm-amber {
+  background-color: var(--amber);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-farm-amber:hover {
+  background-color: var(--amber-dark);
+}
+
+/* بیجز */
+.badge-cream {
+  background-color: var(--cream);
+  color: #5d4037;
+  border: 1px solid #ffe082;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.82rem;
+}
+
+.badge-green {
+  background-color: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #c8e6c9;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.82rem;
+}
+
+.badge-amber {
+  background-color: #fff3e0;
+  color: #e65100;
+  border: 1px solid #ffe0b2;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.82rem;
+}
+
+/* ٹیبلز */
+.farm-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.farm-table th {
+  background-color: #f1f5e9;
+  color: var(--primary-dark);
+  font-weight: 600;
+  padding: 0.9rem 1rem;
+  border-bottom: 2px solid #d0e1d4;
+  text-align: right;
+}
+
+.farm-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #edf2e9;
+  vertical-align: middle;
+}
+
+.farm-table tr:hover td {
+  background-color: #fafcf7;
+}
+
+/* KPI کارڈز */
+.kpi-title {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.kpi-value {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  line-height: 1.2;
+}
+
+/* وارننگ پٹی */
+.disk-warning-banner {
+  background: linear-gradient(90deg, #d32f2f, #b71c1c);
+  color: white;
+  padding: 0.9rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(211, 47, 47, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* فوٹر */
+.footer-bar {
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  padding: 1rem 2rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
