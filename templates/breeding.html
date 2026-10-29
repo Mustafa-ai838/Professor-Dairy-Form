@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}بریڈنگ و تولیدی نظام اور حمل کاؤنٹ ڈاؤن (Breeding & Reproduction Tracker){% endblock %}
+{% block title %}Breeding and Reproduction Tracker{% endblock %}
 
 {% block content %}
 <div class="space-y-6">
@@ -9,22 +9,22 @@
   <div class="flex flex-wrap items-center justify-between gap-4">
     <div>
       <div class="flex items-center gap-2">
-        <h2 class="text-2xl font-bold text-[#1B5E20] urdu-font">ماڈیول 7: بریڈنگ و تولیدی نظام (Breeding Tracker)</h2>
+        <h2 class="text-2xl font-bold text-[#1B5E20] urdu-font">Module 7: Breeding and Reproduction</h2>
         <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#FF8F00] text-white">280 Days Gestation</span>
       </div>
-      <p class="text-xs text-gray-500 mt-1">حمل کاؤنٹ ڈاؤن، ٹیکہ تاریخ (A.I Date) سے خودکار متوقع تاریخ ولادت (+280 دن)، الرٹس اور کیلنڈر ویو</p>
+      <p class="text-xs text-gray-500 mt-1">Pregnancy countdown, estimated calving date automatically calculated from the insemination date (+280 days), alerts, and calendar view</p>
     </div>
     <div class="flex items-center gap-2">
       <button onclick="document.getElementById('addBreedingModal').classList.remove('hidden')" class="btn-farm-primary urdu-font">
         <span>🧬</span>
-        <span>نیا بریڈنگ ریکارڈ (Add Insemination)</span>
+        <span>Add breeding record</span>
       </button>
       <div class="inline-flex rounded-xl bg-gray-100 p-1 text-xs font-semibold">
         <button id="btnListView" onclick="switchView('list')" class="px-3 py-1.5 rounded-lg bg-white text-[#1B5E20] shadow-xs">
-          📋 لسٹ ویو
+          📋 List view
         </button>
         <button id="btnCalView" onclick="switchView('calendar')" class="px-3 py-1.5 rounded-lg text-gray-600 hover:text-[#1B5E20]">
-          📅 کیلنڈر ویو
+          📅 Calendar view
         </button>
       </div>
     </div>
@@ -33,12 +33,12 @@
   <!-- کاؤنٹرز / سمری کارڈز -->
   <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
     <div class="glass-card p-4 border-r-4 border-r-[#1B5E20]">
-      <div class="text-xs text-gray-500 font-semibold urdu-font">کل ٹریک شدہ جانور</div>
+      <div class="text-xs text-gray-500 font-semibold urdu-font">Total animals tracked</div>
       <div class="text-3xl font-extrabold text-gray-800 mt-1">{{ records|length }}</div>
-      <div class="text-[11px] text-gray-400 mt-0.5">افزائش نسل ڈیٹا بیس</div>
+      <div class="text-[11px] text-gray-400 mt-0.5">Breeding database</div>
     </div>
     <div class="glass-card p-4 border-r-4 border-r-emerald-600">
-      <div class="text-xs text-gray-500 font-semibold urdu-font">تصدیق شدہ گابھن (Pregnant)</div>
+      <div class="text-xs text-gray-500 font-semibold urdu-font">Confirmed pregnant</div>
       <div class="text-3xl font-extrabold text-emerald-800 mt-1">
         {% set preg_count = namespace(total=0) %}
         {% for r in records if r.pregnancy_status == 'Tasdeeq Shuda' or r.pregnancy_status == 'Pregnant' %}
@@ -46,17 +46,17 @@
         {% endfor %}
         {{ preg_count.total }}
       </div>
-      <div class="text-[11px] text-emerald-700 mt-0.5">کاؤنٹ ڈاؤن فعال ہے</div>
+      <div class="text-[11px] text-emerald-700 mt-0.5">Countdown is active</div>
     </div>
     <div class="glass-card p-4 border-r-4 border-r-[#FF8F00] bg-amber-50/40">
-      <div class="text-xs text-amber-900 font-bold urdu-font">ولادت متوقع قریب (&lt;35 دن)</div>
+      <div class="text-xs text-amber-900 font-bold urdu-font">Calving due soon (&lt;35 days)</div>
       <div class="text-3xl font-extrabold text-[#e65100] mt-1">2</div>
-      <div class="text-[11px] text-amber-800 mt-0.5">⚠️ فوری ڈیلیوری پین تیار رکھیں</div>
+      <div class="text-[11px] text-amber-800 mt-0.5">⚠️ Prepare the calving pen promptly</div>
     </div>
     <div class="glass-card p-4 border-r-4 border-r-rose-500">
-      <div class="text-xs text-rose-900 font-semibold urdu-font">ہیٹ میں جانور (In Heat)</div>
+      <div class="text-xs text-rose-900 font-semibold urdu-font">Animals in heat</div>
       <div class="text-3xl font-extrabold text-rose-700 mt-1">1</div>
-      <div class="text-[11px] text-rose-600 mt-0.5">فوری سیمن ملاپ ضروری</div>
+      <div class="text-[11px] text-rose-600 mt-0.5">Insemination is needed promptly</div>
     </div>
   </div>
 
@@ -65,28 +65,28 @@
     <div class="glass-card p-4 bg-amber-50/70 border border-amber-200">
       <div class="flex items-center gap-2 text-xs font-bold text-amber-900 urdu-font mb-1.5">
         <span>🔔</span>
-        <span>ولادت الرٹ (Calving Due Soon):</span>
+        <span>Calving alert (due soon):</span>
       </div>
       <p class="text-xs text-gray-700 leading-relaxed">
-        <strong>PK-106</strong> اور <strong>PK-102</strong> کی ولادت <strong>21 نومبر 2026</strong> کو متوقع ہے (صرف 31 دن باقی)۔ علیحدہ کاونگ روم اور خشک بستر تیار رکھیں۔
+        <strong>PK-106</strong> and <strong>PK-102</strong> will calve <strong>November 21, 2026</strong> (31 days remaining). Prepare a separate calving room and dry bedding.
       </p>
     </div>
     <div class="glass-card p-4 bg-blue-50/70 border border-blue-200">
       <div class="flex items-center gap-2 text-xs font-bold text-blue-900 urdu-font mb-1.5">
         <span>🩺</span>
-        <span>حمل جانچ الرٹ (PD Check Due):</span>
+        <span>Pregnancy test alert (PD check due):</span>
       </div>
       <p class="text-xs text-gray-700 leading-relaxed">
-        <strong>PK-103</strong> کا 19 ستمبر کو سیمن ہوا تھا۔ <strong>5 نومبر 2026</strong> کو الٹرا ساؤنڈ یا پی ڈی چیک کروا کر گابھن کی تصدیق کریں۔
+        <strong>PK-103</strong> was inseminated on September 19. <strong>November 5, 2026</strong> Arrange an ultrasound or PD check to confirm pregnancy.
       </p>
     </div>
     <div class="glass-card p-4 bg-rose-50/70 border border-rose-200">
       <div class="flex items-center gap-2 text-xs font-bold text-rose-900 urdu-font mb-1.5">
         <span>🔥</span>
-        <span>ہیٹ علامات الرٹ (Heat Alert):</span>
+        <span>Heat signs alert:</span>
       </div>
       <p class="text-xs text-gray-700 leading-relaxed">
-        <strong>PK-104</strong> گائے کل شام سے ہیٹ علامات میں ہے۔ اگلے 12 گھنٹوں کے اندر ساہیوال چیمپئن سیمن کروائیں۔
+        <strong>PK-104</strong> Cow has shown signs of heat since yesterday evening. Arrange insemination with Sahiwal Champion semen within the next 12 hours.
       </p>
     </div>
   </div>
@@ -97,13 +97,13 @@
       <div class="flex items-center gap-3">
         <span class="text-3xl">🤰</span>
         <div>
-          <h3 class="text-lg font-bold text-[#1B5E20] urdu-font">حمل کاؤنٹ ڈاؤن اور متوقع ولادت (Pregnancy Countdown)</h3>
-          <p class="text-xs text-gray-500">گائے کے لیے 280 دن مدت حمل کے مطابق خودکار متوقع تاریخ ولادت اور بقیہ ایام</p>
+          <h3 class="text-lg font-bold text-[#1B5E20] urdu-font">Pregnancy countdown and estimated calving (Pregnancy Countdown)</h3>
+          <p class="text-xs text-gray-500">Estimated calving date and days remaining, based on a 280-day cow gestation</p>
         </div>
       </div>
       <div class="flex gap-2 text-xs">
-        <span class="px-3 py-1 bg-[#FFF8E1] border border-[#ffe082] rounded-lg font-bold text-[#1B5E20]">گائے: +280 دن</span>
-        <span class="px-3 py-1 bg-blue-50 border border-blue-200 rounded-lg font-bold text-blue-900">بھینس: +310 دن</span>
+        <span class="px-3 py-1 bg-[#FFF8E1] border border-[#ffe082] rounded-lg font-bold text-[#1B5E20]">Cows: +280 days</span>
+        <span class="px-3 py-1 bg-blue-50 border border-blue-200 rounded-lg font-bold text-blue-900">Buffaloes: +310 days</span>
       </div>
     </div>
 
@@ -115,42 +115,42 @@
         <div class="flex items-center justify-between">
           <div>
             <div className="font-black text-gray-900 text-lg">PK-106</div>
-            <div className="text-xs text-gray-500">ساہیوال گائے (Sahiwal)</div>
+            <div className="text-xs text-gray-500">Sahiwal cow</div>
           </div>
           <div class="px-3 py-1 rounded-xl bg-amber-100 text-amber-950 font-black text-sm border border-amber-300">
-            ⏳ 31 دن باقی
+            ⏳ 31 days left
           </div>
         </div>
         <div>
           <div class="flex justify-between text-xs text-gray-600 mb-1">
-            <span>مدت حمل پیش رفت:</span>
-            <strong class="text-gray-900">249 / 280 دن (89%)</strong>
+            <span>Gestation progress:</span>
+            <strong class="text-gray-900">249 / 280 days (89%)</strong>
           </div>
           <div class="w-full h-3 bg-gray-100 rounded-full overflow-hidden p-0.5">
             <div class="bg-gradient-to-l from-[#1B5E20] to-[#FF8F00] h-full rounded-full" style="width: 89%"></div>
           </div>
-          <div class="text-[11px] text-gray-500 mt-1">مرحلہ: تیسری سہ ماہی (3rd Trimester)</div>
+          <div class="text-[11px] text-gray-500 mt-1">Stage: third trimester</div>
         </div>
         <div class="grid grid-cols-2 gap-2 text-xs bg-[#F8F9F5] p-2.5 rounded-xl text-gray-700">
           <div>
-            <span class="text-gray-400 block text-[10px]">ٹیکہ تاریخ:</span>
+            <span class="text-gray-400 block text-[10px]">Insemination date:</span>
             <strong>2026-02-14</strong>
           </div>
           <div>
-            <span class="text-gray-400 block text-[10px]">متوقع ولادت (+280d):</span>
+            <span class="text-gray-400 block text-[10px]">Estimated calving (+280d):</span>
             <strong class="text-[#1B5E20]">2026-11-21</strong>
           </div>
           <div>
-            <span class="text-gray-400 block text-[10px]">ڈرائی آف تاریخ (-60d):</span>
+            <span class="text-gray-400 block text-[10px]">Dry-off date (-60d):</span>
             <strong class="text-amber-800">2026-09-22</strong>
           </div>
           <div>
-            <span class="text-gray-400 block text-[10px]">سیمن:</span>
-            <span class="truncate">امریکن فریزن</span>
+            <span class="text-gray-400 block text-[10px]">Semen:</span>
+            <span class="truncate">American Friesian</span>
           </div>
         </div>
         <div class="p-2 rounded-lg bg-amber-50 text-amber-900 text-xs font-bold border border-amber-200">
-          ⚠️ ولادت انتہائی قریب ہے! کاونگ روم تیار رکھیں۔
+          ⚠️ Calving is imminent! Prepare the calving room.
         </div>
       </div>
 
@@ -159,42 +159,42 @@
         <div class="flex items-center justify-between">
           <div>
             <div className="font-black text-gray-900 text-lg">PK-102</div>
-            <div className="text-xs text-gray-500">نیلی راوی بھینس (Nili Ravi)</div>
+            <div className="text-xs text-gray-500">Nili Ravi buffalo</div>
           </div>
           <div class="px-3 py-1 rounded-xl bg-amber-100 text-amber-950 font-black text-sm border border-amber-300">
-            ⏳ 31 دن باقی
+            ⏳ 31 days left
           </div>
         </div>
         <div>
           <div class="flex justify-between text-xs text-gray-600 mb-1">
-            <span>مدت حمل پیش رفت:</span>
-            <strong class="text-gray-900">279 / 310 دن (90%)</strong>
+            <span>Gestation progress:</span>
+            <strong class="text-gray-900">279 / 310 days (90%)</strong>
           </div>
           <div class="w-full h-3 bg-gray-100 rounded-full overflow-hidden p-0.5">
             <div class="bg-gradient-to-l from-[#1B5E20] to-[#FF8F00] h-full rounded-full" style="width: 90%"></div>
           </div>
-          <div class="text-[11px] text-gray-500 mt-1">مرحلہ: تیسری سہ ماہی (3rd Trimester)</div>
+          <div class="text-[11px] text-gray-500 mt-1">Stage: third trimester</div>
         </div>
         <div class="grid grid-cols-2 gap-2 text-xs bg-[#F8F9F5] p-2.5 rounded-xl text-gray-700">
           <div>
-            <span class="text-gray-400 block text-[10px]">ٹیکہ تاریخ:</span>
+            <span class="text-gray-400 block text-[10px]">Insemination date:</span>
             <strong>2026-01-15</strong>
           </div>
           <div>
-            <span class="text-gray-400 block text-[10px]">متوقع ولادت (+310d):</span>
+            <span class="text-gray-400 block text-[10px]">Estimated calving (+310d):</span>
             <strong class="text-[#1B5E20]">2026-11-21</strong>
           </div>
           <div>
-            <span class="text-gray-400 block text-[10px]">ڈرائی آف تاریخ (-60d):</span>
+            <span class="text-gray-400 block text-[10px]">Dry-off date (-60d):</span>
             <strong class="text-amber-800">2026-09-22</strong>
           </div>
           <div>
-            <span class="text-gray-400 block text-[10px]">سیمن / سانڈ:</span>
-            <span class="truncate">قدرتی سانڈ ملاپ</span>
+            <span class="text-gray-400 block text-[10px]">Semen / bull:</span>
+            <span class="truncate">Natural bull service</span>
           </div>
         </div>
         <div class="p-2 rounded-lg bg-amber-50 text-amber-900 text-xs font-bold border border-amber-200">
-          ⚠️ ڈرائی آف مکمل ہو چکا ہے، ولادت کی تیاری رکھیں۔
+          ⚠️ Dry-off is complete; prepare for calving.
         </div>
       </div>
 
@@ -203,42 +203,42 @@
         <div class="flex items-center justify-between">
           <div>
             <div className="font-black text-gray-900 text-lg">PK-101</div>
-            <div className="text-xs text-gray-500">ساہیوال گائے (Sahiwal)</div>
+            <div className="text-xs text-gray-500">Sahiwal cow</div>
           </div>
           <div class="px-3 py-1 rounded-xl bg-emerald-50 text-emerald-900 font-black text-sm border border-emerald-200">
-            ⏳ 116 دن باقی
+            ⏳ 116 days left
           </div>
         </div>
         <div>
           <div class="flex justify-between text-xs text-gray-600 mb-1">
-            <span>مدت حمل پیش رفت:</span>
-            <strong class="text-gray-900">164 / 280 دن (58%)</strong>
+            <span>Gestation progress:</span>
+            <strong class="text-gray-900">164 / 280 days (58%)</strong>
           </div>
           <div class="w-full h-3 bg-gray-100 rounded-full overflow-hidden p-0.5">
             <div class="bg-gradient-to-l from-[#1B5E20] to-[#FF8F00] h-full rounded-full" style="width: 58%"></div>
           </div>
-          <div class="text-[11px] text-gray-500 mt-1">مرحلہ: دوسری سہ ماہی (2nd Trimester)</div>
+          <div class="text-[11px] text-gray-500 mt-1">Stage: second trimester</div>
         </div>
         <div class="grid grid-cols-2 gap-2 text-xs bg-[#F8F9F5] p-2.5 rounded-xl text-gray-700">
           <div>
-            <span class="text-gray-400 block text-[10px]">ٹیکہ تاریخ:</span>
+            <span class="text-gray-400 block text-[10px]">Insemination date:</span>
             <strong>2026-05-10</strong>
           </div>
           <div>
-            <span class="text-gray-400 block text-[10px]">متوقع ولادت (+280d):</span>
+            <span class="text-gray-400 block text-[10px]">Estimated calving (+280d):</span>
             <strong class="text-[#1B5E20]">2027-02-14</strong>
           </div>
           <div>
-            <span class="text-gray-400 block text-[10px]">ڈرائی آف تاریخ (-60d):</span>
+            <span class="text-gray-400 block text-[10px]">Dry-off date (-60d):</span>
             <strong class="text-amber-800">2026-12-16</strong>
           </div>
           <div>
-            <span class="text-gray-400 block text-[10px]">سیمن:</span>
-            <span class="truncate">ساہیوال بیف سیمن</span>
+            <span class="text-gray-400 block text-[10px]">Semen:</span>
+            <span class="truncate">Sahiwal beef semen</span>
           </div>
         </div>
         <div class="p-2 rounded-lg bg-emerald-50 text-emerald-800 text-xs font-semibold border border-emerald-200">
-          ✅ حمل کی نشوونما معمول کے مطابق ہے، متوازن ونڈا دیں۔
+          ✅ Pregnancy is progressing normally; provide a balanced feed.
         </div>
       </div>
 
@@ -248,22 +248,22 @@
   <!-- ویو 1: لسٹ ٹیبل ویو -->
   <div id="listViewContainer" class="glass-card overflow-hidden">
     <div class="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
-      <h3 class="font-bold text-[#1B5E20] urdu-font text-base">بریڈنگ و ولادت ریکارڈ ٹیبل</h3>
-      <span class="text-xs text-gray-500">کل ریکارڈز: {{ records|length }}</span>
+      <h3 class="font-bold text-[#1B5E20] urdu-font text-base">Breeding and calving records</h3>
+      <span class="text-xs text-gray-500">Total records: {{ records|length }}</span>
     </div>
 
     <div class="overflow-x-auto">
       <table class="farm-table">
         <thead>
           <tr>
-            <th>ٹیگ نمبر (Tag No)</th>
-            <th>ٹیکہ / ملاپ تاریخ</th>
-            <th>طریقہ (Method)</th>
-            <th>متوقع تاریخ ولادت (+280d)</th>
-            <th>حمل کی حالت (Status)</th>
-            <th>کاؤنٹ ڈاؤن (Days Left)</th>
-            <th>تفصیل / سیمن ریکارڈ</th>
-            <th class="text-center">حذف</th>
+            <th>Tag number</th>
+            <th>Insemination / mating date</th>
+            <th>Method</th>
+            <th>Estimated calving date (+280d)</th>
+            <th>Pregnancy status</th>
+            <th>Countdown (days left)</th>
+            <th>Description / semen record</th>
+            <th class="text-center">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -287,29 +287,29 @@
                 {% elif b.pregnancy_status == 'Mushtaba' or b.pregnancy_status == 'Inseminated' %}bg-blue-100 text-blue-800
                 {% elif b.pregnancy_status == 'In Heat' %}bg-rose-100 text-rose-800
                 {% else %}bg-gray-100 text-gray-800{% endif %}">
-                {% if b.pregnancy_status == 'Tasdeeq Shuda' or b.pregnancy_status == 'Pregnant' %}تصدیق شدہ گابھن
-                {% elif b.pregnancy_status == 'Mushtaba' or b.pregnancy_status == 'Inseminated' %}ٹیکہ شدہ / زیر جانچ
-                {% elif b.pregnancy_status == 'In Heat' %}ہیٹ میں
-                {% else %}خالی (Open){% endif %}
+                {% if b.pregnancy_status == 'Tasdeeq Shuda' or b.pregnancy_status == 'Pregnant' %}Confirmed pregnant
+                {% elif b.pregnancy_status == 'Mushtaba' or b.pregnancy_status == 'Inseminated' %}Inseminated / awaiting test
+                {% elif b.pregnancy_status == 'In Heat' %}In heat
+                {% else %}Not pregnant (open){% endif %}
               </span>
             </td>
             <td>
               <span class="px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800">
-                280 دن شیڈول
+                280-day schedule
               </span>
             </td>
             <td class="text-xs text-gray-500">{{ b.notes or '-' }}</td>
             <td class="text-center">
-              <form method="POST" action="{{ url_for('delete_breeding', id=b.id) }}" onsubmit="return confirm('کیا آپ یہ ریکارڈ حذف کرنا چاہتے ہیں؟');" class="inline">
+              <form method="POST" action="{{ url_for('delete_breeding', id=b.id) }}" onsubmit="return confirm('Are you sure you want to delete this breeding record?');" class="inline">
                 <button type="submit" class="text-red-500 hover:text-red-700 text-xs font-bold p-1">
-                  حذف 🗑️
+                  Delete 🗑️
                 </button>
               </form>
             </td>
           </tr>
           {% else %}
           <tr>
-            <td colspan="8" class="text-center py-8 text-gray-400 urdu-font">کوئی بریڈنگ ریکارڈ نہیں ملا</td>
+            <td colspan="8" class="text-center py-8 text-gray-400 urdu-font">No breeding records found</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -321,24 +321,24 @@
   <div id="calendarViewContainer" class="hidden glass-card p-6 space-y-4">
     <div class="flex items-center justify-between border-b pb-3">
       <div>
-        <h3 class="text-lg font-bold text-[#1B5E20] urdu-font">نومبر 2026 - بریڈنگ و ولادت کیلنڈر</h3>
-        <p class="text-xs text-gray-500">متوقع تاریخ ولادت، حمل چیک اور ہیٹ سائیکل کا شیڈول</p>
+        <h3 class="text-lg font-bold text-[#1B5E20] urdu-font">November 2026 - Breeding and Calving Calendar</h3>
+        <p class="text-xs text-gray-500">Schedule of estimated calving dates, pregnancy checks, and heat cycles</p>
       </div>
       <div class="px-3 py-1 bg-[#FFF8E1] border border-[#ffe082] rounded-xl font-bold text-[#1B5E20] text-sm">
-        نومبر 2026
+        November 2026
       </div>
     </div>
 
     <!-- کیلنڈر گرڈ -->
     <div class="border rounded-xl overflow-hidden bg-white">
       <div class="grid grid-cols-7 text-center text-xs font-bold text-gray-700 bg-gray-100 py-2 border-b">
-        <div>پیر</div>
-        <div>منگل</div>
-        <div>بدھ</div>
-        <div>جمعرات</div>
-        <div>جمعہ</div>
-        <div>ہفتہ</div>
-        <div>اتوار</div>
+        <div>Monday</div>
+        <div>Tuesday</div>
+        <div>Wednesday</div>
+        <div>Thursday</div>
+        <div>Friday</div>
+        <div>Saturday</div>
+        <div>Sunday</div>
       </div>
       <div class="grid grid-cols-7 auto-rows-fr divide-x divide-y divide-gray-100 text-xs">
         {% for day in range(1, 31) %}
@@ -346,10 +346,10 @@
           <div class="font-bold text-gray-700">{{ day }}</div>
           <div>
             {% if day == 21 %}
-              <div class="bg-emerald-600 text-white text-[10px] p-1 rounded font-bold mb-1 truncate">🔔 ولادت: PK-106</div>
-              <div class="bg-emerald-600 text-white text-[10px] p-1 rounded font-bold truncate">🔔 ولادت: PK-102</div>
+              <div class="bg-emerald-600 text-white text-[10px] p-1 rounded font-bold mb-1 truncate">🔔 Calving: PK-106</div>
+              <div class="bg-emerald-600 text-white text-[10px] p-1 rounded font-bold truncate">🔔 Calving: PK-102</div>
             {% elif day == 5 %}
-              <div class="bg-blue-600 text-white text-[10px] p-1 rounded font-bold truncate">🩺 حمل چیک: PK-103</div>
+              <div class="bg-blue-600 text-white text-[10px] p-1 rounded font-bold truncate">🩺 Pregnancy check: PK-103</div>
             {% endif %}
           </div>
         </div>
@@ -358,8 +358,8 @@
     </div>
 
     <div class="flex items-center gap-4 text-xs pt-2">
-      <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-emerald-600"></span>متوقع ولادت (+280 دن)</span>
-      <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-blue-600"></span>حمل چیک (PD Check)</span>
+      <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-emerald-600"></span>Estimated calving (+280 days)</span>
+      <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-blue-600"></span>Pregnancy check (PD check)</span>
     </div>
   </div>
 
@@ -369,14 +369,14 @@
 <div id="addBreedingModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
   <div class="glass-card max-w-lg w-full p-6 bg-white overflow-y-auto max-h-[90vh]">
     <div class="flex items-center justify-between border-b pb-3 mb-4">
-      <h3 class="text-lg font-bold text-[#1B5E20] urdu-font">نیا بریڈنگ اندراج (Add Breeding Entry)</h3>
+      <h3 class="text-lg font-bold text-[#1B5E20] urdu-font">Add breeding record</h3>
       <button onclick="document.getElementById('addBreedingModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700 text-xl font-bold">&times;</button>
     </div>
 
     <form method="POST" action="{{ url_for('breeding') }}" class="space-y-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">مادہ جانور کا ٹیگ نمبر*:</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Female animal tag number*:</label>
           <select name="tag_no" id="animalSelect" onchange="updateDeliveryPreview()" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
             {% for c in cows %}
               <option value="{{ c.tag_no }}">{{ c.tag_no }} - {{ c.nasal }}</option>
@@ -384,54 +384,54 @@
           </select>
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">ٹیکہ / AI تاریخ*:</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Insemination / AI date*:</label>
           <input type="date" name="tika_tarikh" id="tikaDateInput" onchange="updateDeliveryPreview()" value="{{ today_date }}" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">ہیٹ تاریخ (Heat Date):</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Heat date:</label>
           <input type="date" name="heat_date" value="{{ today_date }}" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">حمل ٹیسٹ تاریخ (PD Date):</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Pregnancy test date (PD date):</label>
           <input type="date" name="pd_date" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">طریقہ نسل کشی (Method):</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Breeding method:</label>
           <select name="tika_qism" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
-            <option value="مصنوعی نسل کشی (A.I)">مصنوعی نسل کشی (A.I Semen)</option>
-            <option value="قدرتی ملاپ (Natural Bull)">قدرتی ملاپ (Natural Bull)</option>
+            <option value="مصنوعی نسل کشی (A.I)">Artificial insemination (A.I. semen)</option>
+            <option value="قدرتی ملاپ (Natural Bull)">Natural mating (bull)</option>
           </select>
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">حمل کی حالت (Status):</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Pregnancy status:</label>
           <select name="pregnancy_status" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
-            <option value="Tasdeeq Shuda">تصدیق شدہ گابھن (Pregnant)</option>
-            <option value="Mushtaba">ٹیکہ شدہ / زیر انتظار (Inseminated)</option>
-            <option value="In Heat">ہیٹ میں (In Heat)</option>
-            <option value="Open">خالی (Open)</option>
+            <option value="Tasdeeq Shuda">Confirmed pregnant</option>
+            <option value="Mushtaba">Inseminated / awaiting test (Inseminated)</option>
+            <option value="In Heat">In heat (In Heat)</option>
+            <option value="Open">Not pregnant (open)</option>
           </select>
         </div>
       </div>
 
       <!-- خودکار 280 دن کیلکولیشن پریویو -->
       <div id="deliveryPreviewBox" class="p-3 bg-[#FFF8E1] rounded-xl text-xs text-amber-900 border border-[#ffe082]">
-        💡 خودکار متوقع تاریخ ولادت: <strong id="previewDeliveryDate" class="text-[#1B5E20] font-bold">280 دن بعد</strong> (گائے 280 دن، بھینس 310 دن)
+        💡 Estimated calving date: <strong id="previewDeliveryDate" class="text-[#1B5E20] font-bold">280 days later</strong> (cows: 280 days; buffaloes: 310 days)
       </div>
 
       <div>
-        <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">سیمن کمپنی / سانڈ کا نام / نوٹس:</label>
-        <input type="text" name="notes" placeholder="امریکن امپورٹڈ سیمن، یا فارم کا اپنا سانڈ..." class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
+        <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Semen company / bull name / notes:</label>
+        <input type="text" name="notes" placeholder="Imported American semen or the farm’s own bull..." class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
       </div>
 
       <div class="flex justify-end gap-2 pt-3 border-t">
-        <button type="button" onclick="document.getElementById('addBreedingModal').classList.add('hidden')" class="px-4 py-2 border rounded-xl text-gray-600 hover:bg-gray-100 urdu-font">منسوخ کریں</button>
-        <button type="submit" class="btn-farm-primary urdu-font">محفوظ کریں (Save)</button>
+        <button type="button" onclick="document.getElementById('addBreedingModal').classList.add('hidden')" class="px-4 py-2 border rounded-xl text-gray-600 hover:bg-gray-100 urdu-font">Cancel</button>
+        <button type="submit" class="btn-farm-primary urdu-font">Save</button>
       </div>
     </form>
   </div>
@@ -463,10 +463,10 @@ function updateDeliveryPreview() {
   if (!tikaInput.value) return;
 
   const tikaDate = new Date(tikaInput.value);
-  // گائے کے لیے 280 دن
+  // For cows: 280 days
   tikaDate.setDate(tikaDate.getDate() + 280);
   const formatted = tikaDate.toISOString().split('T')[0];
-  preview.innerText = formatted + ' (+280 دن بعد)';
+  preview.innerText = formatted + ' (+280 days later)';
 }
 
 document.addEventListener('DOMContentLoaded', updateDeliveryPreview);

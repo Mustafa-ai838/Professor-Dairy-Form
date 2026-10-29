@@ -7,6 +7,7 @@
 """
 
 import os
+import secrets
 import shutil
 import sqlite3
 from datetime import datetime, date, timedelta
@@ -15,14 +16,26 @@ from flask import (
     Flask, render_template, request, redirect, url_for,
     flash, session, g, jsonify
 )
+from werkzeug.security import check_password_hash, generate_password_hash
 
 # Flask ایپ کو شروع کیا جا رہا ہے
 app = Flask(__name__)
-# سیشن کو محفوظ رکھنے کے لیے خفیہ کی
-app.secret_key = "dairy_farm_pakistan_secret_key_12345"
+APP_ENV = os.environ.get("APP_ENV", "development")
+SECRET_KEY = os.environ.get("SECRET_KEY")
+if APP_ENV == "production" and not SECRET_KEY:
+    raise RuntimeError("SECRET_KEY must be configured for production.")
+app.secret_key = SECRET_KEY or secrets.token_hex(32)
+app.config.update(
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE="Lax",
+    SESSION_COOKIE_SECURE=APP_ENV == "production",
+)
 
 # ڈیٹابیس فائل کا راستہ - تمام ڈیٹا ایک ہی SQLite فائل میں محفوظ ہوگا
-DB_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "farm.db")
+DB_FILE = os.path.abspath(os.environ.get(
+    "DB_PATH",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "farm.db")
+))
 
 
 # --------------------------------------------------------------
@@ -34,7 +47,7 @@ def check_disk_space():
     اگر جگہ 500MB سے کم ہو تو وارننگ دکھائی جائے گی۔
     """
     try:
-        total, used, free = shutil.disk_usage(os.path.dirname(os.path.abspath(__file__)))
+        total, used, free = shutil.disk_usage(os.path.dirname(DB_FILE))
         free_mb = free // (1024 * 1024)
         free_gb = round(free / (1024 * 1024 * 1024), 2)
         total_gb = round(total / (1024 * 1024 * 1024), 2)
@@ -87,7 +100,7 @@ def login_required(f):
     def decorated_function(*args, **kwargs):
         # اگر صارف لاگ ان نہیں ہے تو لاگ ان پیج پر بھیج دیں
         if "user" not in session:
-            flash("براہ کرم ڈیش بورڈ دیکھنے کے لیے پہلے لاگ اِن کریں! (Pehle Login Karein)", "warning")
+            flash("Please log in first to view the dashboard.", "warning")
             return redirect(url_for("login"))
         return f(*args, **kwargs)
     return decorated_function
@@ -100,6 +113,7 @@ def init_db():
     """
     تمام 10 ماڈیولز کے ٹیبلز بناتا ہے اور اگر نیا ڈیٹابیس ہو تو اصلی فارم کا ڈمی ڈیٹا ڈالتا ہے
     """
+    os.makedirs(os.path.dirname(DB_FILE), exist_ok=True)
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
 
@@ -252,17 +266,37 @@ def init_db():
 
     conn.commit()
 
-    # چیک کریں کہ کیا ایڈمن یوزر موجود ہے یا نہیں
-    cursor.execute("SELECT COUNT(*) FROM users WHERE username = 'admin'")
-    if cursor.fetchone()[0] == 0:
-        # ڈیفالٹ یوزر: admin اور پاس ورڈ: 1234
-        cursor.execute("INSERT INTO users (username, password, full_name) VALUES (?, ?, ?)",
-                       ("admin", "1234", "چوہدری بشارت (فارم منیجر)"))
-        conn.commit()
+    admin_username = os.environ.get("ADMIN_USERNAME", "").strip()
+    admin_password = os.environ.get("ADMIN_PASSWORD", "")
+    if APP_ENV == "production":
+        if not admin_username or len(admin_password) < 12:
+            raise RuntimeError(
+                "Set ADMIN_USERNAME and an ADMIN_PASSWORD of at least 12 characters."
+            )
+        if admin_username != "admin":
+            cursor.execute("DELETE FROM users WHERE username = 'admin'")
+        cursor.execute(
+            """
+            INSERT INTO users (username, password, full_name)
+            VALUES (?, ?, 'Farm Administrator')
+            ON CONFLICT(username) DO UPDATE SET password = excluded.password
+            """,
+            (admin_username, generate_password_hash(admin_password))
+        )
+
+    cursor.execute("SELECT id, password FROM users")
+    for user_id, stored_password in cursor.fetchall():
+        if not stored_password.startswith(("scrypt:", "pbkdf2:")):
+            cursor.execute(
+                "UPDATE users SET password = ? WHERE id = ?",
+                (generate_password_hash(stored_password), user_id)
+            )
+    conn.commit()
 
     # چیک کریں کہ کیا ڈمی ڈیٹا موجود ہے، اگر نہیں تو حقیقی ڈیٹا ڈالیں
     cursor.execute("SELECT COUNT(*) FROM herd")
-    if cursor.fetchone()[0] == 0:
+    load_demo_data = os.environ.get("LOAD_DEMO_DATA", "true").lower() == "true"
+    if cursor.fetchone()[0] == 0 and load_demo_data:
         # 1. جانوروں کا ڈیٹا (Herd)
         animals = [
             ("PK-101", "ساہیوال گائے (Sahiwal)", "4 سال", 420.0, "Doodh wali", "Faal", 16.5, 240000, "2024-01-15", "بہترین دودھ دینے والی گائے"),
@@ -407,18 +441,18 @@ def login():
         # ڈیٹابیس سے صارف چیک کریں
         db = get_db()
         user = db.execute(
-            "SELECT * FROM users WHERE username = ? AND password = ?",
-            (username, password)
+            "SELECT * FROM users WHERE username = ?",
+            (username,)
         ).fetchone()
 
-        if user:
+        if user and check_password_hash(user["password"], password):
             # سیشن میں محفوظ کریں
             session["user"] = user["username"]
             session["full_name"] = user["full_name"]
-            flash(f"خوش آمدید جناب {user['full_name']}! ڈیری فارم مینجمنٹ سسٹم میں آپ کا استقبال ہے۔", "success")
+            flash(f"Welcome, {user['full_name']}! You are now signed in to the Dairy Farm Management System.", "success")
             return redirect(url_for("dashboard"))
         else:
-            flash("غلط یوزر نام یا پاس ورڈ! برائے مہربانی دوبارہ کوشش کریں۔ (admin / 1234)", "danger")
+            flash("Incorrect username or password. Please try again.", "danger")
 
     return render_template("login.html")
 
@@ -426,7 +460,7 @@ def login():
 @app.route("/logout")
 def logout():
     session.clear()
-    flash("آپ کامیابی سے لاگ آؤٹ ہو چکے ہیں۔", "info")
+    flash("You have been signed out successfully.", "info")
     return redirect(url_for("login"))
 
 
@@ -541,8 +575,8 @@ def dashboard():
     for uc in upcoming_calvings:
         alerts.append({
             "type": "info",
-            "title": f"ولادت الرٹ (Calving Due): ٹیگ {uc['tag_no']}",
-            "msg": f"متوقع تاریخ: {uc['mutawaqqa_wiladat']} - دیکھ بھال اور علیحدہ شیڈ تیار رکھیں"
+            "title": f"Calving Alert: Tag {uc['tag_no']}",
+            "msg": f"Expected date: {uc['mutawaqqa_wiladat']} - Arrange care and prepare a separate pen."
         })
 
     # گاہکوں کا کل بقایا (Total Customer Balance)
@@ -589,7 +623,7 @@ def herd():
     if request.method == "POST":
         # اگر سپیس 500MB سے کم ہو تو محفوظ وارننگ دیں
         if space_status["is_low"]:
-            flash("وارننگ: جگہ کم ہے، پرانا ڈیٹا ڈیلیٹ کریں! (Jagah kam hai, purana data delete karein - Less than 500MB available)", "warning")
+            flash("Warning: Storage space is low. Delete old data. Less than 500 MB is available.", "warning")
 
         tag_no = request.form.get("tag_no", "").strip().upper()
         nasal = request.form.get("nasal", "").strip()
@@ -608,9 +642,9 @@ def herd():
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (tag_no, nasal, umer, wazan, qism, halat, doodh_capacity, kharid_qemat, tarikh_dakhla, notes))
             db.commit()
-            flash(f"ماشاءاللہ! نیا جانور ٹیگ نمبر {tag_no} کامیابی سے شامل کر لیا گیا ہے۔", "success")
+            flash(f"Animal {tag_no} was added successfully.", "success")
         except sqlite3.IntegrityError:
-            flash(f"ٹیگ نمبر {tag_no} پہلے سے موجود ہے! براہ کرم مختلف ٹیگ درج کریں۔", "danger")
+            flash(f"Tag number {tag_no} already exists. Please enter a different tag.", "danger")
 
         return redirect(url_for("herd"))
 
@@ -650,7 +684,7 @@ def delete_animal(id):
     db = get_db()
     db.execute("DELETE FROM herd WHERE id = ?", (id,))
     db.commit()
-    flash("جانور کا ریکارڈ کامیابی سے حذف (Delete) کر دیا گیا ہے۔", "info")
+    flash("Animal record deleted successfully.", "info")
     return redirect(url_for("herd"))
 
 
@@ -665,7 +699,7 @@ def milk():
 
     if request.method == "POST":
         if space_status["is_low"]:
-            flash("وارننگ: جگہ کم ہے، پرانا ڈیٹا ڈیلیٹ کریں! (Jagah kam hai, purana data delete karein)", "warning")
+            flash("Warning: Storage space is low. Delete old data.", "warning")
 
         tarikh = request.form.get("tarikh", date.today().strftime("%Y-%m-%d"))
         subah = float(request.form.get("subah_liter", 0) or 0)
@@ -693,7 +727,7 @@ def milk():
             """, (tarikh, f"روزانہ دودھ فروخت ({farokht} لیٹر)", farokht, rate, income_amount))
 
         db.commit()
-        flash(f"تاریخ {tarikh} کا دودھ ریکارڈ ({total} لیٹر) کامیابی سے محفوظ ہو گیا!", "success")
+        flash(f"Milk record for {tarikh} ({total} liters) saved successfully.", "success")
         return redirect(url_for("milk"))
 
     # پچھلے تمام ریکارڈز
@@ -728,7 +762,7 @@ def delete_milk(id):
     db = get_db()
     db.execute("DELETE FROM milk_production WHERE id = ?", (id,))
     db.commit()
-    flash("دودھ کا ریکارڈ حذف کر دیا گیا ہے۔", "info")
+    flash("Milk record deleted.", "info")
     return redirect(url_for("milk"))
 
 
@@ -743,7 +777,7 @@ def income():
 
     if request.method == "POST":
         if space_status["is_low"]:
-            flash("وارننگ: جگہ کم ہے، پرانا ڈیٹا ڈیلیٹ کریں!", "warning")
+            flash("Warning: Storage space is low. Delete old data.", "warning")
 
         tarikh = request.form.get("tarikh", date.today().strftime("%Y-%m-%d"))
         mad = request.form.get("mad", "Doodh Farokht").strip()
@@ -759,7 +793,7 @@ def income():
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """, (tarikh, mad, tafseel, miqdar, rate, kul_mublagh, gahak_naam, wasool_shuda))
         db.commit()
-        flash(f"آمدنی کی انٹری ({kul_mublagh:,.0f} روپے) کامیابی سے شامل کر لی گئی ہے۔", "success")
+        flash(f"Income entry of PKR {kul_mublagh:,.0f} added successfully.", "success")
         return redirect(url_for("income"))
 
     incomes = db.execute("SELECT * FROM income ORDER BY tarikh DESC, id DESC").fetchall()
@@ -774,7 +808,7 @@ def delete_income(id):
     db = get_db()
     db.execute("DELETE FROM income WHERE id = ?", (id,))
     db.commit()
-    flash("آمدنی کا ریکارڈ حذف کر دیا گیا ہے۔", "info")
+    flash("Income record deleted.", "info")
     return redirect(url_for("income"))
 
 
@@ -789,7 +823,7 @@ def expenses():
 
     if request.method == "POST":
         if space_status["is_low"]:
-            flash("وارننگ: جگہ کم ہے، پرانا ڈیٹا ڈیلیٹ کریں!", "warning")
+            flash("Warning: Storage space is low. Delete old data.", "warning")
 
         tarikh = request.form.get("tarikh", date.today().strftime("%Y-%m-%d"))
         mad = request.form.get("mad", "Chara/Wanda").strip()
@@ -803,7 +837,7 @@ def expenses():
         VALUES (?, ?, ?, ?, ?, ?)
         """, (tarikh, mad, tafseel, mublagh, paid_to, is_feed))
         db.commit()
-        flash(f"خرچہ کی انٹری ({mublagh:,.0f} روپے) کامیابی سے درج کر لی گئی ہے۔", "success")
+        flash(f"Expense entry of PKR {mublagh:,.0f} saved successfully.", "success")
         return redirect(url_for("expenses"))
 
     expenses_list = db.execute("SELECT * FROM expenses ORDER BY tarikh DESC, id DESC").fetchall()
@@ -826,7 +860,7 @@ def delete_expense(id):
     db = get_db()
     db.execute("DELETE FROM expenses WHERE id = ?", (id,))
     db.commit()
-    flash("اخراجات کا ریکارڈ حذف کر دیا گیا ہے۔", "info")
+    flash("Expense record deleted.", "info")
     return redirect(url_for("expenses"))
 
 
@@ -884,7 +918,7 @@ def feed():
 
     if request.method == "POST":
         if space_status["is_low"]:
-            flash("وارننگ: جگہ کم ہے، پرانا ڈیٹا ڈیلیٹ کریں!", "warning")
+            flash("Warning: Storage space is low. Delete old data.", "warning")
 
         tarikh = request.form.get("tarikh", date.today().strftime("%Y-%m-%d"))
         feed_type = request.form.get("feed_type", "").strip()
@@ -902,7 +936,7 @@ def feed():
         VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (tarikh, feed_type, rozana_miqdar_kg, stock_baqaya_kg, bori_count, fi_janwar, feed_cost))
         db.commit()
-        flash(f"{feed_type} کا خوراک ریکارڈ کامیابی سے درج ہو گیا۔", "success")
+        flash(f"Feed record for {feed_type} saved successfully.", "success")
         return redirect(url_for("feed"))
 
     feed_records = db.execute("SELECT * FROM feed ORDER BY tarikh DESC, id DESC").fetchall()
@@ -921,7 +955,7 @@ def delete_feed(id):
     db = get_db()
     db.execute("DELETE FROM feed WHERE id = ?", (id,))
     db.commit()
-    flash("خوراک کا ریکارڈ حذف ہو گیا۔", "info")
+    flash("Feed record deleted.", "info")
     return redirect(url_for("feed"))
 
 
@@ -936,7 +970,7 @@ def breeding():
 
     if request.method == "POST":
         if space_status["is_low"]:
-            flash("وارننگ: جگہ کم ہے، پرانا ڈیٹا ڈیلیٹ کریں!", "warning")
+            flash("Warning: Storage space is low. Delete old data.", "warning")
 
         tag_no = request.form.get("tag_no", "").strip().upper()
         tika_tarikh_str = request.form.get("tika_tarikh", date.today().strftime("%Y-%m-%d"))
@@ -963,7 +997,7 @@ def breeding():
             db.execute("UPDATE herd SET qism = 'Gabhan' WHERE tag_no = ?", (tag_no,))
 
         db.commit()
-        flash(f"بریڈنگ انٹری محفوظ! متوقع تاریخ ولادت: {mutawaqqa_wiladat}", "success")
+        flash(f"Breeding entry saved. Expected calving date: {mutawaqqa_wiladat}", "success")
         return redirect(url_for("breeding"))
 
     records = db.execute("SELECT * FROM breeding ORDER BY id DESC").fetchall()
@@ -978,7 +1012,7 @@ def delete_breeding(id):
     db = get_db()
     db.execute("DELETE FROM breeding WHERE id = ?", (id,))
     db.commit()
-    flash("بریڈنگ ریکارڈ حذف کر دیا گیا۔", "info")
+    flash("Breeding record deleted.", "info")
     return redirect(url_for("breeding"))
 
 
@@ -993,7 +1027,7 @@ def health():
 
     if request.method == "POST":
         if space_status["is_low"]:
-            flash("وارننگ: جگہ کم ہے، پرانا ڈیٹا ڈیلیٹ کریں!", "warning")
+            flash("Warning: Storage space is low. Delete old data.", "warning")
 
         tag_no = request.form.get("tag_no", "").strip().upper()
         tarikh = request.form.get("tarikh", date.today().strftime("%Y-%m-%d"))
@@ -1023,7 +1057,7 @@ def health():
             db.execute("UPDATE herd SET halat = 'Maut' WHERE tag_no = ?", (tag_no,))
 
         db.commit()
-        flash(f"صحت کا ریکارڈ کامیابی سے محفوظ ہو گیا۔", "success")
+        flash("Health record saved successfully.", "success")
         return redirect(url_for("health"))
 
     records = db.execute("SELECT * FROM health ORDER BY tarikh DESC, id DESC").fetchall()
@@ -1043,7 +1077,7 @@ def delete_health(id):
     db = get_db()
     db.execute("DELETE FROM health WHERE id = ?", (id,))
     db.commit()
-    flash("صحت کا ریکارڈ حذف ہو گیا۔", "info")
+    flash("Health record deleted.", "info")
     return redirect(url_for("health"))
 
 
@@ -1058,7 +1092,7 @@ def weight():
 
     if request.method == "POST":
         if space_status["is_low"]:
-            flash("وارننگ: جگہ کم ہے، پرانا ڈیٹا ڈیلیٹ کریں!", "warning")
+            flash("Warning: Storage space is low. Delete old data.", "warning")
 
         tag_no = request.form.get("tag_no", "").strip().upper()
         tarikh = request.form.get("tarikh", date.today().strftime("%Y-%m-%d"))
@@ -1082,7 +1116,7 @@ def weight():
         db.execute("UPDATE herd SET wazan = ? WHERE tag_no = ?", (wazan_kg, tag_no))
 
         db.commit()
-        flash(f"وزن کا اندراج محفوظ! روزانہ اوسط اضافہ (ADG): {adg_grams} گرام فی دن", "success")
+        flash(f"Weight entry saved. Average daily gain (ADG): {adg_grams} grams per day.", "success")
         return redirect(url_for("weight"))
 
     records = db.execute("SELECT * FROM weight_tracking ORDER BY tarikh DESC, id DESC").fetchall()
@@ -1097,7 +1131,7 @@ def delete_weight(id):
     db = get_db()
     db.execute("DELETE FROM weight_tracking WHERE id = ?", (id,))
     db.commit()
-    flash("وزن کا ریکارڈ حذف ہو گیا۔", "info")
+    flash("Weight record deleted.", "info")
     return redirect(url_for("weight"))
 
 
@@ -1112,7 +1146,7 @@ def customers():
 
     if request.method == "POST":
         if space_status["is_low"]:
-            flash("وارننگ: جگہ کم ہے، پرانا ڈیٹا ڈیلیٹ کریں!", "warning")
+            flash("Warning: Storage space is low. Delete old data.", "warning")
 
         action = request.form.get("action", "add_customer")
 
@@ -1129,7 +1163,7 @@ def customers():
             VALUES (?, ?, ?, ?, ?, ?, 'Active')
             """, (naam, phone, pata, rozana_supply, rate, baqaya))
             db.commit()
-            flash(f"نیا گاہک '{naam}' کامیابی سے شامل کر دیا گیا۔", "success")
+            flash(f"Customer '{naam}' added successfully.", "success")
 
         elif action == "record_payment":
             # گاہک سے وصولی کا اندراج
@@ -1147,7 +1181,7 @@ def customers():
                 VALUES (?, 'Doodh Farokht', ?, 1, ?, ?, ?, 'Haan')
                 """, (tarikh, f"بقایا وصولی از {cust['naam']}", wasooli_mublagh, wasooli_mublagh, cust['naam']))
                 db.commit()
-                flash(f"گاہک {cust['naam']} سے {wasooli_mublagh:,.0f} روپے وصولی درج ہو گئی۔ نیا بقایا: {naya_baqaya:,.0f} روپے", "success")
+                flash(f"Payment of PKR {wasooli_mublagh:,.0f} received from {cust['naam']}. New balance: PKR {naya_baqaya:,.0f}.", "success")
 
         return redirect(url_for("customers"))
 
@@ -1164,7 +1198,7 @@ def delete_customer(id):
     db = get_db()
     db.execute("DELETE FROM customers WHERE id = ?", (id,))
     db.commit()
-    flash("گاہک کا کھاتہ حذف ہو گیا۔", "info")
+    flash("Customer account deleted.", "info")
     return redirect(url_for("customers"))
 
 
@@ -1286,7 +1320,7 @@ def export_payments_csv():
 @login_required
 def simulate_warning():
     """یہ روٹ استاد یا چیکر کو 500MB سے کم کی وارننگ ٹیسٹ کرواتا ہے"""
-    flash("وارننگ (ٹیسٹ): جگہ کم ہے، پرانا ڈیٹا ڈیلیٹ کریں! (Jagah kam hai, purana data delete karein - Free Space < 500MB)", "warning")
+    flash("Warning (test): Storage space is low. Delete old data. Less than 500 MB is available.", "warning")
     return redirect(url_for("dashboard"))
 
 
@@ -1302,6 +1336,5 @@ if __name__ == "__main__":
     print(f"==================================================")
     print(f" ڈیری فارم مینجمنٹ سسٹم شروع ہو چکا ہے")
     print(f" ویب سائٹ لنک: http://localhost:{port}")
-    print(f" ڈیفالٹ لاگ اِن: یوزر: admin | پاس ورڈ: 1234")
     print(f"==================================================")
     app.run(host="0.0.0.0", port=port, debug=False)

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}مین ڈیش بورڈ{% endblock %}
+{% block title %}Main Dashboard{% endblock %}
 
 {% block content %}
 <div class="space-y-6">
@@ -9,13 +9,13 @@
   <div class="glass-card p-6 bg-gradient-to-l from-emerald-900 to-[#1B5E20] text-white flex flex-wrap items-center justify-between gap-4">
     <div>
       <span class="px-3 py-1 bg-[#FF8F00] text-white text-xs font-bold rounded-full mb-2 inline-block">
-        ⭐ لائیو فارم سمری
+        ⭐ Live farm summary
       </span>
       <h2 class="text-2xl font-bold urdu-font leading-tight">
-        ماشاءاللہ! فارم کی کارکردگی اور مالی صورتحال
+        Farm performance and financial overview
       </h2>
       <p class="text-emerald-100 text-sm mt-1">
-        ڈیری فارم کے تمام امور، دودھ، خوراک، بریڈنگ اور منافع کا مکمل خلاصہ
+        A complete overview of farm operations, milk, feed, breeding, and profit
       </p>
     </div>
 
@@ -23,19 +23,19 @@
     <div class="flex items-center gap-2 flex-wrap">
       <a href="{{ url_for('milk') }}" class="px-4 py-2 bg-white text-[#1B5E20] hover:bg-[#FFF8E1] font-bold rounded-xl text-xs transition shadow flex items-center gap-1.5 urdu-font">
         <span>🥛</span>
-        <span>دودھ انٹری کریں</span>
+        <span>Record milk</span>
       </a>
       <a href="{{ url_for('income') }}" class="px-4 py-2 bg-[#FF8F00] hover:bg-[#e65100] text-white font-bold rounded-xl text-xs transition shadow flex items-center gap-1.5 urdu-font">
         <span>💰</span>
-        <span>آمدنی درج کریں</span>
+        <span>Record income</span>
       </a>
       <a href="{{ url_for('expenses') }}" class="px-4 py-2 bg-emerald-800 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition shadow flex items-center gap-1.5 urdu-font">
         <span>📉</span>
-        <span>خرچہ درج کریں</span>
+        <span>Record expense</span>
       </a>
       <a href="{{ url_for('herd') }}" class="px-4 py-2 bg-white/20 hover:bg-white/30 text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 urdu-font">
         <span>🐄</span>
-        <span>نیا جانور</span>
+        <span>New animal</span>
       </a>
     </div>
   </div>
@@ -46,44 +46,44 @@
     <!-- KPI 1: آج کا دودھ (Total Liter) -->
     <div class="glass-card p-5 border-r-4 border-r-blue-600">
       <div class="flex items-center justify-between">
-        <span class="kpi-title urdu-font">آج کا دودھ (Today Milk)</span>
+        <span class="kpi-title urdu-font">Today’s milk</span>
         <span class="text-2xl">🥛</span>
       </div>
       <div class="kpi-value text-blue-900 mt-1">
-        {{ today_milk }} <span class="text-sm font-normal text-gray-500">لیٹر</span>
+        {{ today_milk }} <span class="text-sm font-normal text-gray-500">liters</span>
       </div>
       <div class="mt-2 text-xs text-gray-500 flex justify-between border-t pt-2">
-        <span>صبح: <strong>{{ subah_milk }} ل</strong></span>
-        <span>شام: <strong>{{ sham_milk }} ل</strong></span>
-        <span class="text-emerald-700 font-bold">فیٹ: {{ fat_pct }}%</span>
+        <span>Morning: <strong>{{ subah_milk }} L</strong></span>
+        <span>Evening: <strong>{{ sham_milk }} L</strong></span>
+        <span class="text-emerald-700 font-bold">Fat: {{ fat_pct }}%</span>
       </div>
     </div>
 
     <!-- KPI 2: اس مہینے کی آمدنی -->
     <div class="glass-card p-5 border-r-4 border-r-emerald-600">
       <div class="flex items-center justify-between">
-        <span class="kpi-title urdu-font">اس مہینے کی آمدنی (Income)</span>
+        <span class="kpi-title urdu-font">Income this month</span>
         <span class="text-2xl">💵</span>
       </div>
       <div class="kpi-value text-emerald-800 mt-1">
-        {{ "{:,.0f}".format(month_income) }} <span class="text-sm font-normal text-gray-500">روپے</span>
+        {{ "{:,.0f}".format(month_income) }} <span class="text-sm font-normal text-gray-500">PKR</span>
       </div>
       <div class="mt-2 text-xs text-emerald-700 font-semibold border-t pt-2">
-        دودھ + جانور + دیسی گھی فروخت
+        Milk + livestock + traditional ghee sales
       </div>
     </div>
 
     <!-- KPI 3: اس مہینے کے اخراجات -->
     <div class="glass-card p-5 border-r-4 border-r-red-500">
       <div class="flex items-center justify-between">
-        <span class="kpi-title urdu-font">اس مہینے کے اخراجات (Expenses)</span>
+        <span class="kpi-title urdu-font">Expenses this month</span>
         <span class="text-2xl">💸</span>
       </div>
       <div class="kpi-value text-red-700 mt-1">
-        {{ "{:,.0f}".format(month_expense) }} <span class="text-sm font-normal text-gray-500">روپے</span>
+        {{ "{:,.0f}".format(month_expense) }} <span class="text-sm font-normal text-gray-500">PKR</span>
       </div>
       <div class="mt-2 text-xs text-gray-500 border-t pt-2 flex justify-between">
-        <span>چارہ و ونڈا: <strong>{{ "{:,.0f}".format(feed_expense) }}</strong></span>
+        <span>Feed and fodder: <strong>{{ "{:,.0f}".format(feed_expense) }}</strong></span>
         <span class="font-bold text-amber-700">({{ feed_ratio }}%)</span>
       </div>
     </div>
@@ -91,16 +91,16 @@
     <!-- KPI 4: خالص منافع (Income - Expenses) -->
     <div class="glass-card p-5 border-r-4 border-r-[#FF8F00] bg-[#FFF8E1]/40">
       <div class="flex items-center justify-between">
-        <span class="kpi-title urdu-font">خالص منافع (Net Profit)</span>
+        <span class="kpi-title urdu-font">Net profit (Net Profit)</span>
         <span class="text-2xl">📈</span>
       </div>
       <div class="kpi-value text-[#e65100] mt-1">
-        {{ "{:,.0f}".format(net_profit) }} <span class="text-sm font-normal text-gray-500">روپے</span>
+        {{ "{:,.0f}".format(net_profit) }} <span class="text-sm font-normal text-gray-500">PKR</span>
       </div>
       <div class="mt-2 text-xs border-t border-amber-200 pt-2 flex items-center justify-between">
-        <span class="text-gray-600">آمدنی منہا اخراجات</span>
+        <span class="text-gray-600">Income minus expenses</span>
         <span class="px-2 py-0.5 rounded-full text-[11px] font-bold {% if net_profit >= 0 %}bg-emerald-100 text-emerald-800{% else %}bg-red-100 text-red-800{% endif %}">
-          {% if net_profit >= 0 %}منافع بخش{% else %}نقصان{% endif %}
+          {% if net_profit >= 0 %}Profitable{% else %}Loss{% endif %}
         </span>
       </div>
     </div>
@@ -116,9 +116,9 @@
         %
       </div>
       <div>
-        <div class="text-xs text-gray-500 font-semibold urdu-font">منافع کا تناسب (Profit Margin)</div>
+        <div class="text-xs text-gray-500 font-semibold urdu-font">Profit margin (Profit Margin)</div>
         <div class="text-2xl font-bold text-gray-900 mt-0.5">{{ profit_margin }}%</div>
-        <div class="text-[11px] text-gray-400">فارمولا: (منافع / آمدنی) × 100</div>
+        <div class="text-[11px] text-gray-400">Formula: (profit / income) × 100</div>
       </div>
     </div>
 
@@ -128,11 +128,11 @@
         🐄
       </div>
       <div>
-        <div class="text-xs text-gray-500 font-semibold urdu-font">فعال دودھ دینے والے جانور</div>
+        <div class="text-xs text-gray-500 font-semibold urdu-font">Active milking animals</div>
         <div class="text-2xl font-bold text-[#1B5E20] mt-0.5">
-          {{ active_milking_cows }} <span class="text-sm font-normal text-gray-500">/ کل {{ total_active_animals }}</span>
+          {{ active_milking_cows }} <span class="text-sm font-normal text-gray-500">/ total {{ total_active_animals }}</span>
         </div>
-        <div class="text-[11px] text-emerald-700">دودھ پیدا کرنے والی گائے و بھینس</div>
+        <div class="text-[11px] text-emerald-700">Milk-producing cows and buffaloes</div>
       </div>
     </div>
 
@@ -142,11 +142,11 @@
         🏷️
       </div>
       <div>
-        <div class="text-xs text-gray-500 font-semibold urdu-font">فی لیٹر پیداواری لاگت (Cost/L)</div>
+        <div class="text-xs text-gray-500 font-semibold urdu-font">Production cost per liter (Cost/L)</div>
         <div class="text-2xl font-bold text-blue-900 mt-0.5">
-          {{ cost_per_liter }} <span class="text-sm font-normal text-gray-500">روپے/لیٹر</span>
+          {{ cost_per_liter }} <span class="text-sm font-normal text-gray-500">PKR/liters</span>
         </div>
-        <div class="text-[11px] text-emerald-700">فی لیٹر منافع: تقریبا {{ profit_per_liter }} روپے</div>
+        <div class="text-[11px] text-emerald-700">Profit per liter: about {{ profit_per_liter }} PKR</div>
       </div>
     </div>
 
@@ -158,17 +158,17 @@
       <div class="flex items-center gap-2">
         <span class="text-xl">🌾</span>
         <h3 class="font-bold text-gray-800 urdu-font text-base">
-          چارہ اور ونڈا خرچہ انڈیکیٹر (Feed Expense Ratio - ہدف: 60% تا 70%)
+          Feed expense ratio indicator (target: 60%–70%)
         </h3>
       </div>
       <div class="text-sm font-bold {% if feed_ratio >= 60 and feed_ratio <= 70 %}text-emerald-700{% elif feed_ratio > 70 %}text-red-600{% else %}text-amber-600{% endif %}">
-        موجودہ فیڈ خرچ: {{ feed_ratio }}%
+        Current feed expense: {{ feed_ratio }}%
         {% if feed_ratio >= 60 and feed_ratio <= 70 %}
-          (بہترین معیار - Safe Zone)
+          (Target range - safe zone)
         {% elif feed_ratio > 70 %}
-          (زیادہ خرچ - Alert)
+          (High expenses - Alert)
         {% else %}
-          (معمول کے مطابق)
+          (normal as expected)
         {% endif %}
       </div>
     </div>
@@ -179,7 +179,7 @@
     </div>
     <div class="flex justify-between text-[11px] text-gray-400 mt-1">
       <span>0%</span>
-      <span class="text-emerald-700 font-bold">مثالی حد: 60% تا 70%</span>
+      <span class="text-emerald-700 font-bold">Target range: 60%–70%</span>
       <span>100%</span>
     </div>
   </div>
@@ -191,11 +191,11 @@
     <div class="glass-card p-6 lg:col-span-2">
       <div class="flex items-center justify-between mb-4">
         <div>
-          <h3 class="font-bold text-gray-800 urdu-font text-base">پچھلے 7 دن کا دودھ ٹرینڈ (صبح بمقابلہ شام)</h3>
-          <p class="text-xs text-gray-500">روزانہ لیٹر پیداوار کی رفتار</p>
+          <h3 class="font-bold text-gray-800 urdu-font text-base">Milk trend for the last 7 days (morning vs. evening)</h3>
+          <p class="text-xs text-gray-500">Daily milk production trend (liters)</p>
         </div>
         <span class="px-2.5 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-lg border border-emerald-200">
-          لائیو گراف
+          Live chart
         </span>
       </div>
       <div class="h-64">
@@ -207,8 +207,8 @@
     <div class="glass-card p-6">
       <div class="flex items-center justify-between mb-4">
         <div>
-          <h3 class="font-bold text-gray-800 urdu-font text-base">اخراجات کی تقسیم</h3>
-          <p class="text-xs text-gray-500">مد وار اخراجات بریک ڈاؤن</p>
+          <h3 class="font-bold text-gray-800 urdu-font text-base">Expense breakdown</h3>
+          <p class="text-xs text-gray-500">Expense breakdown by category</p>
         </div>
       </div>
       <div class="h-64 flex items-center justify-center">
@@ -225,9 +225,9 @@
       <div class="flex items-center justify-between mb-3 border-b pb-2">
         <h4 class="font-bold text-gray-800 urdu-font flex items-center gap-2">
           <span>🔔</span>
-          <span>آئندہ ولادت و بریڈنگ الرٹس (Upcoming Calving)</span>
+          <span>Upcoming calving and breeding alerts (Upcoming Calving)</span>
         </h4>
-        <a href="{{ url_for('breeding') }}" class="text-xs text-[#1B5E20] font-bold hover:underline">سب دیکھیں &larr;</a>
+        <a href="{{ url_for('breeding') }}" class="text-xs text-[#1B5E20] font-bold hover:underline">View all &larr;</a>
       </div>
       
       {% if alerts %}
@@ -243,7 +243,7 @@
           {% endfor %}
         </div>
       {% else %}
-        <p class="text-xs text-gray-400 py-4 text-center">کوئی فوری ولادت الرٹ نہیں ہے۔</p>
+        <p class="text-xs text-gray-400 py-4 text-center">No upcoming calving alerts.</p>
       {% endif %}
     </div>
 
@@ -252,24 +252,24 @@
       <div class="flex items-center justify-between mb-3 border-b pb-2">
         <h4 class="font-bold text-gray-800 urdu-font flex items-center gap-2">
           <span>👥</span>
-          <span>گاہکوں کا بقایا کھاتہ (Total Outstanding)</span>
+          <span>Customer ledger (Total Outstanding)</span>
         </h4>
-        <a href="{{ url_for('customers') }}" class="text-xs text-[#1B5E20] font-bold hover:underline">مکمل کھاتہ &larr;</a>
+        <a href="{{ url_for('customers') }}" class="text-xs text-[#1B5E20] font-bold hover:underline">Full ledger &larr;</a>
       </div>
 
       <div class="flex items-center justify-between p-4 bg-emerald-50/70 border border-emerald-200 rounded-xl mb-3">
         <div>
-          <span class="text-xs text-gray-600 urdu-font">کل مارکیٹ بقایا جات:</span>
+          <span class="text-xs text-gray-600 urdu-font">Total market balance due:</span>
           <div class="text-2xl font-bold text-emerald-800 mt-0.5">
-            {{ "{:,.0f}".format(total_customer_due) }} <span class="text-xs font-normal text-gray-500">روپے</span>
+            {{ "{:,.0f}".format(total_customer_due) }} <span class="text-xs font-normal text-gray-500">PKR</span>
           </div>
         </div>
         <a href="{{ url_for('customers') }}" class="px-3 py-1.5 bg-[#1B5E20] text-white text-xs font-bold rounded-lg hover:bg-emerald-700 transition urdu-font">
-          وصولی درج کریں
+          Record payment
         </a>
       </div>
       <p class="text-xs text-gray-500">
-        تمام گاہکوں کو دودھ کی روزانہ ترسیل اور ادائیگیوں کا باقاعدہ حساب رکھیں تاکہ کیش فلو بہتر رہے۔
+        Track daily milk deliveries and payments for every customer to improve cash flow.
       </p>
     </div>
 
@@ -280,7 +280,7 @@
 
 {% block scripts %}
 <script>
-  // 1. دودھ کا 7 دن کا لائیو لائن چارٹ
+  // 1. 7-day live milk line chart
   const ctxMilk = document.getElementById('milkChart').getContext('2d');
   new Chart(ctxMilk, {
     type: 'line',
@@ -288,7 +288,7 @@
       labels: {{ milk_chart_labels | tojson }},
       datasets: [
         {
-          label: 'صبح کا دودھ (لیٹر)',
+          label: 'Morning milk (liters)',
           data: {{ milk_chart_subah | tojson }},
           borderColor: '#1B5E20',
           backgroundColor: 'rgba(27, 94, 32, 0.1)',
@@ -297,7 +297,7 @@
           borderWidth: 2
         },
         {
-          label: 'شام کا دودھ (لیٹر)',
+          label: 'Evening milk (liters)',
           data: {{ milk_chart_sham | tojson }},
           borderColor: '#FF8F00',
           backgroundColor: 'rgba(255, 143, 0, 0.1)',
@@ -328,7 +328,7 @@
     }
   });
 
-  // 2. اخراجات کا ڈونٹ چارٹ
+  // 2. Expense donut chart
   const ctxExp = document.getElementById('expenseChart').getContext('2d');
   const expCats = [
     {% for cat in expense_cats %}
@@ -344,7 +344,7 @@
   new Chart(ctxExp, {
     type: 'doughnut',
     data: {
-      labels: expCats.length ? expCats : ['چارہ/ونڈا', 'مزدوری', 'دوا', 'دیگر'],
+      labels: expCats.length ? expCats : ['Fodder/feed', 'Labor', 'Medicine', 'Other'],
       datasets: [{
         data: expValues.length ? expValues : [65, 15, 10, 10],
         backgroundColor: [

@@ -48,8 +48,8 @@ const proxy = createProxyMiddleware({
     (res as any).writeHead(502, { 'Content-Type': 'text/html; charset=utf-8' });
     (res as any).end(`
       <div style="font-family: sans-serif; text-align: center; padding: 60px; direction: rtl;">
-        <h2 style="color: #1B5E20; font-size: 24px;">ڈیری فارم سسٹم شروع ہو رہا ہے...</h2>
-        <p style="color: #666;">براہ کرم 2 سیکنڈ انتظار فرمائیں، سرور لوڈ ہو رہا ہے۔</p>
+        <h2 style="color: #1B5E20; font-size: 24px;">Dairy farm system is starting...</h2>
+        <p style="color: #666;">Please wait 2 seconds while the server loads.</p>
         <script>setTimeout(function() { window.location.reload(); }, 2000);</script>
       </div>
     `);

@@ -89,12 +89,12 @@ interface FinancialMonthData {
 }
 
 const financialTrendsData: FinancialMonthData[] = [
-  { month: 'May', monthUrdu: 'مئی', income: 640000, expenses: 360000, profit: 280000, feedExpense: 240000 },
-  { month: 'Jun', monthUrdu: 'جون', income: 680000, expenses: 375000, profit: 305000, feedExpense: 252000 },
-  { month: 'Jul', monthUrdu: 'جولائی', income: 710000, expenses: 390000, profit: 320000, feedExpense: 260000 },
-  { month: 'Aug', monthUrdu: 'اگست', income: 695000, expenses: 380000, profit: 315000, feedExpense: 255000 },
-  { month: 'Sep', monthUrdu: 'ستمبر', income: 735000, expenses: 385000, profit: 350000, feedExpense: 258000 },
-  { month: 'Oct', monthUrdu: 'اکتوبر', income: 758500, expenses: 392000, profit: 366500, feedExpense: 265000 },
+  { month: 'May', monthUrdu: 'May', income: 640000, expenses: 360000, profit: 280000, feedExpense: 240000 },
+  { month: 'Jun', monthUrdu: 'June', income: 680000, expenses: 375000, profit: 305000, feedExpense: 252000 },
+  { month: 'Jul', monthUrdu: 'July', income: 710000, expenses: 390000, profit: 320000, feedExpense: 260000 },
+  { month: 'Aug', monthUrdu: 'August', income: 695000, expenses: 380000, profit: 315000, feedExpense: 255000 },
+  { month: 'Sep', monthUrdu: 'September', income: 735000, expenses: 385000, profit: 350000, feedExpense: 258000 },
+  { month: 'Oct', monthUrdu: 'October', income: 758500, expenses: 392000, profit: 366500, feedExpense: 265000 },
 ];
 
 const CustomFinancialTooltip = ({ active, payload }: any) => {
@@ -109,21 +109,21 @@ const CustomFinancialTooltip = ({ active, payload }: any) => {
         <div className="flex justify-between items-center text-emerald-800">
           <span className="font-semibold flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-[#1B5E20]"></span>
-            <span>ماہانہ آمدنی (Income):</span>
+            <span>Monthly Income:</span>
           </span>
           <span className="font-bold">Rs. {data.income.toLocaleString()}</span>
         </div>
         <div className="flex justify-between items-center text-rose-700">
           <span className="font-semibold flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-rose-600"></span>
-            <span>ماہانہ اخراجات (Expenses):</span>
+            <span>Monthly Expenses:</span>
           </span>
           <span className="font-bold">Rs. {data.expenses.toLocaleString()}</span>
         </div>
         <div className="flex justify-between items-center text-[#e65100] pt-1 border-t border-gray-100 font-bold">
           <span className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-[#FF8F00]"></span>
-            <span>خالص منافع (Net Profit):</span>
+            <span>Net Profit:</span>
           </span>
           <span>Rs. {data.profit.toLocaleString()}</span>
         </div>
@@ -164,11 +164,11 @@ function calculateGestation(aiDateStr: string, status: string, breed: string = '
   // ڈرائی آف تاریخ (ولادت سے 60 دن قبل دودھ دوہنا بند کرنا)
   const dryOffDateObj = new Date(expectedDate.getTime() - 60 * 24 * 60 * 60 * 1000);
 
-  let trimester = 'پہلی سہ ماہی (1st Trimester - ابتدائی نشوونما)';
+  let trimester = '1st Trimester - Early Development';
   if (daysElapsed > (gestationPeriod * 0.66)) {
-    trimester = 'تیسری سہ ماہی (3rd Trimester - ولادت کی تیاری)';
+    trimester = '3rd Trimester - Preparing for Calving';
   } else if (daysElapsed > (gestationPeriod * 0.33)) {
-    trimester = 'دوسری سہ ماہی (2nd Trimester - تیز رفتار اضافہ)';
+    trimester = '2nd Trimester - Rapid Growth';
   }
 
   return {
@@ -201,7 +201,7 @@ export default function App() {
   const [showExportMenu, setShowExportMenu] = useState<boolean>(false);
   const [paymentAmount, setPaymentAmount] = useState<number>(0);
   const [paymentCustomerId, setPaymentCustomerId] = useState<number>(1);
-  const [paymentMethod, setPaymentMethod] = useState<string>('کیش رقم (Cash)');
+  const [paymentMethod, setPaymentMethod] = useState<string>('Cash');
   const [paymentNotes, setPaymentNotes] = useState<string>('');
 
   // Quick Action Modal & DB Confirmation States
@@ -232,7 +232,7 @@ export default function App() {
   const [newBreedingAiDate, setNewBreedingAiDate] = useState<string>('2026-10-21');
   const [newBreedingPdDate, setNewBreedingPdDate] = useState<string>('2026-12-20');
   const [newBreedingStatus, setNewBreedingStatus] = useState<'Open' | 'In Heat' | 'Inseminated' | 'Pregnant'>('Pregnant');
-  const [newBreedingSemen, setNewBreedingSemen] = useState<string>('اعلی ساہیوال چیمپئن سیمن');
+  const [newBreedingSemen, setNewBreedingSemen] = useState<string>('Premium Sahiwal Champion Semen');
   const [newBreedingNotes, setNewBreedingNotes] = useState<string>('');
 
   const [breedingRecords, setBreedingRecords] = useState<BreedingRecord[]>(() => {
@@ -244,80 +244,80 @@ export default function App() {
       {
         id: 1,
         animalId: 'PK-106',
-        animalName: 'ساہیوال گائے نمبر 106',
-        breed: 'ساہیوال گائے (Sahiwal)',
+        animalName: 'Sahiwal Cow #106',
+        breed: 'Sahiwal Cow',
         heatDate: '2026-02-13',
         aiDate: '2026-02-14',
         pregnancyCheckDate: '2026-04-20',
         expectedDeliveryDate: '2026-11-21',
         status: 'Pregnant',
-        semenDetails: 'امریکن فریزن امپورٹڈ سیمن (Batch #992)',
-        notes: 'الٹرا ساؤنڈ سے حمل کی تصدیق ہو چکی ہے، صحت بہترین ہے۔'
+        semenDetails: 'Imported American Friesian semen (Batch #992)',
+        notes: 'Pregnancy confirmed by ultrasound; health is excellent.'
       },
       {
         id: 2,
         animalId: 'PK-102',
-        animalName: 'نیلی راوی بھینس نمبر 102',
-        breed: 'نیلی راوی بھینس (Nili Ravi)',
+        animalName: 'Nili Ravi Buffalo #102',
+        breed: 'Nili Ravi Buffalo',
         heatDate: '2026-01-14',
         aiDate: '2026-01-15',
         pregnancyCheckDate: '2026-03-25',
         expectedDeliveryDate: '2026-11-21',
         status: 'Pregnant',
-        semenDetails: 'اعلی نیلی راوی قدرتی سانڈ ملاپ',
-        notes: 'ڈرائی آف پیریڈ مکمل ہو چکا ہے، ولادت کا علیحدہ کمرہ تیار رکھیں۔'
+        semenDetails: 'Premium Nili Ravi natural bull mating',
+        notes: 'The dry-off period is complete. Prepare a separate calving pen.'
       },
       {
         id: 3,
         animalId: 'PK-101',
-        animalName: 'ساہیوال گائے نمبر 101',
-        breed: 'ساہیوال گائے (Sahiwal)',
+        animalName: 'Sahiwal Cow #101',
+        breed: 'Sahiwal Cow',
         heatDate: '2026-05-09',
         aiDate: '2026-05-10',
         pregnancyCheckDate: '2026-07-15',
         expectedDeliveryDate: '2027-02-14',
         status: 'Pregnant',
-        semenDetails: 'ساہیوال بیف سیمن',
-        notes: 'چھٹا مہینہ گابھن، وٹامنز اور منرلز فراہم کیے جا رہے ہیں۔'
+        semenDetails: 'Sahiwal beef semen',
+        notes: 'In the sixth month of pregnancy; vitamins and minerals are being provided.'
       },
       {
         id: 4,
         animalId: 'PK-103',
-        animalName: 'فریزن کراس نمبر 103',
-        breed: 'فریزن کراس (Friesian Cross)',
+        animalName: 'Friesian Cross #103',
+        breed: 'Friesian Cross',
         heatDate: '2026-09-18',
         aiDate: '2026-09-19',
         pregnancyCheckDate: '2026-11-05',
         expectedDeliveryDate: '2027-06-26',
         status: 'Inseminated',
-        semenDetails: 'ہالینڈ فریزن سیمن (Top Milking Line)',
-        notes: 'سیمن شدہ ہے، 5 نومبر کو ڈاکٹر سے پی ڈی ٹیسٹ کروائیں۔'
+        semenDetails: 'Dutch Friesian semen (Top Milking Line)',
+        notes: 'Inseminated. Schedule a pregnancy diagnosis test with the veterinarian on November 5.'
       },
       {
         id: 5,
         animalId: 'PK-104',
-        animalName: 'چولستانی گائے نمبر 104',
-        breed: 'چولستانی گائے (Cholistani)',
+        animalName: 'Cholistani Cow #104',
+        breed: 'Cholistani Cow',
         heatDate: '2026-10-20',
         aiDate: '',
         pregnancyCheckDate: '',
         expectedDeliveryDate: '',
         status: 'In Heat',
-        semenDetails: 'انتظار برائے سیمن',
-        notes: 'کل شام سے ہیٹ علامات ظاہر ہو رہی ہیں، آج دوپہر سیمن کروائیں۔'
+        semenDetails: 'Awaiting insemination',
+        notes: 'Heat signs have been present since yesterday evening. Arrange insemination this afternoon.'
       },
       {
         id: 6,
         animalId: 'PK-105',
-        animalName: 'نیلی راوی بھینس نمبر 105',
-        breed: 'نیلی راوی بھینس (Nili Ravi)',
+        animalName: 'Nili Ravi Buffalo #105',
+        breed: 'Nili Ravi Buffalo',
         heatDate: '2026-09-28',
         aiDate: '',
         pregnancyCheckDate: '',
         expectedDeliveryDate: '',
         status: 'Open',
         semenDetails: '-',
-        notes: 'خالی ہے، اگلے ہیٹ سائیکل کا انتظار ہے۔'
+        notes: 'Not pregnant; waiting for the next heat cycle.'
       }
     ];
   });
@@ -347,43 +347,43 @@ export default function App() {
 
   const [customers, setCustomers] = useState<Customer[]>(() => {
     return dairyDb.getTable<Customer>(DB_KEYS.CUSTOMERS, 'dairy_customers', [
-      { id: 1, name: 'ملک اصغر سنٹر گلبرگ', phone: '0300-1234567', address: 'مین مارکیٹ، لاہور', dailyLiters: 40.0, rate: 190, balance: 18500 },
-      { id: 2, name: 'چوہدری ریاض سویٹس', phone: '0321-9876543', address: 'ماڈل ٹاؤن، ساہیوال', dailyLiters: 25.0, rate: 195, balance: 8400 },
-      { id: 3, name: 'حاجی تنویر (گھریلو خریدار)', phone: '0333-5551234', address: 'سول لائنز، ساہیوال', dailyLiters: 5.0, rate: 210, balance: 1200 },
-      { id: 4, name: 'بسم اللہ ڈیری شاپ', phone: '0301-4447788', address: 'لاری اڈا چونیاں', dailyLiters: 20.0, rate: 185, balance: 0 },
+      { id: 1, name: 'Malik Asghar Center, Gulberg', phone: '0300-1234567', address: 'Main Market, Lahore', dailyLiters: 40.0, rate: 190, balance: 18500 },
+      { id: 2, name: 'Chaudhry Riaz Sweets', phone: '0321-9876543', address: 'Model Town, Sahiwal', dailyLiters: 25.0, rate: 195, balance: 8400 },
+      { id: 3, name: 'Haji Tanvir (Household Customer)', phone: '0333-5551234', address: 'Civil Lines, Sahiwal', dailyLiters: 5.0, rate: 210, balance: 1200 },
+      { id: 4, name: 'Bismillah Dairy Shop', phone: '0301-4447788', address: 'Lari Adda, Chunian', dailyLiters: 20.0, rate: 185, balance: 0 },
     ]);
   });
 
   const [paymentHistory, setPaymentHistory] = useState<PaymentTransaction[]>(() => {
     return dairyDb.getTable<PaymentTransaction>(DB_KEYS.PAYMENTS, 'dairy_payment_history', [
-      { id: 101, customerId: 1, customerName: 'ملک اصغر سنٹر گلبرگ', date: '2026-10-21', type: 'Payment', amountReceived: 10000, remainingBalance: 18500, method: 'کیش رقم (Cash)', notes: 'ہفتہ وار جزوی وصولی' },
-      { id: 102, customerId: 1, customerName: 'ملک اصغر سنٹر گلبرگ', date: '2026-10-20', type: 'Supply', liters: 40, rate: 190, billedAmount: 7600, amountReceived: 0, remainingBalance: 28500, method: 'ڈیلی سپلائی', notes: 'صبح 40 لیٹر دودھ ترسیل' },
-      { id: 103, customerId: 2, customerName: 'چوہدری ریاض سویٹس', date: '2026-10-21', type: 'Payment', amountReceived: 5000, remainingBalance: 8400, method: 'آن لائن ٹرانسفر (Online)', notes: 'میزان بینک ٹرانسفر' },
-      { id: 104, customerId: 2, customerName: 'چوہدری ریاض سویٹس', date: '2026-10-19', type: 'Supply', liters: 25, rate: 195, billedAmount: 4875, amountReceived: 0, remainingBalance: 13400, method: 'ڈیلی سپلائی', notes: 'خالص بھینس کا دودھ' },
-      { id: 105, customerId: 3, customerName: 'حاجی تنویر (گھریلو خریدار)', date: '2026-10-20', type: 'Supply', liters: 5, rate: 210, billedAmount: 1050, amountReceived: 0, remainingBalance: 1200, method: 'ڈیلی سپلائی', notes: 'گھر پر ڈلیوری' },
-      { id: 106, customerId: 4, customerName: 'بسم اللہ ڈیری شاپ', date: '2026-10-21', type: 'Payment', amountReceived: 3700, remainingBalance: 0, method: 'کیش رقم (Cash)', notes: 'مکمل کھاتہ بے باق ہو گیا' },
+      { id: 101, customerId: 1, customerName: 'Malik Asghar Center, Gulberg', date: '2026-10-21', type: 'Payment', amountReceived: 10000, remainingBalance: 18500, method: 'Cash', notes: 'Weekly partial payment' },
+      { id: 102, customerId: 1, customerName: 'Malik Asghar Center, Gulberg', date: '2026-10-20', type: 'Supply', liters: 40, rate: 190, billedAmount: 7600, amountReceived: 0, remainingBalance: 28500, method: 'Daily Supply', notes: 'Delivered 40 liters of milk in the morning' },
+      { id: 103, customerId: 2, customerName: 'Chaudhry Riaz Sweets', date: '2026-10-21', type: 'Payment', amountReceived: 5000, remainingBalance: 8400, method: 'Online Transfer', notes: 'Meezan Bank transfer' },
+      { id: 104, customerId: 2, customerName: 'Chaudhry Riaz Sweets', date: '2026-10-19', type: 'Supply', liters: 25, rate: 195, billedAmount: 4875, amountReceived: 0, remainingBalance: 13400, method: 'Daily Supply', notes: 'Pure buffalo milk' },
+      { id: 105, customerId: 3, customerName: 'Haji Tanvir (Household Customer)', date: '2026-10-20', type: 'Supply', liters: 5, rate: 210, billedAmount: 1050, amountReceived: 0, remainingBalance: 1200, method: 'Daily Supply', notes: 'Home delivery' },
+      { id: 106, customerId: 4, customerName: 'Bismillah Dairy Shop', date: '2026-10-21', type: 'Payment', amountReceived: 3700, remainingBalance: 0, method: 'Cash', notes: 'Account paid in full' },
     ]);
   });
 
   const [expenses, setExpenses] = useState<ExpenseRecord[]>(() => {
     return dairyDb.getTable<ExpenseRecord>(DB_KEYS.EXPENSES, 'dairy_expenses', [
-      { id: 1, date: '2026-10-21', category: 'Feed & Ration (چارہ و ونڈا)', amount: 12500, notes: 'سبز چارہ اور ونڈا سپلائی' },
-      { id: 2, date: '2026-10-20', category: 'Medicines & Vet (ادویات و علاج)', amount: 3200, notes: 'اینٹی بائیوٹک اور منرل سپلیمنٹ' },
-      { id: 3, date: '2026-10-18', category: 'Labor & Wages (ملازمین تنخواہ)', amount: 15000, notes: 'ہفتہ وار اجرت فارم ملازمین' }
+      { id: 1, date: '2026-10-21', category: 'Feed & Ration', amount: 12500, notes: 'Green fodder and Vanda supply' },
+      { id: 2, date: '2026-10-20', category: 'Medicines & Veterinary Care', amount: 3200, notes: 'Antibiotics and mineral supplements' },
+      { id: 3, date: '2026-10-18', category: 'Labor & Wages', amount: 15000, notes: 'Weekly wages for farm staff' }
     ]);
   });
 
   const [feedRecords, setFeedRecords] = useState<FeedRecord[]>(() => {
     return dairyDb.getTable<FeedRecord>(DB_KEYS.FEED, 'dairy_feed', [
-      { id: 1, date: '2026-10-21', feedType: 'سبز چارہ لوسرن (Lucerne Green Fodder)', qtyKg: 280, cost: 4200, notes: 'صبح شام تمام گائیوں کو تقسیم' },
-      { id: 2, date: '2026-10-21', feedType: 'فارمولا ونڈا نمبر 1 (Dairy Concentrate)', qtyKg: 75, cost: 7125, notes: 'دودھ والی گائیوں کے لیے خصوصی راشن' },
-      { id: 3, date: '2026-10-20', feedType: 'توڑی / گندم بھوسہ (Wheat Straw)', qtyKg: 120, cost: 1800, notes: 'خشک چارہ مکسنگ' }
+      { id: 1, date: '2026-10-21', feedType: 'Lucerne Green Fodder', qtyKg: 280, cost: 4200, notes: 'Distributed to all cows morning and evening' },
+      { id: 2, date: '2026-10-21', feedType: 'Formula Vanda No. 1 (Dairy Concentrate)', qtyKg: 75, cost: 7125, notes: 'Special ration for milking cows' },
+      { id: 3, date: '2026-10-20', feedType: 'Wheat Straw', qtyKg: 120, cost: 1800, notes: 'Dry fodder mix' }
     ]);
   });
 
   const [saleRecords, setSaleRecords] = useState<SaleRecord[]>(() => {
     return dairyDb.getTable<SaleRecord>(DB_KEYS.SALES, 'dairy_sales', [
-      { id: 1, date: '2026-10-15', animalTag: 'PK-098', buyer: 'حاجی بشیر ساہیوال منڈی', price: 285000, notes: 'نر بچھڑا عید کی تیاری برائے بیف' }
+      { id: 1, date: '2026-10-15', animalTag: 'PK-098', buyer: 'Haji Bashir, Sahiwal Cattle Market', price: 285000, notes: 'Male calf sold for Eid beef preparation' }
     ]);
   });
 
@@ -440,13 +440,13 @@ export default function App() {
   const exportCustomerKhataCSV = () => {
     const headers = [
       'ID',
-      'Customer Name (گاہک کا نام)',
-      'Phone Number (موبائل نمبر)',
-      'Address (پتہ)',
-      'Daily Milk Supply Liters (روزانہ دودھ لیٹر)',
-      'Rate per Liter PKR (طے شدہ ریٹ فی لیٹر)',
-      'Outstanding Balance PKR (واجب الادا بقایا ادھار)',
-      'Khata Status (کھاتہ حالت)'
+      'Customer Name',
+      'Phone Number',
+      'Address',
+      'Daily Milk Supply (Liters)',
+      'Rate per Liter (PKR)',
+      'Outstanding Balance (PKR)',
+      'Account Status'
     ];
 
     const rows = customers.map(c => [
@@ -457,7 +457,7 @@ export default function App() {
       c.dailyLiters,
       c.rate,
       c.balance,
-      c.balance > 0 ? 'باقی واجب الادا (Due)' : 'بے باق / کلیئر (Cleared)'
+      c.balance > 0 ? 'Due' : 'Cleared'
     ]);
 
     // UTF-8 BOM (\uFEFF) برائے ایکسل میں اردو کے درست ڈسپلے
@@ -482,29 +482,29 @@ export default function App() {
 
     const headers = [
       'Transaction ID',
-      'Date (تاریخ)',
-      'Customer Name (گاہک کا نام)',
-      'Transaction Type (نوعیت)',
-      'Milk Liters (دودھ مقدار لیٹر)',
-      'Rate per Liter PKR (ریٹ روپے)',
-      'Billed Amount PKR (کل بل بنا روپے)',
-      'Payment Received PKR (وصول شدہ رقم روپے)',
-      'Remaining Balance PKR (بقایا ادھار روپے)',
-      'Payment Method (طریقہ وصولی)',
-      'Remarks / Notes (تفصیل و نوٹس)'
+      'Date',
+      'Customer Name',
+      'Transaction Type',
+      'Milk (Liters)',
+      'Rate per Liter (PKR)',
+      'Billed Amount (PKR)',
+      'Payment Received (PKR)',
+      'Remaining Balance (PKR)',
+      'Payment Method',
+      'Remarks / Notes'
     ];
 
     const rows = recordsToExport.map(p => [
       p.id,
       p.date,
       `"${p.customerName.replace(/"/g, '""')}"`,
-      p.type === 'Supply' ? 'دودھ سپلائی (Milk Supply)' : 'ادائیگی وصولی (Payment Received)',
+      p.type === 'Supply' ? 'Milk Supply' : 'Payment Received',
       p.liters || 0,
       p.rate || 0,
       p.billedAmount || 0,
       p.amountReceived || 0,
       p.remainingBalance,
-      `"${p.method || 'کیش'}"`,
+      `"${p.method || 'Cash'}"`,
       `"${(p.notes || '').replace(/"/g, '""')}"`
     ]);
 
@@ -528,7 +528,7 @@ export default function App() {
   const handleRecordPayment = (e: React.FormEvent) => {
     e.preventDefault();
     if (freeSpaceMB < 500) {
-      alert("وارننگ: جگہ کم ہے، پرانا ڈیٹا ڈیلیٹ کریں! (Jagah kam hai, purana data delete karein - Free Space < 500MB)");
+      alert("Warning: Storage space is low. Delete old data. Less than 500 MB is available.");
       return;
     }
 
@@ -551,13 +551,13 @@ export default function App() {
       amountReceived: amt,
       remainingBalance: newBal,
       method: paymentMethod,
-      notes: paymentNotes || 'نئی وصولی درج کی گئی'
+      notes: paymentNotes || 'New payment recorded'
     };
     setPaymentHistory([newTransaction, ...paymentHistory]);
     setShowRecordPaymentModal(false);
     setPaymentAmount(0);
     setPaymentNotes('');
-    alert(`ماشاءاللہ! گاہک ${cust.name} سے ${amt.toLocaleString()} روپے وصولی درج ہو چکی ہے۔ نیا بقایا: ${newBal.toLocaleString()} روپے۔`);
+    alert(`Payment of PKR ${amt.toLocaleString()} received from ${cust.name}. New balance: PKR ${newBal.toLocaleString()}.`);
   };
 
   // ہیلتھ و ویکسینیشن ہینڈلرز (Health & Vaccination Actions)
@@ -588,13 +588,13 @@ export default function App() {
       nextVaccineDue: nextDueStr
     } : a));
 
-    triggerDbSaveNotice(`ماشاءاللہ! ٹیکہ ${rec.vaccineName} جانور ${rec.animalTag} کو کامیابی سے لگ گیا۔ اگلی تاریخ: ${nextDueStr}`);
+    triggerDbSaveNotice(`Vaccine ${rec.vaccineName} administered to animal ${rec.animalTag}. Next due date: ${nextDueStr}`);
   };
 
   const handleAddVaccineRecord = (newVac: Omit<VaccineRecord, 'id'>) => {
     const item: VaccineRecord = { ...newVac, id: Date.now() };
     setVaccineRecords([item, ...vaccineRecords]);
-    triggerDbSaveNotice(`حفاظتی ٹیکہ شیڈول محفوظ ہو گیا: ${newVac.vaccineName}`);
+    triggerDbSaveNotice(`Vaccination schedule saved: ${newVac.vaccineName}`);
   };
 
   const handleAddHealthIssue = (issue: Omit<HealthIssue, 'id'>) => {
@@ -606,7 +606,7 @@ export default function App() {
       temperature: issue.temperature,
       healthNotes: issue.diagnosis
     } : a));
-    triggerDbSaveNotice(`طبی معائنہ و علاج درج ہو گیا: ${issue.animalTag} (${issue.diagnosis})`);
+    triggerDbSaveNotice(`Medical examination and treatment recorded: ${issue.animalTag} (${issue.diagnosis})`);
   };
 
   const handleMarkIssueRecovered = (issueId: number) => {
@@ -614,12 +614,12 @@ export default function App() {
     if (!issue) return;
     setHealthIssues(healthIssues.map(h => h.id === issueId ? { ...h, status: 'Recovered' as const } : h));
     setAnimals(animals.map(a => a.tagNo === issue.animalTag ? { ...a, healthStatus: 'Healthy' } : a));
-    triggerDbSaveNotice(`الحمدللہ! جانور ${issue.animalTag} صحت یاب ہو چکا ہے۔`);
+    triggerDbSaveNotice(`Animal ${issue.animalTag} has recovered.`);
   };
 
   const handleUpdateAnimalHealthStatus = (animalTag: string, status: Animal['healthStatus']) => {
     setAnimals(animals.map(a => a.tagNo === animalTag ? { ...a, healthStatus: status } : a));
-    triggerDbSaveNotice(`جانور ${animalTag} کی صحت کی حالت تبدیل ہو گئی: ${status}`);
+    triggerDbSaveNotice(`Health status updated for animal ${animalTag}: ${status}`);
   };
 
   const handleMarkAsCalved = (motherTag: string, calfGender: 'Male' | 'Female', calfWeight: number, birthDate: string, calfTag: string, ease: string) => {
@@ -635,13 +635,13 @@ export default function App() {
       const newCalf: Animal = {
         id: Date.now(),
         tagNo: calfTag,
-        breed: calfGender === 'Female' ? 'ساہیوال بچھڑی (Female Calf)' : 'ساہیوال بچھڑا (Male Calf)',
-        age: '1 دن',
+        breed: calfGender === 'Female' ? 'Sahiwal Female Calf' : 'Sahiwal Male Calf',
+        age: '1 day',
         weight: calfWeight,
         category: 'Bachra',
         status: 'Faal',
         capacity: 0,
-        lastVaccine: 'Colostrum Fed (بولی شدہ)',
+        lastVaccine: 'Colostrum Fed',
         healthStatus: 'Healthy',
         temperature: 101.5
       };
@@ -652,10 +652,10 @@ export default function App() {
     setBreedingRecords(breedingRecords.map(b => b.animalId === motherTag ? {
       ...b,
       status: 'Calved' as const,
-      notes: `${b.notes} | ولادت مکمل: ${calfGender} (${calfTag}, ${calfWeight}kg)`
+      notes: `${b.notes} | Calving complete: ${calfGender} (${calfTag}, ${calfWeight}kg)`
     } : b));
 
-    triggerDbSaveNotice(`ماشاءاللہ! ولادت اندراج مکمل۔ والدہ گائے دودھ میں شامل اور نیا بچہ ${calfTag} رجسٹر ہو گیا۔`);
+    triggerDbSaveNotice(`Calving recorded. The dam has been added to the milking herd and newborn ${calfTag} has been registered.`);
   };
 
   const handleLogVitals = (animalTag: string, temp: number, fetalMovement: string, rumination: string, bcs: number, notes: string) => {
@@ -664,7 +664,7 @@ export default function App() {
       temperature: temp,
       healthNotes: `BCS: ${bcs} | Fetal: ${fetalMovement} | ${notes}`
     } : a));
-    triggerDbSaveNotice(`وائٹلز لاگ محفوظ: ${animalTag} (Temp: ${temp}°F, BCS: ${bcs})`);
+    triggerDbSaveNotice(`Vitals saved for ${animalTag} (Temp: ${temp}°F, BCS: ${bcs})`);
   };
 
   const handleAddExpense = (category: string, amount: number, notes: string) => {
@@ -673,7 +673,7 @@ export default function App() {
       date: new Date().toISOString().split('T')[0],
       category,
       amount: Number(amount),
-      notes: notes || 'فارم متفرق اخراجات'
+      notes: notes || 'Farm miscellaneous expenses'
     };
     const updated = [newRec, ...expenses];
     setExpenses(updated);
@@ -688,7 +688,7 @@ export default function App() {
       feedType,
       qtyKg: Number(qtyKg),
       cost: Number(cost),
-      notes: notes || 'روزانہ چارہ اندراج'
+      notes: notes || 'Daily feed entry'
     };
     const updated = [newRec, ...feedRecords];
     setFeedRecords(updated);
@@ -703,7 +703,7 @@ export default function App() {
       animalTag,
       buyer,
       price: Number(price),
-      notes: notes || 'جانور فروخت رسید'
+      notes: notes || 'Animal sale receipt'
     };
     const updatedSales = [newRec, ...saleRecords];
     setSaleRecords(updatedSales);
@@ -748,7 +748,7 @@ export default function App() {
   const handleAddMilk = (e: React.FormEvent) => {
     e.preventDefault();
     if (freeSpaceMB < 500) {
-      alert("وارننگ: جگہ کم ہے، پرانا ڈیٹا ڈیلیٹ کریں! (Jagah kam hai, purana data delete karein - Disk Space < 500MB)");
+      alert("Warning: Storage space is low. Delete old data. Less than 500 MB is available.");
       return;
     }
     const total = Number(newMorningMilk) + Number(newEveningMilk);
@@ -767,7 +767,7 @@ export default function App() {
     setMilkLogs(updated);
     dairyDb.saveTable(DB_KEYS.MILK, updated);
     setShowAddMilkModal(false);
-    triggerDbSaveNotice(`Doodh Entry Saved to Database: ${total}L on ${newEntry.date} ✓ (دودھ انٹری محفوظ ہو گئی)`);
+    triggerDbSaveNotice(`Milk entry saved to the database: ${total}L on ${newEntry.date} ✓`);
   };
 
 
@@ -775,12 +775,12 @@ export default function App() {
   const handleAddBreedingRecord = (e: React.FormEvent) => {
     e.preventDefault();
     if (freeSpaceMB < 500) {
-      alert("وارننگ: جگہ کم ہے، پرانا ڈیٹا ڈیلیٹ کریں! (Jagah kam hai, purana data delete karein - Free Space < 500MB)");
+      alert("Warning: Storage space is low. Delete old data. Less than 500 MB is available.");
       return;
     }
 
     const animal = animals.find(a => a.tagNo === newBreedingAnimalId);
-    const breed = animal ? animal.breed : 'ساہیوال گائے (Sahiwal)';
+    const breed = animal ? animal.breed : 'Sahiwal Cow';
     const gestationDays = (breed.includes('بھینس') || breed.includes('Buffalo')) ? 310 : 280;
     
     // خودکار متوقع تاریخ ولادت = AI تاریخ + 280 دن
@@ -802,7 +802,7 @@ export default function App() {
       expectedDeliveryDate: calculatedDelivery,
       status: newBreedingStatus,
       semenDetails: newBreedingSemen,
-      notes: newBreedingNotes || 'نیا بریڈنگ اندراج'
+      notes: newBreedingNotes || 'New breeding entry'
     };
 
     const updatedBreeding = [newRecord, ...breedingRecords];
@@ -823,7 +823,7 @@ export default function App() {
 
 
   const handleDeleteBreedingRecord = (id: number) => {
-    if (confirm("کیا آپ واقعی یہ بریڈنگ ریکارڈ حذف کرنا چاہتے ہیں؟")) {
+    if (confirm("Are you sure you want to delete this breeding record?")) {
       setBreedingRecords(breedingRecords.filter(r => r.id !== id));
     }
   };
@@ -860,9 +860,9 @@ export default function App() {
   const calYear = currentCalendarDate.getFullYear();
   const calMonth = currentCalendarDate.getMonth();
   const urduMonthNames = [
-    'جنوری (January)', 'فروری (February)', 'مارچ (March)', 'اپریل (April)',
-    'مئی (May)', 'جون (June)', 'جولائی (July)', 'اگست (August)',
-    'ستمبر (September)', 'اکتوبر (October)', 'نومبر (November)', 'دسمبر (December)'
+    'January', 'February', 'March', 'April',
+    'May', 'June', 'July', 'August',
+    'September', 'October', 'November', 'December'
   ];
   const currentUrduMonthName = urduMonthNames[calMonth];
   const daysInCalMonth = new Date(calYear, calMonth + 1, 0).getDate();
@@ -878,14 +878,14 @@ export default function App() {
           <div className="flex items-center gap-3">
             <AlertTriangle className="w-5 h-5 animate-bounce text-amber-300" />
             <span>
-              وارننگ: جگہ کم ہے، پرانا ڈیٹا ڈیلیٹ کریں! (Jagah kam hai, purana data delete karein - صرف {freeSpaceMB}MB جگہ باقی ہے)
+              Warning: Storage space is low. Delete old data. Only {freeSpaceMB} MB remains.
             </span>
           </div>
           <button
             onClick={() => setShowWarningModal(false)}
             className="text-white hover:text-amber-200 text-xs px-2 py-1 rounded bg-red-700 hover:bg-red-800"
           >
-            سمجھ گیا ×
+            Understood ×
           </button>
         </div>
       )}
@@ -902,13 +902,13 @@ export default function App() {
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-xl font-extrabold text-[#1B5E20] font-['Noto_Nastaliq_Urdu'] tracking-tight">
-                  چوہدری ڈیری فارمز
+                  Chaudhry Dairy Farms
                 </h1>
                 <span className="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-[#FFF8E1] text-[#1B5E20] border border-[#ffe082]">
                   PRO ERP
                 </span>
               </div>
-              <p className="text-xs text-gray-500 font-medium">پنجاب، پاکستان | Dairy Farm Management System</p>
+              <p className="text-xs text-gray-500 font-medium">Punjab, Pakistan | Dairy Farm Management System</p>
             </div>
           </div>
 
@@ -916,17 +916,17 @@ export default function App() {
           <div className="hidden md:flex items-center gap-3 bg-[#F4F6F0] px-4 py-2 rounded-xl border border-gray-200">
             <HardDrive className={`w-4 h-4 ${isLowSpace ? 'text-red-600 animate-pulse' : 'text-[#1B5E20]'}`} />
             <div className="text-xs">
-              <span className="text-gray-500">لیپ ٹاپ ہارڈ ڈسک سپیس: </span>
+              <span className="text-gray-500">Laptop disk space: </span>
               <strong className={isLowSpace ? 'text-red-600 font-bold' : 'text-[#1B5E20] font-bold'}>
-                {isLowSpace ? `${freeSpaceMB} MB (خطرہ)` : `${(freeSpaceMB / 1000).toFixed(0)} GB (محفوظ)`}
+                {isLowSpace ? `${freeSpaceMB} MB (Low)` : `${(freeSpaceMB / 1000).toFixed(0)} GB (Available)`}
               </strong>
             </div>
             <button
               onClick={toggleLowSpaceWarning}
-              title="ٹیسٹ وارننگ بٹن"
+              title="Test warning button"
               className="text-[10px] font-bold px-2 py-1 rounded bg-amber-100 text-[#e65100] hover:bg-amber-200 transition"
             >
-              {isLowSpace ? 'ری سیٹ سپیس' : '⚠️ وارننگ ٹیسٹ'}
+              {isLowSpace ? 'Reset Space' : '⚠️ Test Warning'}
             </button>
           </div>
 
@@ -945,7 +945,7 @@ export default function App() {
               <Database className="w-3.5 h-3.5 text-[#1B5E20]" />
               <div className="flex flex-col text-left leading-none">
                 <span className="font-extrabold text-[11px]">DB: Connected</span>
-                <span className="text-[9px] font-normal text-emerald-800 font-['Noto_Nastaliq_Urdu']">10 ٹیبلز محفوظ</span>
+                <span className="text-[9px] font-normal text-emerald-800 font-['Noto_Nastaliq_Urdu']">10 tables saved</span>
               </div>
             </button>
 
@@ -956,17 +956,17 @@ export default function App() {
               <PlusCircle className="w-4 h-4 text-[#FFF8E1]" />
               <div className="flex flex-col text-left leading-tight">
                 <span>+ Milk Entry</span>
-                <span className="text-[9px] font-normal opacity-85 font-['Noto_Nastaliq_Urdu']">دودھ انٹری</span>
+                <span className="text-[9px] font-normal opacity-85 font-['Noto_Nastaliq_Urdu']">Milk Entry</span>
               </div>
             </button>
 
             <div className="flex items-center gap-2 pl-2 border-r border-gray-200 mr-2">
               <div className="w-9 h-9 rounded-full bg-[#FF8F00] text-white flex items-center justify-center font-bold text-sm shadow-xs">
-                چ
+                C
               </div>
               <div className="hidden lg:block text-right">
                 <div className="text-xs font-bold text-gray-800">Chaudhry Basharat</div>
-                <div className="text-[10px] text-gray-500 font-['Noto_Nastaliq_Urdu']">فارم منیجر (Manager)</div>
+                <div className="text-[10px] text-gray-500 font-['Noto_Nastaliq_Urdu']">Farm Manager</div>
               </div>
             </div>
           </div>
@@ -988,7 +988,7 @@ export default function App() {
               <PieChart className="w-3.5 h-3.5" />
               <span>Dashboard</span>
             </div>
-            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">مین ڈیش بورڈ</span>
+            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">Main Dashboard</span>
           </button>
 
           <button
@@ -1003,7 +1003,7 @@ export default function App() {
               <span>🐄</span>
               <span>1. Herd ({animals.length})</span>
             </div>
-            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">ریوڑ و جانور</span>
+            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">Herd & Animals</span>
           </button>
 
           <button
@@ -1018,7 +1018,7 @@ export default function App() {
               <span>🥛</span>
               <span>2. Milk Production</span>
             </div>
-            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">دودھ پیداوار</span>
+            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">Milk Production</span>
           </button>
 
           <button
@@ -1033,7 +1033,7 @@ export default function App() {
               <span>💰</span>
               <span>3 & 4. Finance & Profit</span>
             </div>
-            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">مالیات و منافع</span>
+            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">Finance & Profit</span>
           </button>
 
           <button
@@ -1048,7 +1048,7 @@ export default function App() {
               <span>🌾</span>
               <span>6. Feed & Ration</span>
             </div>
-            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">چارہ و ونڈا</span>
+            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">Feed & Ration</span>
           </button>
 
           <button
@@ -1063,7 +1063,7 @@ export default function App() {
               <span>🧬</span>
               <span>7. Breeding (280d)</span>
             </div>
-            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">بریڈنگ و ولادت</span>
+            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">Breeding & Calving</span>
           </button>
 
           <button
@@ -1078,7 +1078,7 @@ export default function App() {
               <span>🩺</span>
               <span>8. Health & Vaccines</span>
             </div>
-            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">صحت و ویکسینیشن</span>
+            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">Health & Vaccination</span>
           </button>
 
           <button
@@ -1093,7 +1093,7 @@ export default function App() {
               <span>⚖️</span>
               <span>9. Growth & ADG</span>
             </div>
-            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">وزن و گروتھ</span>
+            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">Weight & Growth</span>
           </button>
 
           <button
@@ -1108,7 +1108,7 @@ export default function App() {
               <span>👥</span>
               <span>10. Customers & Khata</span>
             </div>
-            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">گاہک و کھاتہ ({customers.length})</span>
+            <span className="text-[10px] opacity-80 font-['Noto_Nastaliq_Urdu']">Customers & Accounts ({customers.length})</span>
           </button>
         </div>
       </header>
@@ -1151,15 +1151,15 @@ export default function App() {
               <div className="space-y-1.5 z-10">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-[#FF8F00] text-white">
                   <Dna className="w-3.5 h-3.5" />
-                  <span>ماڈیول 7: بریڈنگ، تولیدی نظام اور حمل کاؤنٹ ڈاؤن</span>
+                  <span>Module 7: Breeding, Reproduction & Pregnancy Countdown</span>
                   <span>•</span>
                   <span>280-Day Gestation Tracker</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-extrabold font-['Noto_Nastaliq_Urdu'] leading-tight">
-                  بریڈنگ ٹریکر اور 280 دن مدت حمل کاؤنٹ ڈاؤن
+                  Breeding Tracker & 280-Day Pregnancy Countdown
                 </h2>
                 <p className="text-emerald-100 text-xs sm:text-sm max-w-2xl">
-                  ٹیکہ تاریخ (A.I Date) سے خودکار متوقع تاریخ ولادت (+280 دن)، بقیہ ایام کا لائیو کاؤنٹ ڈاؤن، الرٹس اور کیلنڈر ویو۔
+                  Automatically calculate the expected calving date from the AI date (+280 days), with a live countdown, alerts, and calendar view.
                 </p>
               </div>
 
@@ -1169,7 +1169,7 @@ export default function App() {
                   className="px-4 py-2.5 rounded-xl font-bold text-xs bg-[#FF8F00] text-white hover:bg-[#e65100] transition shadow flex items-center gap-2"
                 >
                   <PlusCircle className="w-4 h-4" />
-                  <span>+ نیا بریڈنگ ریکارڈ</span>
+                  <span>+ New Breeding Record</span>
                 </button>
                 <div className="flex bg-white/20 p-1 rounded-xl backdrop-blur-xs">
                   <button
@@ -1181,7 +1181,7 @@ export default function App() {
                     }`}
                   >
                     <Layers className="w-3.5 h-3.5" />
-                    <span>لسٹ ویو</span>
+                    <span>List View</span>
                   </button>
                   <button
                     onClick={() => setBreedingViewMode('calendar')}
@@ -1192,7 +1192,7 @@ export default function App() {
                     }`}
                   >
                     <CalendarDays className="w-3.5 h-3.5" />
-                    <span>کیلنڈر ویو</span>
+                    <span>Calendar View</span>
                   </button>
                 </div>
               </div>
@@ -1204,7 +1204,7 @@ export default function App() {
                 <div className="absolute top-0 right-0 w-2 h-full bg-[#1B5E20]"></div>
                 <div className="flex items-center justify-between text-gray-500 mb-2">
                   <span className="text-xs font-bold text-gray-700 font-['Noto_Nastaliq_Urdu']">
-                    کل ٹریک شدہ ریکارڈز (Total)
+                    Total Tracked Records
                   </span>
                   <div className="w-9 h-9 rounded-xl bg-emerald-50 text-[#1B5E20] flex items-center justify-center font-bold">
                     <Dna className="w-4 h-4" />
@@ -1212,10 +1212,10 @@ export default function App() {
                 </div>
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-black text-gray-900">{breedingRecords.length}</span>
-                  <span className="text-xs text-gray-500 font-semibold">جانور درج</span>
+                  <span className="text-xs text-gray-500 font-semibold">Animals Recorded</span>
                 </div>
                 <div className="mt-2 text-xs text-gray-500">
-                  ڈیٹا بیس میں محفوظ افزائش نسل کا ریکارڈ
+                  Breeding records saved in the database
                 </div>
               </div>
 
@@ -1223,7 +1223,7 @@ export default function App() {
                 <div className="absolute top-0 right-0 w-2 h-full bg-emerald-600"></div>
                 <div className="flex items-center justify-between text-gray-500 mb-2">
                   <span className="text-xs font-bold text-gray-700 font-['Noto_Nastaliq_Urdu']">
-                    تصدیق شدہ گابھن (Confirmed)
+                    Confirmed Pregnancies
                   </span>
                   <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold">
                     <Baby className="w-4 h-4" />
@@ -1231,10 +1231,10 @@ export default function App() {
                 </div>
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-black text-emerald-800">{pregnantBreedingRecords.length}</span>
-                  <span className="text-xs text-gray-500 font-semibold">سر گابھن</span>
+                  <span className="text-xs text-gray-500 font-semibold">Pregnant Animals</span>
                 </div>
                 <div className="mt-2 text-xs text-emerald-700 font-semibold">
-                  حمل کاؤنٹ ڈاؤن ایکٹو ہے
+                  Pregnancy countdown is active
                 </div>
               </div>
 
@@ -1242,7 +1242,7 @@ export default function App() {
                 <div className="absolute top-0 right-0 w-2 h-full bg-[#FF8F00]"></div>
                 <div className="flex items-center justify-between text-gray-500 mb-2">
                   <span className="text-xs font-bold text-amber-900 font-['Noto_Nastaliq_Urdu']">
-                    ولادت متوقع قریب (&lt;35 دن)
+                    Calving Expected Soon (&lt;35 Days)
                   </span>
                   <div className="w-9 h-9 rounded-xl bg-amber-100 text-[#FF8F00] flex items-center justify-center font-bold">
                     <Clock className="w-4 h-4 animate-spin" />
@@ -1250,10 +1250,10 @@ export default function App() {
                 </div>
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-black text-[#e65100]">{dueSoonBreedingRecords.length}</span>
-                  <span className="text-xs text-amber-900 font-semibold">سر جانور</span>
+                  <span className="text-xs text-amber-900 font-semibold">Animals</span>
                 </div>
                 <div className="mt-2 text-xs text-[#e65100] font-bold">
-                  ⚠️ فوری ڈیلیوری پین تیار رکھیں!
+                  ⚠️ Prepare the calving pen now!
                 </div>
               </div>
 
@@ -1261,7 +1261,7 @@ export default function App() {
                 <div className="absolute top-0 right-0 w-2 h-full bg-rose-500"></div>
                 <div className="flex items-center justify-between text-gray-500 mb-2">
                   <span className="text-xs font-bold text-gray-700 font-['Noto_Nastaliq_Urdu']">
-                    ہیٹ میں جانور (In Heat)
+                    Animals in Heat
                   </span>
                   <div className="w-9 h-9 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold">
                     <Activity className="w-4 h-4" />
@@ -1269,10 +1269,10 @@ export default function App() {
                 </div>
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-black text-rose-700">{inHeatBreedingRecords.length}</span>
-                  <span className="text-xs text-gray-500 font-semibold">سر ہیٹ میں</span>
+                  <span className="text-xs text-gray-500 font-semibold">Animals in Heat</span>
                 </div>
                 <div className="mt-2 text-xs text-rose-600 font-semibold">
-                  فوری ٹیکہ / ملاپ ضروری ہے
+                  Immediate insemination is required
                 </div>
               </div>
             </div>
@@ -1282,30 +1282,30 @@ export default function App() {
               <div className="p-4 bg-amber-50 rounded-2xl border border-amber-200 space-y-2">
                 <div className="flex items-center gap-2 text-[#e65100] font-bold text-xs font-['Noto_Nastaliq_Urdu']">
                   <Bell className="w-4 h-4 animate-bounce text-[#FF8F00]" />
-                  <span>ولادت الرٹ: نومبر 2026 میں 2 ولادتیں</span>
+                  <span>Calving Alert: 2 births expected in November 2026</span>
                 </div>
                 <p className="text-xs text-gray-700 leading-relaxed">
-                  <strong>PK-106</strong> (ساہیوال) اور <strong>PK-102</strong> (نیلی راوی) کی متوقع تاریخ ولادت <strong>21 نومبر 2026</strong> ہے۔ صرف <strong>31 دن باقی</strong> ہیں۔ علیحدہ کاونگ روم اور خشک توڑی کا بندوبست کریں۔
+                  Expected calving dates for <strong>PK-106</strong> (Sahiwal) and <strong>PK-102</strong> (Nili Ravi) are <strong>November 21, 2026</strong>. Only <strong>31 days remain</strong>. Prepare a separate calving pen and dry straw.
                 </p>
               </div>
 
               <div className="p-4 bg-blue-50 rounded-2xl border border-blue-200 space-y-2">
                 <div className="flex items-center gap-2 text-blue-900 font-bold text-xs font-['Noto_Nastaliq_Urdu']">
                   <HeartPulse className="w-4 h-4 text-blue-700" />
-                  <span>حمل جانچ الرٹ (PD Check Due)</span>
+                  <span>Pregnancy Check Alert (PD Check Due)</span>
                 </div>
                 <p className="text-xs text-gray-700 leading-relaxed">
-                  <strong>PK-103</strong> فریزن کراس کو 19 ستمبر کو سیمن دیا گیا تھا۔ <strong>5 نومبر 2026</strong> کو ڈاکٹر سے الٹرا ساؤنڈ یا پی ڈی ٹیسٹ کروا کر گابھن ہونے کی تصدیق کریں۔
+                  <strong>PK-103</strong> Friesian Cross was inseminated on September 19. Confirm pregnancy with a veterinarian by ultrasound or PD test on <strong>November 5, 2026</strong>.
                 </p>
               </div>
 
               <div className="p-4 bg-rose-50 rounded-2xl border border-rose-200 space-y-2">
                 <div className="flex items-center gap-2 text-rose-900 font-bold text-xs font-['Noto_Nastaliq_Urdu']">
                   <AlertCircle className="w-4 h-4 text-rose-600" />
-                  <span>ہیٹ سائیکل الرٹ (Heat Detection)</span>
+                  <span>Heat Cycle Alert (Heat Detection)</span>
                 </div>
                 <p className="text-xs text-gray-700 leading-relaxed">
-                  <strong>PK-104</strong> چولستانی گائے کل شام سے ہیٹ علامات ظاہر کر رہی ہے۔ اگلی 12 گھنٹوں کے اندر ساہیوال یا فریزن امپورٹڈ سیمن کروائیں۔
+                  <strong>PK-104</strong> Cholistani Cow has shown signs of heat since yesterday evening. Arrange insemination with Sahiwal or imported Friesian semen within the next 12 hours.
                 </p>
               </div>
             </div>
@@ -1320,14 +1320,14 @@ export default function App() {
                   <div>
                     <div className="flex items-center gap-2">
                       <h3 className="font-extrabold text-gray-900 text-base sm:text-lg font-['Noto_Nastaliq_Urdu']">
-                        حمل کاؤنٹ ڈاؤن اور متوقع ولادت (Pregnancy Countdown Spotlight)
+                        Pregnancy Countdown & Expected Calving
                       </h3>
                       <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#1B5E20] text-white">
-                        280 دن مدت حمل
+                        280-Day Gestation
                       </span>
                     </div>
                     <p className="text-xs text-gray-500">
-                      ہر گابھن جانور کے لیے بقیہ ایام، ٹرائیمیسٹر مرحلہ، ڈرائی آف تاریخ اور پروگریس بار کا مکمل جائزہ
+                      View the days remaining, trimester, dry-off date, and progress for each pregnant animal.
                     </p>
                   </div>
                 </div>
@@ -1337,15 +1337,15 @@ export default function App() {
                   <div className="flex items-center gap-1.5 bg-gray-50 border border-gray-200 rounded-xl px-2.5 py-1.5 shadow-2xs">
                     <ArrowUpDown className="w-3.5 h-3.5 text-[#1B5E20] shrink-0" />
                     <div className="flex flex-col text-left">
-                      <span className="text-[9px] font-bold text-gray-500 uppercase leading-none">Sort by / ترتیب</span>
+                      <span className="text-[9px] font-bold text-gray-500 uppercase leading-none">Sort by</span>
                       <select
                         aria-label="Sort Breeding Tab Gestation List"
                         value={pregnancySortBy}
                         onChange={(e) => setPregnancySortBy(e.target.value as 'due_date' | 'days_elapsed')}
                         className="bg-transparent font-bold text-gray-800 text-xs outline-none cursor-pointer mt-0.5"
                       >
-                        <option value="due_date">Due Date (Urgent First / قریب ولادت)</option>
-                        <option value="days_elapsed">Days Elapsed (Highest Gestation / زیادہ دن)</option>
+                        <option value="due_date">Due Date (Urgent First)</option>
+                        <option value="days_elapsed">Days Elapsed (Longest Gestation)</option>
                       </select>
                     </div>
                   </div>
@@ -1380,7 +1380,7 @@ export default function App() {
                   </div>
 
                   <div className="text-xs text-gray-500 bg-[#F8F9F5] px-3 py-1.5 rounded-xl border border-gray-200 hidden sm:block">
-                    <span>آج: <strong>21 اکتوبر 2026</strong></span>
+                    <span>Today: <strong>October 21, 2026</strong></span>
                   </div>
                 </div>
               </div>
@@ -1407,7 +1407,7 @@ export default function App() {
                           <div className="flex items-center gap-2">
                             <span className="text-lg font-black text-gray-900 tracking-tight">{rec.animalId}</span>
                             <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">
-                              گابھن
+                              Pregnant
                             </span>
                           </div>
                           <div className="text-xs text-gray-600 font-medium mt-0.5">{rec.breed}</div>
@@ -1419,10 +1419,10 @@ export default function App() {
                             ? 'bg-amber-100 border-amber-300 text-amber-950 animate-pulse'
                             : 'bg-emerald-50 border-emerald-200 text-emerald-900'
                         }`}>
-                          <div className="text-[10px] uppercase font-bold text-gray-500">کاؤنٹ ڈاؤن</div>
+                          <div className="text-[10px] uppercase font-bold text-gray-500">Countdown</div>
                           <div className="text-lg font-black leading-none mt-0.5 flex items-center gap-1 justify-center">
                             <Clock className="w-4 h-4 text-[#FF8F00]" />
-                            <span>{gestation.daysRemaining} دن باقی</span>
+                            <span>{gestation.daysRemaining} days left</span>
                           </div>
                         </div>
                       </div>
@@ -1430,8 +1430,8 @@ export default function App() {
                       {/* 280 دن پروگریس بار */}
                       <div className="space-y-1.5">
                         <div className="flex justify-between text-xs text-gray-600 font-semibold">
-                          <span>پیش رفت: {gestation.daysElapsed} / {totalDays} دن</span>
-                          <span className="text-[#1B5E20] font-bold">{gestation.progressPercent}% مکمل</span>
+                          <span>Progress: {gestation.daysElapsed} / {totalDays} days</span>
+                          <span className="text-[#1B5E20] font-bold">{gestation.progressPercent}% complete</span>
                         </div>
                         <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden p-0.5">
                           <div
@@ -1440,7 +1440,7 @@ export default function App() {
                           ></div>
                         </div>
                         <div className="text-[11px] text-gray-500 text-right">
-                          <span>مرحلہ: </span>
+                          <span>Stage: </span>
                           <strong className="text-gray-800">{gestation.trimester}</strong>
                         </div>
                       </div>
@@ -1448,26 +1448,26 @@ export default function App() {
                       {/* سنگ میل تواریخ (Milestone Dates) */}
                       <div className="grid grid-cols-2 gap-2 text-xs bg-[#F8F9F5] p-3 rounded-xl border border-gray-100">
                         <div>
-                          <span className="text-gray-400 block text-[10px]">ٹیکہ / AI تاریخ:</span>
+                          <span className="text-gray-400 block text-[10px]">AI Date:</span>
                           <strong className="text-gray-800 font-mono">{rec.aiDate}</strong>
                         </div>
                         <div>
-                          <span className="text-gray-400 block text-[10px]">متوقع ولادت (+{totalDays}d):</span>
+                          <span className="text-gray-400 block text-[10px]">Expected Calving (+{totalDays}d):</span>
                           <strong className="text-[#1B5E20] font-mono font-bold">{rec.expectedDeliveryDate}</strong>
                         </div>
                         <div>
-                          <span className="text-gray-400 block text-[10px]">ڈرائی آف تاریخ (-60d):</span>
+                          <span className="text-gray-400 block text-[10px]">Dry-Off Date (-60d):</span>
                           <strong className="text-amber-800 font-mono">{gestation.dryOffDate}</strong>
                         </div>
                         <div>
-                          <span className="text-gray-400 block text-[10px]">الٹرا ساؤنڈ / پی ڈی:</span>
-                          <strong className="text-blue-800 font-mono">{rec.pregnancyCheckDate || 'تصدیق شدہ'}</strong>
+                          <span className="text-gray-400 block text-[10px]">Ultrasound / PD:</span>
+                          <strong className="text-blue-800 font-mono">{rec.pregnancyCheckDate || 'Confirmed'}</strong>
                         </div>
                       </div>
 
                       {/* سیمن تفصیل */}
                       <div className="text-[11px] text-gray-600 border-t pt-2 flex items-center justify-between">
-                        <span className="text-gray-400">سیمن:</span>
+                        <span className="text-gray-400">Semen:</span>
                         <span className="font-semibold text-gray-700 truncate max-w-[200px]" title={rec.semenDetails}>
                           {rec.semenDetails}
                         </span>
@@ -1477,12 +1477,12 @@ export default function App() {
                       {gestation.isDueSoon ? (
                         <div className="p-2.5 rounded-xl bg-amber-100/90 text-amber-950 text-xs font-bold border border-amber-300 flex items-center gap-2">
                           <AlertTriangle className="w-4 h-4 text-[#e65100] shrink-0" />
-                          <span>ولادت انتہائی قریب ہے! کاونگ روم اور فوری نگہداشت تیار رکھیں۔</span>
+                          <span>Calving is very near! Prepare the calving pen and immediate care.</span>
                         </div>
                       ) : (
                         <div className="p-2 rounded-xl bg-emerald-50 text-emerald-800 text-xs font-semibold border border-emerald-200 flex items-center gap-1.5">
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                          <span>حمل معمول کے مطابق ہے، متوازن خوراک جاری رکھیں۔</span>
+                          <span>Pregnancy is progressing normally. Continue a balanced diet.</span>
                         </div>
                       )}
 
@@ -1524,7 +1524,7 @@ export default function App() {
                 <Search className="w-4 h-4 text-gray-400 absolute right-3 top-2.5" />
                 <input
                   type="text"
-                  placeholder="جانور ٹیگ، نسل یا سیمن تلاش کریں..."
+                  placeholder="Search animal tag, breed, or semen..."
                   value={breedingSearchTerm}
                   onChange={(e) => setBreedingSearchTerm(e.target.value)}
                   className="w-full pl-3 pr-9 py-2 border rounded-xl text-xs outline-none focus:ring-2 focus:ring-[#1B5E20]"
@@ -1533,13 +1533,13 @@ export default function App() {
 
               {/* اسٹیٹس فلٹر پلز */}
               <div className="flex items-center gap-1.5 overflow-x-auto text-xs scrollbar-none">
-                <span className="text-gray-400 text-[11px] ml-1">فلٹر:</span>
+                <span className="text-gray-400 text-[11px] ml-1">Filter:</span>
                 {[
-                  { label: 'تمام (All)', value: 'All' },
-                  { label: 'گابھن (Pregnant)', value: 'Pregnant' },
-                  { label: 'ٹیکہ شدہ (Inseminated)', value: 'Inseminated' },
-                  { label: 'ہیٹ میں (In Heat)', value: 'In Heat' },
-                  { label: 'خالی (Open)', value: 'Open' },
+                  { label: 'All', value: 'All' },
+                  { label: 'Pregnant', value: 'Pregnant' },
+                  { label: 'Inseminated', value: 'Inseminated' },
+                  { label: 'In Heat', value: 'In Heat' },
+                  { label: 'Open', value: 'Open' },
                 ].map((tab) => (
                   <button
                     key={tab.value}
@@ -1566,7 +1566,7 @@ export default function App() {
                   }`}
                 >
                   <Layers className="w-3.5 h-3.5" />
-                  <span>لسٹ ویو</span>
+                  <span>List View</span>
                 </button>
                 <button
                   onClick={() => setBreedingViewMode('calendar')}
@@ -1577,7 +1577,7 @@ export default function App() {
                   }`}
                 >
                   <CalendarDays className="w-3.5 h-3.5" />
-                  <span>کیلنڈر ویو</span>
+                  <span>Calendar View</span>
                 </button>
               </div>
 
@@ -1590,14 +1590,14 @@ export default function App() {
                   <div className="flex items-center gap-2">
                     <Dna className="w-4 h-4 text-[#1B5E20]" />
                     <h4 className="font-bold text-gray-800 text-sm font-['Noto_Nastaliq_Urdu']">
-                      بریڈنگ و ولادت ریکارڈ ٹیبل ({filteredBreedingRecords.length} ریکارڈز)
+                      Breeding & Calving Records ({filteredBreedingRecords.length})
                     </h4>
                   </div>
                   <button
                     onClick={() => setShowAddBreedingModal(true)}
                     className="text-xs text-[#1B5E20] font-bold hover:underline"
                   >
-                    + نیا بریڈنگ ریکارڈ
+                    + New Breeding Record
                   </button>
                 </div>
 
@@ -1605,15 +1605,15 @@ export default function App() {
                   <table className="w-full text-right text-xs">
                     <thead className="bg-[#F8F9F5] text-gray-600 border-b border-gray-200">
                       <tr>
-                        <th className="py-3 px-3">جانور ٹیگ و نسل</th>
-                        <th className="py-3 px-3">ہیٹ تاریخ</th>
-                        <th className="py-3 px-3">ٹیکہ (AI) تاریخ</th>
-                        <th className="py-3 px-3">پی ڈی چیک تاریخ</th>
-                        <th className="py-3 px-3">متوقع ولادت (+280d)</th>
-                        <th className="py-3 px-3 text-center">حمل کاؤنٹ ڈاؤن</th>
-                        <th className="py-3 px-3 text-center">اسٹیٹس</th>
-                        <th className="py-3 px-3">سیمن و نوٹس</th>
-                        <th className="py-3 px-3 text-center">ایکشن</th>
+                        <th className="py-3 px-3">Animal Tag & Breed</th>
+                        <th className="py-3 px-3">Heat Date</th>
+                        <th className="py-3 px-3">AI Date</th>
+                        <th className="py-3 px-3">PD Check Date</th>
+                        <th className="py-3 px-3">Expected Calving (+280d)</th>
+                        <th className="py-3 px-3 text-center">Pregnancy Countdown</th>
+                        <th className="py-3 px-3 text-center">Status</th>
+                        <th className="py-3 px-3">Semen & Notes</th>
+                        <th className="py-3 px-3 text-center">Action</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
@@ -1648,10 +1648,10 @@ export default function App() {
                                       ? 'bg-amber-100 text-amber-900 border border-amber-300 animate-pulse'
                                       : 'bg-emerald-100 text-emerald-800'
                                   }`}>
-                                    {gestation.daysRemaining} دن باقی
+                                    {gestation.daysRemaining} days left
                                   </span>
                                   <span className="text-[9px] text-gray-400 mt-0.5">
-                                    {gestation.progressPercent}% مکمل
+                                    {gestation.progressPercent}% complete
                                   </span>
                                 </div>
                               ) : (
@@ -1668,10 +1668,10 @@ export default function App() {
                                   ? 'bg-rose-100 text-rose-900 border border-rose-300'
                                   : 'bg-gray-100 text-gray-700'
                               }`}>
-                                {r.status === 'Pregnant' ? 'تصدیق شدہ گابھن'
-                                  : r.status === 'Inseminated' ? 'ٹیکہ شدہ'
-                                  : r.status === 'In Heat' ? 'ہیٹ میں'
-                                  : 'خالی (Open)'}
+                                {r.status === 'Pregnant' ? 'Confirmed Pregnant'
+                                  : r.status === 'Inseminated' ? 'Inseminated'
+                                  : r.status === 'In Heat' ? 'In Heat'
+                                  : 'Open'}
                               </span>
                             </td>
                             <td className="py-3 px-3 text-gray-600 max-w-[200px]">
@@ -1682,7 +1682,7 @@ export default function App() {
                               <button
                                 onClick={() => handleDeleteBreedingRecord(r.id)}
                                 className="text-red-500 hover:text-red-700 p-1 rounded hover:bg-red-50 transition"
-                                title="ریکارڈ حذف کریں"
+                                title="Delete record"
                               >
                                 🗑️
                               </button>
@@ -1708,10 +1708,10 @@ export default function App() {
                     </div>
                     <div>
                       <h3 className="font-extrabold text-gray-900 text-base font-['Noto_Nastaliq_Urdu']">
-                        بریڈنگ، ولادت اور پی ڈی کیلنڈر (Breeding Calendar)
+                        Breeding, Calving & PD Calendar
                       </h3>
                       <p className="text-xs text-gray-500">
-                        تاریخ وار شیڈول برائے ولادت، حمل ٹیسٹ، اور ہیٹ سائیکلز
+                        Dated schedule for calving, pregnancy tests, and heat cycles
                       </p>
                     </div>
                   </div>
@@ -1722,7 +1722,7 @@ export default function App() {
                       className="px-3 py-1.5 rounded-xl border border-gray-200 hover:bg-gray-50 text-xs font-bold text-gray-700 flex items-center gap-1 transition"
                     >
                       <ChevronRight className="w-4 h-4" />
-                      <span>پچھلا مہینہ</span>
+                      <span>Previous Month</span>
                     </button>
                     <div className="px-4 py-1.5 rounded-xl bg-[#FFF8E1] text-[#1B5E20] font-black text-sm border border-[#ffe082]">
                       {currentUrduMonthName} {calYear}
@@ -1731,7 +1731,7 @@ export default function App() {
                       onClick={() => setCalendarMonthOffset(calendarMonthOffset + 1)}
                       className="px-3 py-1.5 rounded-xl border border-gray-200 hover:bg-gray-50 text-xs font-bold text-gray-700 flex items-center gap-1 transition"
                     >
-                      <span>اگلا مہینہ</span>
+                      <span>Next Month</span>
                       <ChevronLeft className="w-4 h-4" />
                     </button>
                   </div>
@@ -1741,13 +1741,13 @@ export default function App() {
                 <div className="border rounded-2xl overflow-hidden bg-gray-50/40">
                   {/* ہفتے کے دن */}
                   <div className="grid grid-cols-7 text-center text-xs font-bold text-gray-700 bg-gray-100/80 py-2.5 border-b">
-                    <div>پیر (Mon)</div>
-                    <div>منگل (Tue)</div>
-                    <div>بدھ (Wed)</div>
-                    <div>جمعرات (Thu)</div>
-                    <div>جمعہ (Fri)</div>
-                    <div>ہفتہ (Sat)</div>
-                    <div>اتوار (Sun)</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                    <div>Sun</div>
                   </div>
 
                   {/* دنوں کا گرڈ */}
@@ -1767,16 +1767,16 @@ export default function App() {
                       const dayEvents: { type: string; label: string; record: BreedingRecord }[] = [];
                       breedingRecords.forEach(rec => {
                         if (rec.expectedDeliveryDate === dateStr) {
-                          dayEvents.push({ type: 'calving', label: `ولادت: ${rec.animalId}`, record: rec });
+                          dayEvents.push({ type: 'calving', label: `Calving: ${rec.animalId}`, record: rec });
                         }
                         if (rec.pregnancyCheckDate === dateStr) {
-                          dayEvents.push({ type: 'pd', label: `حمل چیک: ${rec.animalId}`, record: rec });
+                          dayEvents.push({ type: 'pd', label: `Pregnancy check: ${rec.animalId}`, record: rec });
                         }
                         if (rec.heatDate === dateStr) {
-                          dayEvents.push({ type: 'heat', label: `ہیٹ: ${rec.animalId}`, record: rec });
+                          dayEvents.push({ type: 'heat', label: `Heat: ${rec.animalId}`, record: rec });
                         }
                         if (rec.aiDate === dateStr) {
-                          dayEvents.push({ type: 'ai', label: `ٹیکہ: ${rec.animalId}`, record: rec });
+                          dayEvents.push({ type: 'ai', label: `Insemination: ${rec.animalId}`, record: rec });
                         }
                       });
 
@@ -1839,25 +1839,25 @@ export default function App() {
                   <div className="flex items-center gap-4 flex-wrap">
                     <span className="flex items-center gap-1.5">
                       <span className="w-3 h-3 rounded-full bg-emerald-600"></span>
-                      <span className="font-semibold text-gray-700">متوقع تاریخ ولادت (+280 دن)</span>
+                      <span className="font-semibold text-gray-700">Expected Calving Date (+280 days)</span>
                     </span>
                     <span className="flex items-center gap-1.5">
                       <span className="w-3 h-3 rounded-full bg-blue-600"></span>
-                      <span className="font-semibold text-gray-700">حمل ٹیسٹ / پی ڈی چیک (PD Due)</span>
+                      <span className="font-semibold text-gray-700">Pregnancy Test / PD Check (PD Due)</span>
                     </span>
                     <span className="flex items-center gap-1.5">
                       <span className="w-3 h-3 rounded-full bg-rose-600"></span>
-                      <span className="font-semibold text-gray-700">ہیٹ سائیکل (Heat Date)</span>
+                      <span className="font-semibold text-gray-700">Heat Cycle (Heat Date)</span>
                     </span>
                     <span className="flex items-center gap-1.5">
                       <span className="w-3 h-3 rounded-full bg-purple-600"></span>
-                      <span className="font-semibold text-gray-700">ٹیکہ / ملاپ (AI Date)</span>
+                      <span className="font-semibold text-gray-700">Insemination (AI Date)</span>
                     </span>
                   </div>
 
                   {selectedCalendarDate && (
                     <div className="text-xs bg-[#FFF8E1] px-3 py-1.5 rounded-xl border border-[#ffe082] text-gray-800">
-                      منتخب تاریخ: <strong>{selectedCalendarDate}</strong>
+                      Selected date: <strong>{selectedCalendarDate}</strong>
                     </div>
                   )}
                 </div>
@@ -1873,15 +1873,15 @@ export default function App() {
         <div className="rounded-2xl p-6 bg-gradient-to-l from-[#0d3813] via-[#1B5E20] to-[#2e7d32] text-white shadow-lg relative overflow-hidden flex flex-wrap items-center justify-between gap-4">
           <div className="space-y-1.5 z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-[#FF8F00] text-white">
-              <span>🌟 لائیو کارکردگی رپورٹ</span>
+              <span>🌟 Live Performance Report</span>
               <span>•</span>
-              <span>21 اکتوبر 2026</span>
+              <span>October 21, 2026</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold font-['Noto_Nastaliq_Urdu'] leading-tight">
-              ماشاءاللہ! ڈیری فارم روزانہ پیداوار اور مالیاتی جائزہ
+              Dairy Farm Daily Production & Financial Overview
             </h2>
             <p className="text-emerald-100 text-xs sm:text-sm max-w-2xl">
-              سسٹم خودکار طور پر پیداواری لاگت، فی لیٹر منافع اور چارہ و ونڈا تناسب کو مانیٹر کر رہا ہے۔
+              The system automatically monitors production costs, profit per liter, and feed-to-ration ratios.
             </p>
           </div>
 
@@ -1891,14 +1891,14 @@ export default function App() {
               className="px-4 py-2.5 rounded-xl font-bold text-xs bg-[#FFF8E1] text-[#1B5E20] hover:bg-white transition shadow flex items-center gap-2"
             >
               <Milk className="w-4 h-4 text-[#1B5E20]" />
-              <span>دودھ درج کریں</span>
+              <span>Record Milk</span>
             </button>
             <button
               onClick={() => setShowAddAnimalModal(true)}
               className="px-4 py-2.5 rounded-xl font-bold text-xs bg-[#FF8F00] text-white hover:bg-[#e65100] transition shadow flex items-center gap-2"
             >
               <PlusCircle className="w-4 h-4" />
-              <span>نیا جانور</span>
+              <span>New Animal</span>
             </button>
           </div>
         </div>
@@ -1911,7 +1911,7 @@ export default function App() {
             <div className="absolute top-0 right-0 w-2 h-full bg-[#1B5E20]"></div>
             <div className="flex items-center justify-between text-gray-500 mb-2">
               <span className="text-xs font-bold text-gray-600 font-['Noto_Nastaliq_Urdu']">
-                آج کا کل دودھ (Total Milk Today)
+                Total Milk Today
               </span>
               <div className="w-10 h-10 rounded-xl bg-emerald-50 text-[#1B5E20] flex items-center justify-center">
                 <Milk className="w-5 h-5" />
@@ -1919,12 +1919,12 @@ export default function App() {
             </div>
             <div className="flex items-baseline gap-2">
               <span className="text-3xl font-black text-gray-900 tracking-tight">{todayMilkTotal}</span>
-              <span className="text-sm font-semibold text-gray-500">لیٹر</span>
+              <span className="text-sm font-semibold text-gray-500">Liters</span>
             </div>
             <div className="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600">
-              <span>صبح: <strong>42.5L</strong></span>
-              <span>شام: <strong>36.0L</strong></span>
-              <span className="font-bold text-[#1B5E20] bg-emerald-50 px-2 py-0.5 rounded">فیٹ: 5.8%</span>
+              <span>Morning: <strong>42.5L</strong></span>
+              <span>Evening: <strong>36.0L</strong></span>
+              <span className="font-bold text-[#1B5E20] bg-emerald-50 px-2 py-0.5 rounded">Fat: 5.8%</span>
             </div>
           </div>
 
@@ -1933,7 +1933,7 @@ export default function App() {
             <div className="absolute top-0 right-0 w-2 h-full bg-[#FF8F00]"></div>
             <div className="flex items-center justify-between text-gray-500 mb-2">
               <span className="text-xs font-bold text-gray-600 font-['Noto_Nastaliq_Urdu']">
-                اس مہینے کی آمدنی (Monthly Income)
+                Monthly Income
               </span>
               <div className="w-10 h-10 rounded-xl bg-amber-50 text-[#FF8F00] flex items-center justify-center">
                 <TrendingUp className="w-5 h-5" />
@@ -1943,13 +1943,13 @@ export default function App() {
               <span className="text-3xl font-black text-[#1B5E20] tracking-tight">
                 {monthlyIncome.toLocaleString()}
               </span>
-              <span className="text-sm font-semibold text-gray-500">روپے</span>
+              <span className="text-sm font-semibold text-gray-500">PKR</span>
             </div>
             <div className="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600">
               <span className="text-emerald-700 font-semibold flex items-center gap-0.5">
-                <ArrowUpRight className="w-3.5 h-3.5" /> +14.2% اضافہ
+                <ArrowUpRight className="w-3.5 h-3.5" /> +14.2% increase
               </span>
-              <span className="text-[11px] text-gray-400">دودھ + جانور فروخت</span>
+              <span className="text-[11px] text-gray-400">Milk + Animal Sales</span>
             </div>
           </div>
 
@@ -1958,7 +1958,7 @@ export default function App() {
             <div className="absolute top-0 right-0 w-2 h-full bg-rose-600"></div>
             <div className="flex items-center justify-between text-gray-500 mb-2">
               <span className="text-xs font-bold text-gray-600 font-['Noto_Nastaliq_Urdu']">
-                اس مہینے کے اخراجات (Expenses)
+                Monthly Expenses
               </span>
               <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
                 <TrendingDown className="w-5 h-5" />
@@ -1968,10 +1968,10 @@ export default function App() {
               <span className="text-3xl font-black text-rose-700 tracking-tight">
                 {monthlyExpenses.toLocaleString()}
               </span>
-              <span className="text-sm font-semibold text-gray-500">روپے</span>
+              <span className="text-sm font-semibold text-gray-500">PKR</span>
             </div>
             <div className="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600">
-              <span>چارہ و ونڈا: <strong>{feedExpenses.toLocaleString()}</strong></span>
+              <span>Feed & Ration: <strong>{feedExpenses.toLocaleString()}</strong></span>
               <span className="px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 font-bold text-[11px]">
                 {feedRatio}%
               </span>
@@ -1983,7 +1983,7 @@ export default function App() {
             <div className="absolute top-0 right-0 w-2 h-full bg-[#1B5E20]"></div>
             <div className="flex items-center justify-between text-gray-500 mb-2">
               <span className="text-xs font-bold text-gray-800 font-['Noto_Nastaliq_Urdu']">
-                خالص منافع (Net Profit)
+                Net Profit
               </span>
               <div className="w-10 h-10 rounded-xl bg-[#1B5E20] text-[#FFF8E1] flex items-center justify-center font-bold">
                 <DollarSign className="w-5 h-5" />
@@ -1993,10 +1993,10 @@ export default function App() {
               <span className="text-3xl font-black text-[#1B5E20] tracking-tight">
                 {netProfit.toLocaleString()}
               </span>
-              <span className="text-sm font-semibold text-gray-600">روپے</span>
+              <span className="text-sm font-semibold text-gray-600">PKR</span>
             </div>
             <div className="mt-3 pt-3 border-t border-amber-200/60 flex items-center justify-between text-xs text-gray-700">
-              <span>منافع کا تناسب (Margin):</span>
+              <span>Profit Margin:</span>
               <span className="font-extrabold text-[#e65100] text-sm">{profitMargin}%</span>
             </div>
           </div>
@@ -2013,14 +2013,14 @@ export default function App() {
               <div>
                 <div className="flex items-center gap-2">
                   <h3 className="font-extrabold text-gray-900 text-base font-['Noto_Nastaliq_Urdu']">
-                    مالیاتی جائزہ اور کاروباری صحت (Financial Health: 6-Month Trends)
+                    Financial Health: 6-Month Trends
                   </h3>
                   <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
-                    منافع بخش کاروبار (Profitable)
+                    Profitable
                   </span>
                 </div>
                 <p className="text-xs text-gray-500">
-                  پچھلے 6 ماہ کا 'ماہانہ آمدنی' بمقابلہ 'ماہانہ اخراجات' کا تفصیلی موازنہ برائے کاروباری استحکام
+                  Detailed comparison of monthly income and expenses over the past six months.
                 </p>
               </div>
             </div>
@@ -2028,15 +2028,15 @@ export default function App() {
             {/* کوئیک سمری اسکور */}
             <div className="flex items-center gap-3 flex-wrap text-xs">
               <div className="px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-900 border border-emerald-200">
-                <span className="text-[11px] text-emerald-700">6 ماہ اوسط آمدنی: </span>
+                <span className="text-[11px] text-emerald-700">6-Month Average Income: </span>
                 <strong className="font-bold">Rs. 703,083</strong>
               </div>
               <div className="px-3 py-1.5 rounded-xl bg-rose-50 text-rose-900 border border-rose-200">
-                <span className="text-[11px] text-rose-700">6 ماہ اوسط اخراجات: </span>
+                <span className="text-[11px] text-rose-700">6-Month Average Expenses: </span>
                 <strong className="font-bold">Rs. 380,333</strong>
               </div>
               <div className="px-3 py-1.5 rounded-xl bg-[#FFF8E1] text-amber-900 border border-[#ffe082]">
-                <span className="text-[11px] text-amber-800">اوسط خالص منافع: </span>
+                <span className="text-[11px] text-amber-800">Average Net Profit: </span>
                 <strong className="font-bold text-[#e65100]">Rs. 322,750</strong>
               </div>
             </div>
@@ -2064,9 +2064,9 @@ export default function App() {
                 <Legend
                   wrapperStyle={{ paddingTop: '10px', fontSize: '12px' }}
                   formatter={(value) => {
-                    if (value === 'income') return 'ماہانہ آمدنی (Monthly Income)';
-                    if (value === 'expenses') return 'ماہانہ اخراجات (Monthly Expenses)';
-                    if (value === 'profit') return 'خالص منافع (Net Profit)';
+                    if (value === 'income') return 'Monthly Income';
+                    if (value === 'expenses') return 'Monthly Expenses';
+                    if (value === 'profit') return 'Net Profit';
                     return value;
                   }}
                 />
@@ -2105,15 +2105,15 @@ export default function App() {
           <div className="pt-2 border-t border-gray-100 flex flex-wrap items-center justify-between text-xs text-gray-500">
             <span className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full bg-[#1B5E20]"></span>
-              <span>سبز لکیر: <strong>ماہانہ آمدنی (Monthly Income)</strong> - مئی تا اکتوبر مسلسل اضافہ</span>
+              <span>Green line: <strong>Monthly Income</strong> - steady growth from May to October</span>
             </span>
             <span className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full bg-rose-600"></span>
-              <span>سرخ لکیر: <strong>ماہانہ اخراجات (Monthly Expenses)</strong> - متوازن اور کنٹرولڈ</span>
+              <span>Red line: <strong>Monthly Expenses</strong> - balanced and controlled</span>
             </span>
             <span className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full bg-[#FF8F00]"></span>
-              <span>سنہری لکیر (ڈیش): <strong>خالص منافع (Net Profit)</strong> - مثبت گروتھ (+30.8%)</span>
+              <span>Gold dashed line: <strong>Net Profit</strong> - positive growth (+30.8%)</span>
             </span>
           </div>
         </div>
@@ -2135,7 +2135,7 @@ export default function App() {
                   </span>
                 </div>
                 <p className="text-xs text-gray-500 font-['Noto_Nastaliq_Urdu']">
-                  280 دن مدت حمل کے مطابق خودکار متوقع تاریخ ولادت اور بقیہ ایام کا لائیو کاؤنٹ ڈاؤن
+                  Automatic expected calving date and live countdown based on a 280-day gestation period
                 </p>
               </div>
             </div>
@@ -2147,7 +2147,7 @@ export default function App() {
                 <ArrowUpDown className="w-3.5 h-3.5 text-[#1B5E20] shrink-0" />
                 <div className="flex flex-col text-left">
                   <label htmlFor="pregnancy-sort-dropdown" className="text-[9px] font-bold text-gray-500 uppercase leading-none">
-                    Sort by / ترتیب
+                    Sort by
                   </label>
                   <select
                     id="pregnancy-sort-dropdown"
@@ -2156,8 +2156,8 @@ export default function App() {
                     onChange={(e) => setPregnancySortBy(e.target.value as 'due_date' | 'days_elapsed')}
                     className="bg-transparent font-bold text-gray-800 text-xs outline-none cursor-pointer mt-0.5"
                   >
-                    <option value="due_date">Due Date (Urgent First / قریب ولادت)</option>
-                    <option value="days_elapsed">Days Elapsed (Highest Gestation / زیادہ دن)</option>
+                    <option value="due_date">Due Date (Urgent First)</option>
+                    <option value="days_elapsed">Days Elapsed (Longest Gestation)</option>
                   </select>
                 </div>
               </div>
@@ -2223,13 +2223,13 @@ export default function App() {
                           : 'bg-emerald-100 text-emerald-900 border border-emerald-300'
                       }`}>
                         <Clock className="w-3.5 h-3.5" />
-                        <span>{gestation.daysRemaining} Days Left (دن باقی)</span>
+                        <span>{gestation.daysRemaining} Days Left</span>
                       </span>
                     </div>
 
                     <div>
                       <div className="flex justify-between text-[11px] text-gray-500 mb-1">
-                        <span>Gestation Progress (پیش رفت):</span>
+                        <span>Gestation Progress:</span>
                         <strong className="text-gray-800">{gestation.daysElapsed} / 280 Days ({gestation.progressPercent}%)</strong>
                       </div>
                       <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden">
@@ -2292,14 +2292,14 @@ export default function App() {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900 text-sm font-['Noto_Nastaliq_Urdu']">
-                    چارہ اور ونڈا تناسب انڈیکیٹر (Feed Expense Indicator)
+                    Feed Expense Indicator
                   </h3>
-                  <p className="text-xs text-gray-500">ڈیری فارمنگ میں چارے کا مثالی خرچ کل اخراجات کا 60% تا 70% ہونا چاہیے۔</p>
+                  <p className="text-xs text-gray-500">Feed costs should ideally account for 60% to 70% of total dairy farm expenses.</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">
-                  موجودہ: {feedRatio}% (محفوظ حد)
+                  Current: {feedRatio}% (Healthy Range)
                 </span>
               </div>
             </div>
@@ -2307,9 +2307,9 @@ export default function App() {
             {/* پروگریس بار */}
             <div>
               <div className="flex justify-between text-xs text-gray-500 mb-1.5 font-medium">
-                <span>0% خرچ</span>
-                <span className="text-[#1B5E20] font-bold">ہدف رینج: 60% تا 70%</span>
-                <span>100% اخراجات</span>
+                <span>0% Expenses</span>
+                <span className="text-[#1B5E20] font-bold">Target Range: 60% to 70%</span>
+                <span>100% Expenses</span>
               </div>
               <div className="w-full h-4 bg-gray-100 rounded-full overflow-hidden flex p-0.5">
                 <div
@@ -2322,16 +2322,16 @@ export default function App() {
             {/* 3 فوری سمری پوائنٹس */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
               <div className="p-3 bg-[#F8F9F5] rounded-xl border border-gray-200/70">
-                <span className="text-[11px] text-gray-500">کل فیڈ خرچ:</span>
-                <div className="text-base font-bold text-gray-800 mt-0.5">{feedExpenses.toLocaleString()} روپے</div>
+                <span className="text-[11px] text-gray-500">Total Feed Cost:</span>
+                <div className="text-base font-bold text-gray-800 mt-0.5">PKR {feedExpenses.toLocaleString()}</div>
               </div>
               <div className="p-3 bg-emerald-50/70 rounded-xl border border-emerald-200/70">
-                <span className="text-[11px] text-emerald-800">فی لیٹر پیداواری لاگت:</span>
-                <div className="text-base font-bold text-[#1B5E20] mt-0.5">{costPerLiter} روپے / لیٹر</div>
+                <span className="text-[11px] text-emerald-800">Production Cost per Liter:</span>
+                <div className="text-base font-bold text-[#1B5E20] mt-0.5">PKR {costPerLiter} / liter</div>
               </div>
               <div className="p-3 bg-[#FFF8E1] rounded-xl border border-[#ffe082]">
-                <span className="text-[11px] text-amber-900">فی لیٹر اوسط منافع:</span>
-                <div className="text-base font-bold text-[#e65100] mt-0.5">78 روپے / لیٹر</div>
+                <span className="text-[11px] text-amber-900">Average Profit per Liter:</span>
+                <div className="text-base font-bold text-[#e65100] mt-0.5">PKR 78 / liter</div>
               </div>
             </div>
           </div>
@@ -2341,42 +2341,42 @@ export default function App() {
             <div className="border-b border-gray-100 pb-3 flex items-center justify-between">
               <h3 className="font-bold text-gray-900 text-sm font-['Noto_Nastaliq_Urdu'] flex items-center gap-2">
                 <span>🐄</span>
-                <span>فارم ریوڑ صورتحال (Herd Summary)</span>
+                <span>Farm Herd Summary</span>
               </h3>
-              <span className="text-xs font-bold text-[#1B5E20]">کل: {animals.length} سر</span>
+              <span className="text-xs font-bold text-[#1B5E20]">Total: {animals.length} animals</span>
             </div>
 
             <div className="space-y-3">
               <div className="flex items-center justify-between p-2.5 rounded-xl bg-blue-50/70 border border-blue-100">
                 <div className="flex items-center gap-2.5">
                   <span className="text-base">🥛</span>
-                  <span className="text-xs font-bold text-blue-900">دودھ دینے والے جانور (Milking):</span>
+                  <span className="text-xs font-bold text-blue-900">Milking Animals:</span>
                 </div>
-                <strong className="text-sm text-blue-900">{activeMilkingCount} سر</strong>
+                <strong className="text-sm text-blue-900">{activeMilkingCount} animals</strong>
               </div>
 
               <div className="flex items-center justify-between p-2.5 rounded-xl bg-purple-50/70 border border-purple-100">
                 <div className="flex items-center gap-2.5">
                   <span className="text-base">🤰</span>
-                  <span className="text-xs font-bold text-purple-900">گابھن جانور (Pregnant):</span>
+                  <span className="text-xs font-bold text-purple-900">Pregnant Animals:</span>
                 </div>
-                <strong className="text-sm text-purple-900">1 سر (ولادت متوقع)</strong>
+                <strong className="text-sm text-purple-900">1 animal (calving expected)</strong>
               </div>
 
               <div className="flex items-center justify-between p-2.5 rounded-xl bg-amber-50/70 border border-amber-100">
                 <div className="flex items-center gap-2.5">
                   <span className="text-base">🍂</span>
-                  <span className="text-xs font-bold text-amber-900">خشک جانور (Dry Cows):</span>
+                  <span className="text-xs font-bold text-amber-900">Dry Cows:</span>
                 </div>
-                <strong className="text-sm text-amber-900">1 سر</strong>
+                <strong className="text-sm text-amber-900">1 animal</strong>
               </div>
 
               <div className="flex items-center justify-between p-2.5 rounded-xl bg-teal-50/70 border border-teal-100">
                 <div className="flex items-center gap-2.5">
                   <span className="text-base">🌱</span>
-                  <span className="text-xs font-bold text-teal-900">بچھڑے و بچھڑیاں (Calves):</span>
+                  <span className="text-xs font-bold text-teal-900">Calves:</span>
                 </div>
-                <strong className="text-sm text-teal-900">2 سر (نشوونما جاری)</strong>
+                <strong className="text-sm text-teal-900">2 animals (growing)</strong>
               </div>
             </div>
 
@@ -2384,7 +2384,7 @@ export default function App() {
               onClick={() => setActiveTab('herd')}
               className="w-full py-2 bg-[#FFF8E1] hover:bg-[#ffecb3] text-[#1B5E20] font-bold text-xs rounded-xl border border-[#ffe082] transition flex items-center justify-center gap-1.5"
             >
-              <span>مکمل ریوڑ لسٹ دیکھیں</span>
+              <span>View Complete Herd List</span>
               <ChevronRight className="w-3.5 h-3.5 rotate-180" />
             </button>
           </div>
@@ -2400,14 +2400,14 @@ export default function App() {
               <div className="flex items-center gap-2">
                 <Milk className="w-4 h-4 text-[#1B5E20]" />
                 <h4 className="font-bold text-gray-800 text-sm font-['Noto_Nastaliq_Urdu']">
-                  حالیہ روزانہ دودھ کی پیداوار (Recent Milk Logs)
+                  Recent Daily Milk Production
                 </h4>
               </div>
               <button
                 onClick={() => setShowAddMilkModal(true)}
                 className="text-xs text-[#1B5E20] font-bold hover:underline"
               >
-                + نیا اندراج
+                + New Entry
               </button>
             </div>
 
@@ -2415,12 +2415,12 @@ export default function App() {
               <table className="w-full text-right text-xs">
                 <thead className="bg-[#F8F9F5] text-gray-600 border-b border-gray-200">
                   <tr>
-                    <th className="py-2.5 px-3">تاریخ</th>
-                    <th className="py-2.5 px-3">صبح</th>
-                    <th className="py-2.5 px-3">شام</th>
-                    <th className="py-2.5 px-3">کل پیداوار</th>
-                    <th className="py-2.5 px-3">فیٹ %</th>
-                    <th className="py-2.5 px-3">فروخت شدہ</th>
+                    <th className="py-2.5 px-3">Date</th>
+                    <th className="py-2.5 px-3">Morning</th>
+                    <th className="py-2.5 px-3">Evening</th>
+                    <th className="py-2.5 px-3">Total Production</th>
+                    <th className="py-2.5 px-3">Fat %</th>
+                    <th className="py-2.5 px-3">Sold</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
@@ -2445,14 +2445,14 @@ export default function App() {
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-[#FF8F00]" />
                 <h4 className="font-bold text-gray-800 text-sm font-['Noto_Nastaliq_Urdu']">
-                  گاہکوں کی دودھ ترسیل اور بقایا ادھار (Customer Khata)
+                  Customer Milk Supply & Outstanding Balances
                 </h4>
               </div>
 
               {/* ایکشن بٹنز بشمول CSV ایکسپورٹ */}
               <div className="flex items-center gap-2 relative">
                 <span className="text-xs font-bold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-lg border border-rose-200">
-                  کل بقایا: Rs. {customers.reduce((acc, c) => acc + c.balance, 0).toLocaleString()}
+                  Total Outstanding: PKR {customers.reduce((acc, c) => acc + c.balance, 0).toLocaleString()}
                 </span>
 
                 {/* ایکسپورٹ CSV بٹن اور مینیو */}
@@ -2460,17 +2460,17 @@ export default function App() {
                   <button
                     onClick={() => setShowExportMenu(!showExportMenu)}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-700 hover:bg-emerald-800 text-white shadow-xs transition"
-                    title="ایکسپورٹ کھاتہ CSV"
+                    title="Export Accounts CSV"
                   >
                     <Download className="w-3.5 h-3.5" />
-                    <span>ایکسپورٹ CSV</span>
+                    <span>Export CSV</span>
                   </button>
 
                   {/* ڈراپ ڈاؤن مینیو برائے CSV ایکسپورٹ */}
                   {showExportMenu && (
                     <div className="absolute left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-200 z-50 p-2 space-y-1 text-right">
                       <div className="text-[11px] font-bold text-gray-400 px-2 py-1 border-b">
-                        ریکارڈ کیپنگ کے لیے فارمیٹ منتخب کریں:
+                        Select an export format:
                       </div>
                       <button
                         onClick={exportCustomerKhataCSV}
@@ -2478,7 +2478,7 @@ export default function App() {
                       >
                         <span className="flex items-center gap-2">
                           <FileSpreadsheet className="w-4 h-4 text-[#1B5E20]" />
-                          <span>گاہک بقایا جات لیجر (Balances CSV)</span>
+                          <span>Customer Balances (CSV)</span>
                         </span>
                         <span className="text-[10px] text-gray-400">Excel</span>
                       </button>
@@ -2488,7 +2488,7 @@ export default function App() {
                       >
                         <span className="flex items-center gap-2">
                           <Download className="w-4 h-4 text-[#FF8F00]" />
-                          <span>تمام ادائیگیوں کی ہسٹری (Payment History)</span>
+                          <span>All Payment History</span>
                         </span>
                         <span className="text-[10px] text-gray-400">Excel</span>
                       </button>
@@ -2501,7 +2501,7 @@ export default function App() {
                   className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-[#FF8F00] hover:bg-[#e65100] text-white shadow-xs transition"
                 >
                   <DollarSign className="w-3.5 h-3.5" />
-                  <span>وصولی درج</span>
+                  <span>Record Payment</span>
                 </button>
               </div>
             </div>
@@ -2510,12 +2510,12 @@ export default function App() {
               <table className="w-full text-right text-xs">
                 <thead className="bg-[#F8F9F5] text-gray-600 border-b border-gray-200">
                   <tr>
-                    <th className="py-2.5 px-3">گاہک کا نام</th>
-                    <th className="py-2.5 px-3">روزانہ سپلائی</th>
-                    <th className="py-2.5 px-3">ریٹ</th>
-                    <th className="py-2.5 px-3">واجب الادا بقایا</th>
-                    <th className="py-2.5 px-3 text-center">حالت</th>
-                    <th className="py-2.5 px-3 text-center">ہسٹری و رپورٹ</th>
+                    <th className="py-2.5 px-3">Customer Name</th>
+                    <th className="py-2.5 px-3">Daily Supply</th>
+                    <th className="py-2.5 px-3">Rate</th>
+                    <th className="py-2.5 px-3">Outstanding Balance</th>
+                    <th className="py-2.5 px-3 text-center">Status</th>
+                    <th className="py-2.5 px-3 text-center">History & Report</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
@@ -2525,18 +2525,18 @@ export default function App() {
                         <div>{c.name}</div>
                         <div className="text-[10px] text-gray-400 font-normal">{c.phone}</div>
                       </td>
-                      <td className="py-2.5 px-3 font-semibold text-[#1B5E20]">{c.dailyLiters} ل/دن</td>
-                      <td className="py-2.5 px-3">{c.rate} روپے</td>
+                      <td className="py-2.5 px-3 font-semibold text-[#1B5E20]">{c.dailyLiters} L/day</td>
+                      <td className="py-2.5 px-3">PKR {c.rate}</td>
                       <td className="py-2.5 px-3 font-bold text-amber-900">
                         {c.balance > 0 ? (
-                          <span className="text-red-700">{c.balance.toLocaleString()} روپے</span>
+                          <span className="text-red-700">PKR {c.balance.toLocaleString()}</span>
                         ) : (
-                          <span className="text-emerald-700">0 (بے باق)</span>
+                          <span className="text-emerald-700">0 (Paid)</span>
                         )}
                       </td>
                       <td className="py-2.5 px-3 text-center">
                         <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${c.balance > 0 ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}`}>
-                          {c.balance > 0 ? 'بقایا واجب' : 'کلیئر'}
+                          {c.balance > 0 ? 'Due' : 'Cleared'}
                         </span>
                       </td>
                       <td className="py-2.5 px-3 text-center">
@@ -2544,14 +2544,14 @@ export default function App() {
                           <button
                             onClick={() => setSelectedCustomerForHistory(c)}
                             className="px-2 py-1 rounded-md text-[11px] font-bold text-[#1B5E20] bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition"
-                            title="ادائیگی ہسٹری دیکھیں"
+                            title="View payment history"
                           >
-                            لیجر دیکھیں 📜
+                            View Ledger 📜
                           </button>
                           <button
                             onClick={() => exportPaymentHistoryCSV(c.id)}
                             className="p-1 rounded-md text-gray-500 hover:text-[#1B5E20] hover:bg-gray-100 transition"
-                            title="اس گاہک کی ہسٹری CSV ڈاؤن لوڈ کریں"
+                            title="Download this customer's history as CSV"
                           >
                             <Download className="w-3.5 h-3.5" />
                           </button>
@@ -2573,27 +2573,27 @@ export default function App() {
       {/* 🌟 فوٹر بار برائے لیپ ٹاپ فری سپیس اور انفارمیشن (Requirement 4) */}
       <footer className="bg-white border-t border-gray-200 mt-auto py-4 px-4 sm:px-6 lg:px-8 text-xs text-gray-600 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <span className="font-bold text-[#1B5E20] font-['Noto_Nastaliq_Urdu']">ڈیری فارم مینجمنٹ سسٹم</span>
+          <span className="font-bold text-[#1B5E20] font-['Noto_Nastaliq_Urdu']">Dairy Farm Management System</span>
           <span>•</span>
-          <span className="text-gray-500">پائیتھن فلاسک اور سنگل فائل SQLite ڈیٹابیس (farm.db)</span>
+          <span className="text-gray-500">Python Flask and single-file SQLite database (farm.db)</span>
         </div>
 
         {/* لائیو ہارڈ ڈسک فری سپیس مانیٹر */}
         <div className="flex items-center gap-3">
           <span className="flex items-center gap-1.5 font-medium">
             <HardDrive className={`w-4 h-4 ${isLowSpace ? 'text-red-600 animate-pulse' : 'text-emerald-700'}`} />
-            <span>سسٹم فری سپیس: </span>
+            <span>System free space: </span>
             <strong className={isLowSpace ? 'text-red-600 font-bold' : 'text-[#1B5E20] font-bold'}>
-              {isLowSpace ? `${freeSpaceMB} MB` : `${(freeSpaceMB / 1000).toFixed(0)} GB`} دستیاب
+              {isLowSpace ? `${freeSpaceMB} MB` : `${(freeSpaceMB / 1000).toFixed(0)} GB`} available
             </strong>
           </span>
           {isLowSpace ? (
             <span className="px-2 py-0.5 rounded bg-red-100 text-red-700 font-bold text-[10px]">
-              ⚠️ جگہ کم ہے! پرانا ڈیٹا ڈیلیٹ کریں
+              ⚠️ Low storage space! Delete old data.
             </span>
           ) : (
             <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[10px]">
-              محفوظ ہارڈ ڈسک
+              Storage space is available
             </span>
           )}
         </div>
@@ -2606,7 +2606,7 @@ export default function App() {
             <div className="flex items-center justify-between border-b pb-3">
               <h3 className="font-bold text-gray-900 text-base font-['Noto_Nastaliq_Urdu'] flex items-center gap-2">
                 <Milk className="w-5 h-5 text-[#1B5E20]" />
-                <span>روزانہ دودھ پیداوار اندراج</span>
+                <span>Daily Milk Production Entry</span>
               </h3>
               <button onClick={() => setShowAddMilkModal(false)} className="text-gray-400 hover:text-gray-700">
                 <X className="w-5 h-5" />
@@ -2616,7 +2616,7 @@ export default function App() {
             <form onSubmit={handleAddMilk} className="space-y-3.5">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">صبح کا دودھ (L)*:</label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Morning Milk (L)*:</label>
                   <input
                     type="number"
                     step="0.5"
@@ -2627,7 +2627,7 @@ export default function App() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">شام کا دودھ (L)*:</label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Evening Milk (L)*:</label>
                   <input
                     type="number"
                     step="0.5"
@@ -2640,7 +2640,7 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">ریٹ فی لیٹر (PKR):</label>
+                <label className="block text-xs font-semibold text-gray-700 mb-1">Rate per Liter (PKR):</label>
                 <input
                   type="number"
                   value={newMilkRate}
@@ -2650,8 +2650,8 @@ export default function App() {
               </div>
 
               <div className="p-3 bg-emerald-50 rounded-xl text-xs text-emerald-800 flex justify-between">
-                <span>کل پیداوار: <strong>{(Number(newMorningMilk) + Number(newEveningMilk)).toFixed(1)} لیٹر</strong></span>
-                <span>تخمینہ رقم: <strong>{((Number(newMorningMilk) + Number(newEveningMilk)) * newMilkRate).toLocaleString()} روپے</strong></span>
+                <span>Total Production: <strong>{(Number(newMorningMilk) + Number(newEveningMilk)).toFixed(1)} liters</strong></span>
+                <span>Estimated Amount: <strong>PKR {((Number(newMorningMilk) + Number(newEveningMilk)) * newMilkRate).toLocaleString()}</strong></span>
               </div>
 
               <div className="flex justify-end gap-2 pt-3 border-t">
@@ -2660,13 +2660,13 @@ export default function App() {
                   onClick={() => setShowAddMilkModal(false)}
                   className="px-4 py-2 border rounded-xl text-gray-600 hover:bg-gray-100 text-xs font-semibold"
                 >
-                  منسوخ کریں
+                  Cancel
                 </button>
                 <button
                   type="submit"
                   className="px-5 py-2 bg-[#1B5E20] hover:bg-[#2e7d32] text-white rounded-xl text-xs font-bold transition shadow"
                 >
-                  محفوظ کریں (Save)
+                  Save
                 </button>
               </div>
             </form>
@@ -2681,7 +2681,7 @@ export default function App() {
             <div className="flex items-center justify-between border-b pb-3">
               <h3 className="font-bold text-gray-900 text-base font-['Noto_Nastaliq_Urdu'] flex items-center gap-2">
                 <span>🐄</span>
-                <span>نیا جانور ریوڑ میں شامل کریں</span>
+                <span>Add a New Animal to the Herd</span>
               </h3>
               <button onClick={() => setShowAddAnimalModal(false)} className="text-gray-400 hover:text-gray-700">
                 <X className="w-5 h-5" />
@@ -2691,39 +2691,39 @@ export default function App() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                alert("ماشاءاللہ! نیا جانور کامیابی سے رجسٹر ہو گیا۔");
+                alert("New animal registered successfully.");
                 setShowAddAnimalModal(false);
               }}
               className="space-y-3.5"
             >
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">ٹیگ نمبر*:</label>
-                  <input type="text" placeholder="مثال: PK-110" required className="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]" />
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Tag Number*:</label>
+                  <input type="text" placeholder="Example: PK-110" required className="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]" />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">نسل (Breed)*:</label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Breed*:</label>
                   <select className="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
-                    <option>ساہیوال گائے (Sahiwal)</option>
-                    <option>نیلی راوی بھینس (Nili Ravi)</option>
-                    <option>چولستانی گائے (Cholistani)</option>
-                    <option>فریزن کراس (Friesian Cross)</option>
+                    <option>Sahiwal Cow</option>
+                    <option>Nili Ravi Buffalo</option>
+                    <option>Cholistani Cow</option>
+                    <option>Friesian Cross</option>
                   </select>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">قسم (Category):</label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Category:</label>
                   <select className="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
-                    <option>دودھ والی (Milking)</option>
-                    <option>خشک (Dry)</option>
-                    <option>گابھن (Pregnant)</option>
-                    <option>بچھڑا / کٹی (Calf)</option>
+                    <option>Milking</option>
+                    <option>Dry</option>
+                    <option>Pregnant</option>
+                    <option>Calf</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">وزن (کلوگرام):</label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Weight (kg):</label>
                   <input type="number" placeholder="450" className="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]" />
                 </div>
               </div>
@@ -2734,13 +2734,13 @@ export default function App() {
                   onClick={() => setShowAddAnimalModal(false)}
                   className="px-4 py-2 border rounded-xl text-gray-600 hover:bg-gray-100 text-xs font-semibold"
                 >
-                  منسوخ کریں
+                  Cancel
                 </button>
                 <button
                   type="submit"
                   className="px-5 py-2 bg-[#1B5E20] hover:bg-[#2e7d32] text-white rounded-xl text-xs font-bold transition shadow"
                 >
-                  محفوظ کریں
+                  Save
                 </button>
               </div>
             </form>
@@ -2759,10 +2759,10 @@ export default function App() {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900 text-base font-['Noto_Nastaliq_Urdu']">
-                    گاہک لیجر و ادائیگی ہسٹری: {selectedCustomerForHistory.name}
+                    Customer Ledger & Payment History: {selectedCustomerForHistory.name}
                   </h3>
                   <p className="text-xs text-gray-500">
-                    موبائل: {selectedCustomerForHistory.phone} | پتہ: {selectedCustomerForHistory.address}
+                    Phone: {selectedCustomerForHistory.phone} | Address: {selectedCustomerForHistory.address}
                   </p>
                 </div>
               </div>
@@ -2774,17 +2774,17 @@ export default function App() {
             {/* سمری پٹی */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200">
-                <span className="text-[11px] text-emerald-800 font-semibold">روزانہ دودھ سپلائی:</span>
-                <div className="text-lg font-bold text-[#1B5E20] mt-0.5">{selectedCustomerForHistory.dailyLiters} لیٹر / روزانہ</div>
+                <span className="text-[11px] text-emerald-800 font-semibold">Daily Milk Supply:</span>
+                <div className="text-lg font-bold text-[#1B5E20] mt-0.5">{selectedCustomerForHistory.dailyLiters} liters / day</div>
               </div>
               <div className="p-3 bg-blue-50 rounded-xl border border-blue-200">
-                <span className="text-[11px] text-blue-800 font-semibold">طے شدہ ریٹ فی لیٹر:</span>
-                <div className="text-lg font-bold text-blue-900 mt-0.5">{selectedCustomerForHistory.rate} روپے / لیٹر</div>
+                <span className="text-[11px] text-blue-800 font-semibold">Agreed Rate per Liter:</span>
+                <div className="text-lg font-bold text-blue-900 mt-0.5">PKR {selectedCustomerForHistory.rate} / liter</div>
               </div>
               <div className="p-3 bg-amber-50 rounded-xl border border-amber-200">
-                <span className="text-[11px] text-amber-900 font-semibold">موجودہ واجب الادا بقایا:</span>
+                <span className="text-[11px] text-amber-900 font-semibold">Current Outstanding Balance:</span>
                 <div className="text-lg font-bold text-amber-900 mt-0.5">
-                  {selectedCustomerForHistory.balance > 0 ? `${selectedCustomerForHistory.balance.toLocaleString()} روپے` : '0 (بے باق)'}
+                  {selectedCustomerForHistory.balance > 0 ? `PKR ${selectedCustomerForHistory.balance.toLocaleString()}` : '0 (Paid)'}
                 </div>
               </div>
             </div>
@@ -2792,14 +2792,14 @@ export default function App() {
             {/* ٹول بار برائے CSV ڈاؤن لوڈ */}
             <div className="flex items-center justify-between pt-2">
               <h4 className="text-xs font-bold text-gray-700 font-['Noto_Nastaliq_Urdu']">
-                حالیہ ٹرانزیکشنز و ادائیگیوں کا ریکارڈ:
+                Recent Transactions & Payment Records:
               </h4>
               <button
                 onClick={() => exportPaymentHistoryCSV(selectedCustomerForHistory.id)}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-[#1B5E20] hover:bg-[#2e7d32] text-white shadow-xs transition"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>اس گاہک کی ہسٹری CSV ڈاؤن لوڈ کریں</span>
+                <span>Download This Customer's History as CSV</span>
               </button>
             </div>
 
@@ -2808,13 +2808,13 @@ export default function App() {
               <table className="w-full text-right text-xs">
                 <thead className="bg-[#F8F9F5] text-gray-700 border-b">
                   <tr>
-                    <th className="py-2.5 px-3">تاریخ</th>
-                    <th className="py-2.5 px-3">نوعیت</th>
-                    <th className="py-2.5 px-3">دودھ لیٹر</th>
-                    <th className="py-2.5 px-3">بل رقم (PKR)</th>
-                    <th className="py-2.5 px-3">وصول رقم (PKR)</th>
-                    <th className="py-2.5 px-3">باقی بقایا</th>
-                    <th className="py-2.5 px-3">طریقہ / تفصیل</th>
+                    <th className="py-2.5 px-3">Date</th>
+                    <th className="py-2.5 px-3">Type</th>
+                    <th className="py-2.5 px-3">Milk (Liters)</th>
+                    <th className="py-2.5 px-3">Billed Amount (PKR)</th>
+                    <th className="py-2.5 px-3">Amount Received (PKR)</th>
+                    <th className="py-2.5 px-3">Remaining Balance</th>
+                    <th className="py-2.5 px-3">Method / Details</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
@@ -2827,18 +2827,18 @@ export default function App() {
                           <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                             tx.type === 'Payment' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800'
                           }`}>
-                            {tx.type === 'Payment' ? 'وصولی رقم' : 'دودھ سپلائی'}
+                            {tx.type === 'Payment' ? 'Payment Received' : 'Milk Supply'}
                           </span>
                         </td>
                         <td className="py-2.5 px-3">{tx.liters ? `${tx.liters} L` : '-'}</td>
                         <td className="py-2.5 px-3 font-semibold text-gray-800">
-                          {tx.billedAmount ? `${tx.billedAmount.toLocaleString()} روپے` : '-'}
+                          {tx.billedAmount ? `PKR ${tx.billedAmount.toLocaleString()}` : '-'}
                         </td>
                         <td className="py-2.5 px-3 font-bold text-emerald-700">
-                          {tx.amountReceived ? `${tx.amountReceived.toLocaleString()} روپے` : '-'}
+                          {tx.amountReceived ? `PKR ${tx.amountReceived.toLocaleString()}` : '-'}
                         </td>
                         <td className="py-2.5 px-3 font-bold text-amber-900">
-                          {tx.remainingBalance.toLocaleString()} روپے
+                          PKR {tx.remainingBalance.toLocaleString()}
                         </td>
                         <td className="py-2.5 px-3 text-gray-500">
                           <div>{tx.method || '-'}</div>
@@ -2855,7 +2855,7 @@ export default function App() {
                 onClick={() => setSelectedCustomerForHistory(null)}
                 className="px-4 py-2 border rounded-xl text-gray-600 hover:bg-gray-100 text-xs font-semibold"
               >
-                بند کریں
+                Close
               </button>
             </div>
           </div>
@@ -2869,7 +2869,7 @@ export default function App() {
             <div className="flex items-center justify-between border-b pb-3">
               <h3 className="font-bold text-gray-900 text-base font-['Noto_Nastaliq_Urdu'] flex items-center gap-2">
                 <DollarSign className="w-5 h-5 text-[#FF8F00]" />
-                <span>گاہک سے ادائیگی وصولی درج کریں</span>
+                <span>Record a Customer Payment</span>
               </h3>
               <button onClick={() => setShowRecordPaymentModal(false)} className="text-gray-400 hover:text-gray-700">
                 <X className="w-5 h-5" />
@@ -2878,7 +2878,7 @@ export default function App() {
 
             <form onSubmit={handleRecordPayment} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">گاہک منتخب کریں*:</label>
+                <label className="block text-xs font-semibold text-gray-700 mb-1">Select Customer*:</label>
                 <select
                   value={paymentCustomerId}
                   onChange={(e) => setPaymentCustomerId(Number(e.target.value))}
@@ -2886,18 +2886,18 @@ export default function App() {
                 >
                   {customers.map((c) => (
                     <option key={c.id} value={c.id}>
-                      {c.name} (باقی ادھار: {c.balance.toLocaleString()} روپے)
+                      {c.name} (Balance: PKR {c.balance.toLocaleString()})
                     </option>
                   ))}
                 </select>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">وصول شدہ رقم (PKR)*:</label>
+                <label className="block text-xs font-semibold text-gray-700 mb-1">Amount Received (PKR)*:</label>
                 <input
                   type="number"
                   required
-                  placeholder="مثال: 5000"
+                  placeholder="Example: 5000"
                   value={paymentAmount || ''}
                   onChange={(e) => setPaymentAmount(parseFloat(e.target.value) || 0)}
                   className="w-full px-3 py-2 border rounded-xl font-bold text-emerald-800 outline-none focus:ring-2 focus:ring-[#1B5E20]"
@@ -2905,24 +2905,24 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">طریقہ وصولی (Method):</label>
+                <label className="block text-xs font-semibold text-gray-700 mb-1">Payment Method:</label>
                 <select
                   value={paymentMethod}
                   onChange={(e) => setPaymentMethod(e.target.value)}
                   className="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20] text-xs"
                 >
-                  <option value="کیش رقم (Cash)">کیش رقم (Cash)</option>
-                  <option value="آن لائن بینک ٹرانسفر (Bank)">آن لائن بینک ٹرانسفر (Bank)</option>
-                  <option value="جاز کیش / ایزی پیسہ (JazzCash/EasyPaisa)">جاز کیش / ایزی پیسہ (Mobile Wallet)</option>
-                  <option value="چیک (Cheque)">چیک (Cheque)</option>
+                  <option value="Cash">Cash</option>
+                  <option value="Bank Transfer">Bank Transfer</option>
+                  <option value="JazzCash/EasyPaisa">JazzCash / EasyPaisa</option>
+                  <option value="Cheque">Cheque</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">تفصیل / ریمارکس:</label>
+                <label className="block text-xs font-semibold text-gray-700 mb-1">Details / Remarks:</label>
                 <input
                   type="text"
-                  placeholder="ہفتہ وار وصولی یا بل نمبر..."
+                  placeholder="Weekly payment or bill number..."
                   value={paymentNotes}
                   onChange={(e) => setPaymentNotes(e.target.value)}
                   className="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20] text-xs"
@@ -2935,13 +2935,13 @@ export default function App() {
                   onClick={() => setShowRecordPaymentModal(false)}
                   className="px-4 py-2 border rounded-xl text-gray-600 hover:bg-gray-100 text-xs font-semibold"
                 >
-                  منسوخ کریں
+                  Cancel
                 </button>
                 <button
                   type="submit"
                   className="px-5 py-2 bg-[#FF8F00] hover:bg-[#e65100] text-white rounded-xl text-xs font-bold transition shadow"
                 >
-                  وصولی درج کریں (Submit)
+                  Record Payment
                 </button>
               </div>
             </form>
@@ -2960,9 +2960,9 @@ export default function App() {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900 text-base font-['Noto_Nastaliq_Urdu']">
-                    نیا بریڈنگ و حمل ریکارڈ (Add Breeding Record)
+                    New Breeding & Pregnancy Record
                   </h3>
-                  <p className="text-xs text-gray-500">خودکار متوقع تاریخ ولادت (+280 دن) اور کاؤنٹ ڈاؤن</p>
+                  <p className="text-xs text-gray-500">Automatic expected calving date (+280 days) and countdown</p>
                 </div>
               </div>
               <button onClick={() => setShowAddBreedingModal(false)} className="text-gray-400 hover:text-gray-700">
@@ -2974,7 +2974,7 @@ export default function App() {
               
               {/* جانور سلیکشن */}
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">جانور منتخب کریں (Tag & Breed)*:</label>
+                <label className="block text-xs font-semibold text-gray-700 mb-1">Select Animal (Tag & Breed)*:</label>
                 <select
                   value={newBreedingAnimalId}
                   onChange={(e) => setNewBreedingAnimalId(e.target.value)}
@@ -2984,7 +2984,7 @@ export default function App() {
                     .filter(a => a.category !== 'Bail')
                     .map((a) => (
                       <option key={a.id} value={a.tagNo}>
-                        {a.tagNo} - {a.breed} ({a.category === 'Gabhan' ? 'گابھن' : a.category === 'Doodh wali' ? 'دودھ والی' : a.category})
+                        {a.tagNo} - {a.breed} ({a.category === 'Gabhan' ? 'Pregnant' : a.category === 'Doodh wali' ? 'Milking' : a.category})
                       </option>
                     ))}
                 </select>
@@ -2993,7 +2993,7 @@ export default function App() {
               {/* تواریخ: ہیٹ اور ٹیکہ */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">ہیٹ تاریخ (Heat Date):</label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Heat Date:</label>
                   <input
                     type="date"
                     value={newBreedingHeatDate}
@@ -3002,7 +3002,7 @@ export default function App() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">ٹیکہ / AI تاریخ (AI Date)*:</label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">AI Date*:</label>
                   <input
                     type="date"
                     required
@@ -3016,7 +3016,7 @@ export default function App() {
               {/* حمل ٹیسٹ تاریخ اور اسٹیٹس */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">حمل ٹیسٹ تاریخ (PD Check Date):</label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Pregnancy Test Date (PD Check Date):</label>
                   <input
                     type="date"
                     value={newBreedingPdDate}
@@ -3025,16 +3025,16 @@ export default function App() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-1">موجودہ حالت (Breeding Status)*:</label>
+                  <label className="block text-xs font-semibold text-gray-700 mb-1">Current Status (Breeding Status)*:</label>
                   <select
                     value={newBreedingStatus}
                     onChange={(e) => setNewBreedingStatus(e.target.value as any)}
                     className="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20] text-xs font-bold"
                   >
-                    <option value="Pregnant">تصدیق شدہ گابھن (Pregnant / Gabhan)</option>
-                    <option value="Inseminated">ٹیکہ شدہ - زیر انتظار (Inseminated)</option>
-                    <option value="In Heat">ہیٹ میں (In Heat)</option>
-                    <option value="Open">خالی (Open)</option>
+                    <option value="Pregnant">Confirmed Pregnant</option>
+                    <option value="Inseminated">Inseminated - Awaiting Diagnosis</option>
+                    <option value="In Heat">In Heat</option>
+                    <option value="Open">Open</option>
                   </select>
                 </div>
               </div>
@@ -3045,7 +3045,7 @@ export default function App() {
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-[#FF8F00] animate-spin" />
                     <div>
-                      <span className="font-bold text-gray-800">خودکار متوقع تاریخ ولادت: </span>
+                      <span className="font-bold text-gray-800">Automatically Calculated Expected Calving Date: </span>
                       <strong className="text-[#1B5E20] text-sm font-black">
                         {(() => {
                           const isBuffalo = newBreedingAnimalId.includes('102') || newBreedingAnimalId.includes('105');
@@ -3058,17 +3058,17 @@ export default function App() {
                     </div>
                   </div>
                   <span className="px-2 py-0.5 rounded bg-emerald-100 text-[#1B5E20] font-bold text-[10px]">
-                    +{newBreedingAnimalId.includes('102') || newBreedingAnimalId.includes('105') ? '310' : '280'} دن مدت حمل
+                    +{newBreedingAnimalId.includes('102') || newBreedingAnimalId.includes('105') ? '310' : '280'}-day gestation
                   </span>
                 </div>
               )}
 
               {/* سیمن تفصیل */}
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">سیمن / سانڈ کا نام و بیچ (Semen Details):</label>
+                <label className="block text-xs font-semibold text-gray-700 mb-1">Semen / Bull Name & Batch (Semen Details):</label>
                 <input
                   type="text"
-                  placeholder="مثال: امریکن ہالینڈ امپورٹڈ فریزن سیمن بیچ #441"
+                  placeholder="Example: Imported American Friesian semen, batch #441"
                   value={newBreedingSemen}
                   onChange={(e) => setNewBreedingSemen(e.target.value)}
                   className="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20] text-xs"
@@ -3077,10 +3077,10 @@ export default function App() {
 
               {/* نوٹس */}
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">نوٹس اور خصوصی ہدایات:</label>
+                <label className="block text-xs font-semibold text-gray-700 mb-1">Notes & Special Instructions:</label>
                 <textarea
                   rows={2}
-                  placeholder="الٹرا ساؤنڈ رپورٹ یا الرٹ نوٹ..."
+                  placeholder="Ultrasound report or alert notes..."
                   value={newBreedingNotes}
                   onChange={(e) => setNewBreedingNotes(e.target.value)}
                   className="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20] text-xs"
@@ -3094,14 +3094,14 @@ export default function App() {
                   onClick={() => setShowAddBreedingModal(false)}
                   className="px-4 py-2 border rounded-xl text-gray-600 hover:bg-gray-100 text-xs font-semibold"
                 >
-                  منسوخ کریں
+                  Cancel
                 </button>
                 <button
                   type="submit"
                   className="px-5 py-2 bg-[#1B5E20] hover:bg-[#2e7d32] text-white rounded-xl text-xs font-bold transition shadow flex items-center gap-1.5"
                 >
                   <Check className="w-4 h-4" />
-                  <span>محفوظ کریں (Save Record)</span>
+                  <span>Save Record</span>
                 </button>
               </div>
             </form>
@@ -3131,7 +3131,7 @@ export default function App() {
           const updated = [newEntry, ...milkLogs];
           setMilkLogs(updated);
           dairyDb.saveTable(DB_KEYS.MILK, updated);
-          triggerDbSaveNotice(`Doodh Entry Saved to Database: ${total.toFixed(1)}L on ${newEntry.date} ✓ (دودھ انٹری محفوظ ہو گئی)`);
+          triggerDbSaveNotice(`Milk entry saved to the database: ${total.toFixed(1)}L on ${newEntry.date} ✓`);
         }}
         onAddExpense={handleAddExpense}
         onAddFeed={handleAddFeed}
@@ -3174,7 +3174,7 @@ export default function App() {
                     </span>
                   </div>
                   <p className="text-xs text-gray-500 font-['Noto_Nastaliq_Urdu']">
-                    تمام ریکارڈز براؤزر ریفریش کے بعد بھی محفوظ رہتے ہیں اور برآمد کیے جا سکتے ہیں۔
+                    All records remain saved after refreshing the browser and can be exported.
                   </p>
                 </div>
               </div>
@@ -3194,24 +3194,24 @@ export default function App() {
                   <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
                   <span>Connected</span>
                 </div>
-                <span className="text-[10px] text-emerald-800 font-['Noto_Nastaliq_Urdu']">مستقل متصل ہے</span>
+                <span className="text-[10px] text-emerald-800 font-['Noto_Nastaliq_Urdu']">Connected</span>
               </div>
               <div className="p-3 bg-blue-50 rounded-xl border border-blue-200">
                 <span className="text-[10px] font-bold text-gray-500 uppercase">Total Tables</span>
                 <div className="text-base font-black text-blue-900 mt-0.5">10 Tables</div>
-                <span className="text-[10px] text-blue-800 font-['Noto_Nastaliq_Urdu']">دس ٹیبلز اسکیما</span>
+                <span className="text-[10px] text-blue-800 font-['Noto_Nastaliq_Urdu']">10-Table Schema</span>
               </div>
               <div className="p-3 bg-amber-50 rounded-xl border border-amber-200">
                 <span className="text-[10px] font-bold text-gray-500 uppercase">Total Records</span>
                 <div className="text-base font-black text-amber-900 mt-0.5">
                   {animals.length + milkLogs.length + expenses.length + feedRecords.length + breedingRecords.length + vaccineRecords.length + healthIssues.length + customers.length + paymentHistory.length + saleRecords.length}
                 </div>
-                <span className="text-[10px] text-amber-800 font-['Noto_Nastaliq_Urdu']">کل محفوظ اندراجات</span>
+                <span className="text-[10px] text-amber-800 font-['Noto_Nastaliq_Urdu']">Total Saved Records</span>
               </div>
               <div className="p-3 bg-purple-50 rounded-xl border border-purple-200">
                 <span className="text-[10px] font-bold text-gray-500 uppercase">Storage Type</span>
                 <div className="text-base font-black text-purple-900 mt-0.5">Persistent DB</div>
-                <span className="text-[10px] text-purple-800 font-['Noto_Nastaliq_Urdu']">لوکل ڈیٹا بیس</span>
+                <span className="text-[10px] text-purple-800 font-['Noto_Nastaliq_Urdu']">Local Database</span>
               </div>
             </div>
 
@@ -3224,70 +3224,70 @@ export default function App() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                 <div className="p-2.5 rounded-xl border bg-gray-50 flex items-center justify-between">
                   <div>
-                    <strong className="text-gray-800 block">1. Animals Herd (ریوڑ)</strong>
+                    <strong className="text-gray-800 block">1. Animal Herd</strong>
                     <span className="text-[10px] text-gray-500 font-mono">table: dairy_db_animals</span>
                   </div>
                   <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold">{animals.length} rows</span>
                 </div>
                 <div className="p-2.5 rounded-xl border bg-gray-50 flex items-center justify-between">
                   <div>
-                    <strong className="text-gray-800 block">2. Milk Production (دودھ ریکارڈ)</strong>
+                    <strong className="text-gray-800 block">2. Milk Production</strong>
                     <span className="text-[10px] text-gray-500 font-mono">table: dairy_db_milk_production</span>
                   </div>
                   <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold">{milkLogs.length} rows</span>
                 </div>
                 <div className="p-2.5 rounded-xl border bg-gray-50 flex items-center justify-between">
                   <div>
-                    <strong className="text-gray-800 block">3. Expenses (اخراجات)</strong>
+                    <strong className="text-gray-800 block">3. Expenses</strong>
                     <span className="text-[10px] text-gray-500 font-mono">table: dairy_db_expenses</span>
                   </div>
                   <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold">{expenses.length} rows</span>
                 </div>
                 <div className="p-2.5 rounded-xl border bg-gray-50 flex items-center justify-between">
                   <div>
-                    <strong className="text-gray-800 block">4. Feed & Ration (چارہ و ونڈا)</strong>
+                    <strong className="text-gray-800 block">4. Feed & Ration</strong>
                     <span className="text-[10px] text-gray-500 font-mono">table: dairy_db_feed_ration</span>
                   </div>
                   <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold">{feedRecords.length} rows</span>
                 </div>
                 <div className="p-2.5 rounded-xl border bg-gray-50 flex items-center justify-between">
                   <div>
-                    <strong className="text-gray-800 block">5. Breeding & Calving (بریڈنگ و ولادت)</strong>
+                    <strong className="text-gray-800 block">5. Breeding & Calving</strong>
                     <span className="text-[10px] text-gray-500 font-mono">table: dairy_db_breeding</span>
                   </div>
                   <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold">{breedingRecords.length} rows</span>
                 </div>
                 <div className="p-2.5 rounded-xl border bg-gray-50 flex items-center justify-between">
                   <div>
-                    <strong className="text-gray-800 block">6. Vaccination Schedule (ٹیکہ جات)</strong>
+                    <strong className="text-gray-800 block">6. Vaccination Schedule</strong>
                     <span className="text-[10px] text-gray-500 font-mono">table: dairy_db_vaccination</span>
                   </div>
                   <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold">{vaccineRecords.length} rows</span>
                 </div>
                 <div className="p-2.5 rounded-xl border bg-gray-50 flex items-center justify-between">
                   <div>
-                    <strong className="text-gray-800 block">7. Health & Clinical (علاج و وائٹلز)</strong>
+                    <strong className="text-gray-800 block">7. Health & Clinical Records</strong>
                     <span className="text-[10px] text-gray-500 font-mono">table: dairy_db_health_issues</span>
                   </div>
                   <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold">{healthIssues.length} rows</span>
                 </div>
                 <div className="p-2.5 rounded-xl border bg-gray-50 flex items-center justify-between">
                   <div>
-                    <strong className="text-gray-800 block">8. Customer Accounts (گاہک کھاتہ)</strong>
+                    <strong className="text-gray-800 block">8. Customer Accounts</strong>
                     <span className="text-[10px] text-gray-500 font-mono">table: dairy_db_customers</span>
                   </div>
                   <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold">{customers.length} rows</span>
                 </div>
                 <div className="p-2.5 rounded-xl border bg-gray-50 flex items-center justify-between">
                   <div>
-                    <strong className="text-gray-800 block">9. Payment Transactions (ادائیگی لیجر)</strong>
+                    <strong className="text-gray-800 block">9. Payment Transactions</strong>
                     <span className="text-[10px] text-gray-500 font-mono">table: dairy_db_payment_history</span>
                   </div>
                   <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold">{paymentHistory.length} rows</span>
                 </div>
                 <div className="p-2.5 rounded-xl border bg-gray-50 flex items-center justify-between">
                   <div>
-                    <strong className="text-gray-800 block">10. Livestock Sales (جانور فروخت)</strong>
+                    <strong className="text-gray-800 block">10. Livestock Sales</strong>
                     <span className="text-[10px] text-gray-500 font-mono">table: dairy_db_sales</span>
                   </div>
                   <span className="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold">{saleRecords.length} rows</span>
@@ -3313,7 +3313,7 @@ export default function App() {
                     a.download = `Dairy_Farm_ERP_Database_Backup_${new Date().toISOString().split('T')[0]}.json`;
                     a.click();
                     URL.revokeObjectURL(url);
-                    triggerDbSaveNotice('Database Backup Downloaded Successfully ✓ (مکمل ڈیٹا بیس بیک اپ محفوظ ہو گیا)');
+                    triggerDbSaveNotice('Database backup downloaded successfully ✓');
                   }}
                   className="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#1B5E20] hover:bg-[#2e7d32] text-white shadow-xs transition flex items-center gap-1.5 cursor-pointer"
                 >
@@ -3353,7 +3353,7 @@ export default function App() {
                 onClick={() => setShowDbManagerModal(false)}
                 className="px-5 py-2 rounded-xl text-xs font-bold bg-gray-100 hover:bg-gray-200 text-gray-700 transition"
               >
-                Close (بند کریں)
+                Close
               </button>
             </div>
           </div>
@@ -3363,4 +3363,3 @@ export default function App() {
     </div>
   );
 }
-

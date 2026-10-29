@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}دودھ کی پیداوار (Milk Production){% endblock %}
+{% block title %}Milk Production{% endblock %}
 
 {% block content %}
 <div class="space-y-6">
@@ -8,36 +8,36 @@
   <!-- ہیڈر ٹائٹل اور بٹن -->
   <div class="flex flex-wrap items-center justify-between gap-4">
     <div>
-      <h2 class="text-2xl font-bold text-[#1B5E20] urdu-font">ماڈیول 2: دودھ کی روزانہ پیداوار (Milk Production)</h2>
-      <p class="text-xs text-gray-500">صبح و شام کی پیداوار، فیٹ %، ایس این ایف %، فروخت اور گھریلو استعمال کا ریکارڈ</p>
+      <h2 class="text-2xl font-bold text-[#1B5E20] urdu-font">Module 2: Daily Milk Production</h2>
+      <p class="text-xs text-gray-500">Track morning and evening production, fat %, SNF %, sales, and household use</p>
     </div>
     <button onclick="document.getElementById('addMilkModal').classList.remove('hidden')" class="btn-farm-primary urdu-font">
       <span>🥛</span>
-      <span>روزانہ دودھ انٹری کریں (Add Milk Record)</span>
+      <span>Record daily milk</span>
     </button>
   </div>
 
   <!-- سمری میٹرکس -->
   <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
     <div class="glass-card p-4 text-center border-b-4 border-b-blue-600">
-      <div class="text-xs text-gray-500 font-semibold urdu-font">روزانہ اوسط پیداوار</div>
-      <div class="text-2xl font-bold text-blue-900 mt-1">{{ avg_milk }} <span class="text-sm font-normal text-gray-400">ل</span></div>
+      <div class="text-xs text-gray-500 font-semibold urdu-font">Average daily production</div>
+      <div class="text-2xl font-bold text-blue-900 mt-1">{{ avg_milk }} <span class="text-sm font-normal text-gray-400">L</span></div>
     </div>
     <div class="glass-card p-4 text-center border-b-4 border-b-emerald-600">
-      <div class="text-xs text-gray-500 font-semibold urdu-font">کل ریکارڈ شدہ دودھ</div>
-      <div class="text-2xl font-bold text-emerald-800 mt-1">{{ sum_milk }} <span class="text-sm font-normal text-gray-400">ل</span></div>
+      <div class="text-xs text-gray-500 font-semibold urdu-font">Total milk recorded</div>
+      <div class="text-2xl font-bold text-emerald-800 mt-1">{{ sum_milk }} <span class="text-sm font-normal text-gray-400">L</span></div>
     </div>
     <div class="glass-card p-4 text-center border-b-4 border-b-amber-500">
-      <div class="text-xs text-gray-500 font-semibold urdu-font">فی گائے/بھینس اوسط</div>
-      <div class="text-2xl font-bold text-[#e65100] mt-1">{{ per_animal_avg }} <span class="text-sm font-normal text-gray-400">ل/دن</span></div>
-      <div class="text-[10px] text-gray-400 mt-0.5">{{ cows_count }} فعال جانوروں پر</div>
+      <div class="text-xs text-gray-500 font-semibold urdu-font">Average per cow/buffalo</div>
+      <div class="text-2xl font-bold text-[#e65100] mt-1">{{ per_animal_avg }} <span class="text-sm font-normal text-gray-400">L/day</span></div>
+      <div class="text-[10px] text-gray-400 mt-0.5">{{ cows_count }} active animals</div>
     </div>
     <div class="glass-card p-4 text-center border-b-4 border-b-purple-600">
-      <div class="text-xs text-gray-500 font-semibold urdu-font">اوسط فیٹ (Fat Ratio)</div>
+      <div class="text-xs text-gray-500 font-semibold urdu-font">Average fat (Fat Ratio)</div>
       <div class="text-2xl font-bold text-purple-800 mt-1">{{ avg_fat }}%</div>
     </div>
     <div class="glass-card p-4 text-center border-b-4 border-b-teal-600">
-      <div class="text-xs text-gray-500 font-semibold urdu-font">اوسط ایس این ایف (SNF)</div>
+      <div class="text-xs text-gray-500 font-semibold urdu-font">Average SNF (SNF)</div>
       <div class="text-2xl font-bold text-teal-800 mt-1">{{ avg_snf }}%</div>
     </div>
   </div>
@@ -45,52 +45,52 @@
   <!-- ریکارڈز ٹیبل -->
   <div class="glass-card overflow-hidden">
     <div class="p-4 border-b flex justify-between items-center bg-gray-50/50">
-      <h3 class="font-bold text-gray-800 urdu-font">پچھلے 30 دنوں کا دودھ ریکارڈ</h3>
-      <span class="text-xs text-gray-500">تازہ ترین تاریخ پہلے درج ہے</span>
+      <h3 class="font-bold text-gray-800 urdu-font">Milk records for the last 30 days</h3>
+      <span class="text-xs text-gray-500">Latest date shown first</span>
     </div>
     <div class="overflow-x-auto">
       <table class="farm-table">
         <thead>
           <tr>
-            <th>تاریخ (Date)</th>
-            <th>صبح (Morning L)</th>
-            <th>شام (Evening L)</th>
-            <th>کل پیداوار (Total)</th>
-            <th>فیٹ % (Fat)</th>
+            <th>Date</th>
+            <th>Morning (L)</th>
+            <th>Evening (L)</th>
+            <th>Total production (Total)</th>
+            <th>Fat (%)</th>
             <th>SNF %</th>
-            <th>فروخت (Sold L)</th>
-            <th>گھریلو / بچھڑے</th>
-            <th>ضائع (Waste)</th>
-            <th>ریٹ فی لیٹر</th>
-            <th>کل آمدنی</th>
-            <th class="text-center">حذف</th>
+            <th>Sold (L)</th>
+            <th>Household / calves</th>
+            <th>Wasted (Waste)</th>
+            <th>Rate per liter</th>
+            <th>Total income</th>
+            <th class="text-center">Delete</th>
           </tr>
         </thead>
         <tbody>
           {% for rec in records %}
           <tr>
             <td class="font-bold text-gray-700">{{ rec.tarikh }}</td>
-            <td>{{ rec.subah_liter }} ل</td>
-            <td>{{ rec.sham_liter }} ل</td>
-            <td class="font-bold text-[#1B5E20]">{{ rec.total_liter }} ل</td>
+            <td>{{ rec.subah_liter }} L</td>
+            <td>{{ rec.sham_liter }} L</td>
+            <td class="font-bold text-[#1B5E20]">{{ rec.total_liter }} L</td>
             <td><span class="badge-amber font-semibold">{{ rec.fat_ratio }}%</span></td>
             <td>{{ rec.snf_ratio }}%</td>
-            <td class="font-semibold text-emerald-800">{{ rec.farokht_liter }} ل</td>
-            <td>{{ rec.gharelu_liter }} ل</td>
-            <td class="text-rose-600">{{ rec.zaya_liter }} ل</td>
-            <td>{{ rec.rate_fi_liter }} روپے</td>
-            <td class="font-bold text-gray-900">{{ "{:,.0f}".format(rec.farokht_liter * rec.rate_fi_liter) }} روپے</td>
+            <td class="font-semibold text-emerald-800">{{ rec.farokht_liter }} L</td>
+            <td>{{ rec.gharelu_liter }} L</td>
+            <td class="text-rose-600">{{ rec.zaya_liter }} L</td>
+            <td>{{ rec.rate_fi_liter }} PKR</td>
+            <td class="font-bold text-gray-900">{{ "{:,.0f}".format(rec.farokht_liter * rec.rate_fi_liter) }} PKR</td>
             <td class="text-center">
-              <form method="POST" action="{{ url_for('delete_milk', id=rec.id) }}" onsubmit="return confirm('کیا آپ واقعی یہ انٹری ڈیلیٹ کرنا چاہتے ہیں؟');" class="inline">
+              <form method="POST" action="{{ url_for('delete_milk', id=rec.id) }}" onsubmit="return confirm('Are you sure you want to delete this milk entry?');" class="inline">
                 <button type="submit" class="text-red-500 hover:text-red-700 text-xs font-bold p-1">
-                  حذف 🗑️
+                  Delete 🗑️
                 </button>
               </form>
             </td>
           </tr>
           {% else %}
           <tr>
-            <td colspan="12" class="text-center py-8 text-gray-400 urdu-font">کوئی دودھ ریکارڈ نہیں ملا</td>
+            <td colspan="12" class="text-center py-8 text-gray-400 urdu-font">No milk records found</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -104,65 +104,65 @@
 <div id="addMilkModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
   <div class="glass-card max-w-xl w-full p-6 bg-white overflow-y-auto max-h-[90vh]">
     <div class="flex items-center justify-between border-b pb-3 mb-4">
-      <h3 class="text-lg font-bold text-[#1B5E20] urdu-font">روزانہ دودھ پیداوار انٹری (Daily Milk Entry)</h3>
+      <h3 class="text-lg font-bold text-[#1B5E20] urdu-font">Daily milk entry (Daily Milk Entry)</h3>
       <button onclick="document.getElementById('addMilkModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700 text-xl font-bold">&times;</button>
     </div>
 
     <form method="POST" action="{{ url_for('milk') }}" class="space-y-4">
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">تاریخ (Date):</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Date:</label>
           <input type="date" name="tarikh" value="{{ today_date }}" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">صبح کا دودھ (لیٹر)*:</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Morning milk (liters)*:</label>
           <input type="number" step="0.5" id="subah_liter" name="subah_liter" required placeholder="40.5" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">شام کا دودھ (لیٹر)*:</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Evening milk (liters)*:</label>
           <input type="number" step="0.5" id="sham_liter" name="sham_liter" required placeholder="35.0" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">فیٹ فیصد (Fat %):</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Fat percentage (Fat %):</label>
           <input type="number" step="0.1" name="fat_ratio" value="5.8" placeholder="5.8" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">ایس این ایف (SNF %):</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">SNF (%):</label>
           <input type="number" step="0.1" name="snf_ratio" value="8.9" placeholder="8.9" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">فروخت شدہ لیٹر (Sold):</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Liters sold:</label>
           <input type="number" step="0.5" name="farokht_liter" placeholder="70" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">ریٹ فی لیٹر (Rate PKR):</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Rate per liter (Rate PKR):</label>
           <input type="number" step="1" name="rate_fi_liter" value="190" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">گھریلو / بچھڑوں کا دودھ:</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Household / calf milk:</label>
           <input type="number" step="0.5" name="gharelu_liter" value="4.0" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
       </div>
 
       <div>
-        <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">ضائع شدہ لیٹر (اگر کوئی خرابی ہوئی):</label>
+        <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Wasted liters (if milk spoiled):</label>
         <input type="number" step="0.5" name="zaya_liter" value="0.0" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
       </div>
 
       <div>
-        <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">اضافی نوٹس:</label>
-        <input type="text" name="notes" placeholder="موسم کا اثر، جانور کی صورتحال..." class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
+        <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Additional notes:</label>
+        <input type="text" name="notes" placeholder="Weather effects, animal condition..." class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
       </div>
 
       <div class="flex justify-end gap-2 pt-3 border-t">
-        <button type="button" onclick="document.getElementById('addMilkModal').classList.add('hidden')" class="px-4 py-2 border rounded-xl text-gray-600 hover:bg-gray-100 urdu-font">منسوخ کریں</button>
-        <button type="submit" class="btn-farm-primary urdu-font">محفوظ کریں (Save)</button>
+        <button type="button" onclick="document.getElementById('addMilkModal').classList.add('hidden')" class="px-4 py-2 border rounded-xl text-gray-600 hover:bg-gray-100 urdu-font">Cancel</button>
+        <button type="submit" class="btn-farm-primary urdu-font">Save</button>
       </div>
     </form>
   </div>

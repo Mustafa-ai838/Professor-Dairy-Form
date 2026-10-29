@@ -60,11 +60,11 @@ const CustomHealthTooltip = ({ active, payload }: any) => {
           <span className="text-[11px] text-gray-500 font-['Noto_Nastaliq_Urdu']">{data.nameUrdu}</span>
         </div>
         <div className="flex justify-between items-center text-gray-700 pt-1">
-          <span className="text-gray-500">Animal Count (تعداد):</span>
+          <span className="text-gray-500">Animal Count:</span>
           <strong className="text-sm font-black text-gray-900">{data.count} Animals</strong>
         </div>
         <div className="flex justify-between items-center text-gray-600">
-          <span className="text-gray-500">Herd Share (تناسب):</span>
+          <span className="text-gray-500">Herd Share:</span>
           <span className="font-bold text-[#1B5E20]">{data.percentage}</span>
         </div>
         <div className="text-[10px] text-gray-400 italic pt-1 border-t border-gray-100">
@@ -108,7 +108,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
       {
         id: 'healthy',
         name: 'Healthy',
-        nameUrdu: 'صحت مند',
+        nameUrdu: 'Healthy',
         count: healthyCount,
         fill: '#10B981', // Emerald
         percentage: `${Math.round((healthyCount / total) * 100)}%`,
@@ -117,7 +117,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
       {
         id: 'vaccinated',
         name: 'Vaccinated',
-        nameUrdu: 'ٹیکہ شدہ',
+        nameUrdu: 'Vaccinated',
         count: vaccinatedCount,
         fill: '#2563EB', // Blue
         percentage: `${Math.round((vaccinatedCount / total) * 100)}%`,
@@ -126,7 +126,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
       {
         id: 'treatment',
         name: 'Treatment Needed',
-        nameUrdu: 'زیر علاج',
+        nameUrdu: 'Under treatment',
         count: treatmentCount,
         fill: '#F59E0B', // Amber
         percentage: `${Math.round((treatmentCount / total) * 100)}%`,
@@ -135,7 +135,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
       {
         id: 'overdue',
         name: 'Overdue / Alert',
-        nameUrdu: 'تاخیر شدہ ویکسین',
+        nameUrdu: 'Overdue vaccinations',
         count: criticalOverdueCount,
         fill: '#EF4444', // Red
         percentage: `${Math.round((criticalOverdueCount / total) * 100)}%`,
@@ -180,18 +180,18 @@ export const HealthTab: React.FC<HealthTabProps> = ({
   const calYear = currentCalDate.getFullYear();
   const calMonth = currentCalDate.getMonth();
   const monthNames = [
-    { en: 'January', ur: 'جنوری' },
-    { en: 'February', ur: 'فروری' },
-    { en: 'March', ur: 'مارچ' },
-    { en: 'April', ur: 'اپریل' },
-    { en: 'May', ur: 'مئی' },
-    { en: 'June', ur: 'جون' },
-    { en: 'July', ur: 'جولائی' },
-    { en: 'August', ur: 'اگست' },
-    { en: 'September', ur: 'ستمبر' },
-    { en: 'October', ur: 'اکتوبر' },
-    { en: 'November', ur: 'نومبر' },
-    { en: 'December', ur: 'دسمبر' }
+    { en: 'January', ur: 'January' },
+    { en: 'February', ur: 'February' },
+    { en: 'March', ur: 'March' },
+    { en: 'April', ur: 'April' },
+    { en: 'May', ur: 'May' },
+    { en: 'June', ur: 'June' },
+    { en: 'July', ur: 'July' },
+    { en: 'August', ur: 'August' },
+    { en: 'September', ur: 'September' },
+    { en: 'October', ur: 'October' },
+    { en: 'November', ur: 'November' },
+    { en: 'December', ur: 'December' }
   ];
   const currentMonthObj = monthNames[calMonth];
   const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
@@ -208,7 +208,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
             <Stethoscope className="w-3.5 h-3.5" />
             <span>Module 8: Herd Health & Vaccination Tracker</span>
             <span>•</span>
-            <span className="font-['Noto_Nastaliq_Urdu']">صحت و ویکسینیشن مینجمنٹ</span>
+            <span className="font-['Noto_Nastaliq_Urdu']">Health and Vaccination Management</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
             Herd Health & Vaccination Management
@@ -216,7 +216,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
           <p className="text-emerald-100 text-xs sm:text-sm max-w-2xl">
             Track upcoming immunization schedules, breed-specific protocols (FMD, HS, Anthrax), health status distribution, and clinical treatments.
             <span className="block text-[11px] text-emerald-200 mt-0.5 font-['Noto_Nastaliq_Urdu']">
-              حفاظتی ٹیکوں کا ٹائم ٹیبل، نسل کے مطابق شیڈول (منہ کھر، گل گھوٹو، اینتھراکس) اور بیماریوں کا مکمل ریکارڈ
+              Vaccination schedules by breed (FMD, Hemorrhagic Septicemia, Anthrax) and complete health records
             </span>
           </p>
         </div>
@@ -230,7 +230,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
             <Syringe className="w-4 h-4" />
             <div className="text-left">
               <div>+ Record Vaccine</div>
-              <div className="text-[10px] opacity-90 font-['Noto_Nastaliq_Urdu']">ٹیکہ اندراج</div>
+              <div className="text-[10px] opacity-90 font-['Noto_Nastaliq_Urdu']">Vaccine Entry</div>
             </div>
           </button>
 
@@ -241,7 +241,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
             <HeartPulse className="w-4 h-4 text-rose-600" />
             <div className="text-left">
               <div>+ Log Treatment</div>
-              <div className="text-[10px] opacity-90 font-['Noto_Nastaliq_Urdu']">طبی معائنہ</div>
+              <div className="text-[10px] opacity-90 font-['Noto_Nastaliq_Urdu']">Medical Examination</div>
             </div>
           </button>
 
@@ -292,7 +292,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
           <div className="flex items-center justify-between text-gray-500 mb-2">
             <div>
               <span className="text-xs font-bold text-gray-700 block">Herd Wellness Score</span>
-              <span className="text-[10px] text-gray-400 font-['Noto_Nastaliq_Urdu']">مجموعی ریوڑ صحت انڈیکس</span>
+              <span className="text-[10px] text-gray-400 font-['Noto_Nastaliq_Urdu']">Overall Herd Health Index</span>
             </div>
             <div className="w-9 h-9 rounded-xl bg-emerald-50 text-[#1B5E20] flex items-center justify-center font-bold">
               <ShieldCheck className="w-5 h-5" />
@@ -301,12 +301,12 @@ export const HealthTab: React.FC<HealthTabProps> = ({
           <div className="flex items-baseline gap-2">
             <span className="text-3xl font-black text-gray-900 tracking-tight">{wellnessScore}%</span>
             <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-              Optimal (محفوظ)
+              Optimal
             </span>
           </div>
           <div className="mt-2 text-xs text-gray-500 flex items-center justify-between">
             <span>Healthy Herd: <strong>{animals.filter(a => a.healthStatus !== 'Treatment Needed' && a.healthStatus !== 'Critical').length} / {animals.length}</strong></span>
-            <span className="text-[11px] text-emerald-800 font-semibold font-['Noto_Nastaliq_Urdu']">تندرست جانور</span>
+            <span className="text-[11px] text-emerald-800 font-semibold font-['Noto_Nastaliq_Urdu']">Healthy Animals</span>
           </div>
         </div>
 
@@ -316,7 +316,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
           <div className="flex items-center justify-between text-gray-500 mb-2">
             <div>
               <span className="text-xs font-bold text-gray-700 block">Vaccine Coverage</span>
-              <span className="text-[10px] text-gray-400 font-['Noto_Nastaliq_Urdu']">حفاظتی ٹیکوں کی کوریج</span>
+              <span className="text-[10px] text-gray-400 font-['Noto_Nastaliq_Urdu']">Vaccination Coverage</span>
             </div>
             <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
               <Syringe className="w-5 h-5" />
@@ -330,7 +330,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
           </div>
           <div className="mt-2 text-xs text-gray-500 flex items-center justify-between">
             <span>Primary Target: <strong>FMD & HS</strong></span>
-            <span className="text-[11px] text-blue-800 font-semibold font-['Noto_Nastaliq_Urdu']">منہ کھر و گل گھوٹو</span>
+            <span className="text-[11px] text-blue-800 font-semibold font-['Noto_Nastaliq_Urdu']">FMD and Hemorrhagic Septicemia</span>
           </div>
         </div>
 
@@ -340,7 +340,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
           <div className="flex items-center justify-between text-gray-500 mb-2">
             <div>
               <span className="text-xs font-bold text-gray-700 block">Upcoming / Overdue</span>
-              <span className="text-[10px] text-gray-400 font-['Noto_Nastaliq_Urdu']">متوقع و تاخیر شدہ خوراکیں</span>
+              <span className="text-[10px] text-gray-400 font-['Noto_Nastaliq_Urdu']">Upcoming and Overdue Doses</span>
             </div>
             <div className="w-9 h-9 rounded-xl bg-amber-50 text-[#FF8F00] flex items-center justify-center font-bold">
               <Clock className="w-5 h-5" />
@@ -354,7 +354,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
           </div>
           <div className="mt-2 text-xs text-gray-500 flex items-center justify-between">
             <span>Overdue: <strong className="text-rose-600">{vaccineRecords.filter(v => v.status === 'Overdue').length} doses</strong></span>
-            <span className="text-[11px] text-amber-800 font-semibold font-['Noto_Nastaliq_Urdu']">فوری توجہ درکار</span>
+            <span className="text-[11px] text-amber-800 font-semibold font-['Noto_Nastaliq_Urdu']">Immediate Attention Required</span>
           </div>
         </div>
 
@@ -364,7 +364,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
           <div className="flex items-center justify-between text-gray-500 mb-2">
             <div>
               <span className="text-xs font-bold text-gray-700 block">Active Treatments</span>
-              <span className="text-[10px] text-gray-400 font-['Noto_Nastaliq_Urdu']">زیر علاج و آئسولیشن</span>
+              <span className="text-[10px] text-gray-400 font-['Noto_Nastaliq_Urdu']">Under Treatment and Isolation</span>
             </div>
             <div className="w-9 h-9 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold">
               <Pill className="w-5 h-5" />
@@ -378,7 +378,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
           </div>
           <div className="mt-2 text-xs text-gray-500 flex items-center justify-between">
             <span>Isolated: <strong>{healthIssues.filter(h => h.status === 'Quarantine').length} head</strong></span>
-            <span className="text-[11px] text-rose-800 font-semibold font-['Noto_Nastaliq_Urdu']">ڈاکٹری نگرانی</span>
+            <span className="text-[11px] text-rose-800 font-semibold font-['Noto_Nastaliq_Urdu']">Veterinary Supervision</span>
           </div>
         </div>
 
@@ -403,7 +403,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
                   </span>
                 </h3>
                 <p className="text-xs text-gray-500 font-['Noto_Nastaliq_Urdu']">
-                  ریوڑ کی صحت و تندرستی کی تقسیم کا جائزہ (صحت مند، ویکسین شدہ، زیر علاج)
+                  Herd health status overview (healthy, vaccinated, under treatment)
                 </p>
               </div>
             </div>
@@ -497,7 +497,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
                   <span>Veterinary Quick Guidelines</span>
                 </h3>
                 <p className="text-xs text-gray-500 font-['Noto_Nastaliq_Urdu']">
-                  حفاظتی تدابیر اور ویکسین شیڈول کے رہنما اصول
+                  Preventive care and vaccination schedule guidelines
                 </p>
               </div>
               <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-[#1B5E20]">
@@ -509,7 +509,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
             <div className="p-3 rounded-xl bg-amber-50/80 border border-amber-200 text-xs text-amber-900 space-y-1">
               <div className="font-bold flex items-center gap-1.5 text-amber-900">
                 <AlertTriangle className="w-4 h-4 text-amber-600" />
-                <span>Pre-Monsoon Warning: HS (گل گھوٹو)</span>
+                <span>Pre-Monsoon Warning: Hemorrhagic Septicemia (HS)</span>
               </div>
               <p className="text-[11px] text-amber-800">
                 All Nili-Ravi buffaloes and Sahiwal cows must receive the HS vaccine before seasonal humidity increases.
@@ -519,7 +519,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
             <div className="p-3 rounded-xl bg-blue-50/80 border border-blue-200 text-xs text-blue-900 space-y-1">
               <div className="font-bold flex items-center gap-1.5 text-blue-900">
                 <Sparkles className="w-4 h-4 text-blue-600" />
-                <span>Biannual FMD Campaign (منہ کھر مہم)</span>
+                <span>Biannual Foot and Mouth Disease (FMD) Campaign</span>
               </div>
               <p className="text-[11px] text-blue-800">
                 Next mass herd booster scheduled for November 2026. Maintain booster within 21 days for newly arrived heifers.
@@ -529,7 +529,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
             <div className="p-3 rounded-xl bg-emerald-50/80 border border-emerald-200 text-xs text-emerald-900 space-y-1">
               <div className="font-bold flex items-center gap-1.5 text-[#1B5E20]">
                 <CheckCircle2 className="w-4 h-4 text-[#1B5E20]" />
-                <span>Routine Deworming (پیٹ کے کیڑوں کا خاتمہ)</span>
+                <span>Routine Deworming</span>
               </div>
               <p className="text-[11px] text-emerald-800">
                 Quarterly broad-spectrum anthelmintic (Albendazole / Oxyclozanide) rotation reduces feed conversion waste by up to 18%.
@@ -564,7 +564,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
                   </span>
                 </h3>
                 <p className="text-xs text-gray-500 font-['Noto_Nastaliq_Urdu']">
-                  تاریخ وار ویکسینیشن شیڈول اور آنے والے ٹیکوں کی تفصیلات
+                  Dated vaccination schedule and upcoming dose details
                 </p>
               </div>
             </div>
@@ -597,13 +597,13 @@ export const HealthTab: React.FC<HealthTabProps> = ({
             
             {/* Week Days Header */}
             <div className="grid grid-cols-7 text-center text-xs font-bold text-gray-700 bg-gray-100/80 py-2.5 border-b border-gray-200">
-              <div>Mon (پیر)</div>
-              <div>Tue (منگل)</div>
-              <div>Wed (بدھ)</div>
-              <div>Thu (جمعرات)</div>
-              <div>Fri (جمعہ)</div>
-              <div>Sat (ہفتہ)</div>
-              <div>Sun (اتوار)</div>
+              <div>Mon</div>
+              <div>Tue</div>
+              <div>Wed</div>
+              <div>Thu</div>
+              <div>Fri</div>
+              <div>Sat</div>
+              <div>Sun</div>
             </div>
 
             {/* Days Grid */}
@@ -689,7 +689,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
                   </span>
                 </div>
                 <span className="text-xs text-gray-500 font-['Noto_Nastaliq_Urdu']">
-                  اس تاریخ کے شیڈول شدہ حفاظتی ٹیکے
+                  Vaccinations scheduled for this date
                 </span>
               </div>
 
@@ -745,7 +745,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
                 <span>Breed-Specific Vaccination Protocols (Pakistan Dairy Farms)</span>
               </h3>
               <p className="text-xs text-gray-500 font-['Noto_Nastaliq_Urdu']">
-                ساہیوال گائے، نیلی راوی بھینس، فریزن کراس اور بچھڑوں کے لیے مصدقہ طبی و حفاظتی شیڈول
+                Recommended veterinary and preventive schedules for Sahiwal cattle, Nili Ravi buffaloes, Friesian Cross cattle, and calves
               </p>
             </div>
             <span className="text-xs font-bold text-[#1B5E20] bg-emerald-50 px-3 py-1 rounded-xl border border-emerald-200">
@@ -767,13 +767,13 @@ export const HealthTab: React.FC<HealthTabProps> = ({
                 </span>
               </div>
               <ul className="text-xs text-gray-700 space-y-1.5 list-disc list-inside">
-                <li><strong className="text-emerald-900">FMD (منہ کھر):</strong> Biannual (March & September) - 5ml S/C.</li>
-                <li><strong className="text-emerald-900">HS (گل گھوٹو):</strong> Pre-monsoon in May & Nov - 5ml S/C.</li>
-                <li><strong className="text-emerald-900">Anthrax (اینتھراکس):</strong> Annual in endemic zones (July).</li>
+                <li><strong className="text-emerald-900">FMD (Foot and Mouth Disease):</strong> Biannual (March & September) - 5ml S/C.</li>
+                <li><strong className="text-emerald-900">HS (Hemorrhagic Septicemia):</strong> Pre-monsoon in May & Nov - 5ml S/C.</li>
+                <li><strong className="text-emerald-900">Anthrax:</strong> Annual in endemic zones (July).</li>
                 <li><strong className="text-emerald-900">Deworming:</strong> Quarterly rotation (Albendazole / Ivermectin).</li>
               </ul>
               <div className="text-[11px] text-gray-500 italic pt-1 border-t border-emerald-200/40 font-['Noto_Nastaliq_Urdu']">
-                دیسی نسل کی قوت مدافعت اچھی ہے لیکن منہ کھر اور گل گھوٹو بروقت ضروری ہے۔
+                Indigenous breeds have good immunity, but timely FMD and HS vaccination is essential.
               </div>
             </div>
 
@@ -789,13 +789,13 @@ export const HealthTab: React.FC<HealthTabProps> = ({
                 </span>
               </div>
               <ul className="text-xs text-gray-700 space-y-1.5 list-disc list-inside">
-                <li><strong className="text-blue-900">HS (گل گھوٹو):</strong> Critical! Every 6 months before rains (oil adjuvant vaccine).</li>
-                <li><strong className="text-blue-900">FMD (منہ کھر):</strong> Every 6 months (February & October).</li>
-                <li><strong className="text-blue-900">Liver Fluke (جگر کے کیڑے):</strong> Post-monsoon flooding deworming with Triclabendazole.</li>
+                <li><strong className="text-blue-900">HS (Hemorrhagic Septicemia):</strong> Critical! Every 6 months before rains (oil adjuvant vaccine).</li>
+                <li><strong className="text-blue-900">FMD (Foot and Mouth Disease):</strong> Every 6 months (February & October).</li>
+                <li><strong className="text-blue-900">Liver Fluke:</strong> Post-monsoon flooding deworming with Triclabendazole.</li>
                 <li><strong className="text-blue-900">Mastitis Screening:</strong> Surf field test monthly.</li>
               </ul>
               <div className="text-[11px] text-gray-500 italic pt-1 border-t border-blue-200/40 font-['Noto_Nastaliq_Urdu']">
-                بھینسوں میں گل گھوٹو سے بچاؤ اولین ترجیح ہونی چاہیے۔
+                Preventing Hemorrhagic Septicemia in buffaloes should be a top priority.
               </div>
             </div>
 
@@ -811,13 +811,13 @@ export const HealthTab: React.FC<HealthTabProps> = ({
                 </span>
               </div>
               <ul className="text-xs text-gray-700 space-y-1.5 list-disc list-inside">
-                <li><strong className="text-amber-900">Theileriosis (چچڑی بخار):</strong> Strict tick control (Cypermethrin spray) & Buparvaquone protocol.</li>
-                <li><strong className="text-amber-900">FMD (منہ کھر):</strong> High-potency polyvalent FMD booster every 6 months.</li>
+                <li><strong className="text-amber-900">Theileriosis (Tick Fever):</strong> Strict tick control (Cypermethrin spray) & Buparvaquone protocol.</li>
+                <li><strong className="text-amber-900">FMD (Foot and Mouth Disease):</strong> High-potency polyvalent FMD booster every 6 months.</li>
                 <li><strong className="text-amber-900">Heat Stress & Electrolytes:</strong> May to August continuous cooling & minerals.</li>
                 <li><strong className="text-amber-900">Brucellosis:</strong> Calfhood vaccination (Strain 19) at 4-8 months.</li>
               </ul>
               <div className="text-[11px] text-gray-500 italic pt-1 border-t border-amber-200/40 font-['Noto_Nastaliq_Urdu']">
-                کراس بریڈ کو چچڑوں اور گرمی کے تناؤ سے محفوظ رکھنا لازمی ہے۔
+                Protect crossbreeds from ticks and heat stress.
               </div>
             </div>
 
@@ -833,13 +833,13 @@ export const HealthTab: React.FC<HealthTabProps> = ({
                 </span>
               </div>
               <ul className="text-xs text-gray-700 space-y-1.5 list-disc list-inside">
-                <li><strong className="text-purple-900">Colostrum (بولی):</strong> 10% body weight within first 2 hours of birth.</li>
+                <li><strong className="text-purple-900">Colostrum:</strong> 10% body weight within first 2 hours of birth.</li>
                 <li><strong className="text-purple-900">Deworming:</strong> Day 14 and Day 30, then monthly until weaning.</li>
-                <li><strong className="text-purple-900">Blackleg (BQ / چوڑیا):</strong> At 3-4 months age.</li>
+                <li><strong className="text-purple-900">Blackleg (BQ):</strong> At 3-4 months age.</li>
                 <li><strong className="text-purple-900">FMD First Dose:</strong> At 4 months with booster at 5 months.</li>
               </ul>
               <div className="text-[11px] text-gray-500 italic pt-1 border-t border-purple-200/40 font-['Noto_Nastaliq_Urdu']">
-                بچھڑوں کی بروقت بولی اور ڈیورمنگ بعد میں دودھ کی پیداوار بڑھاتی ہے۔
+                Timely colostrum feeding and deworming help improve future milk production.
               </div>
             </div>
 
@@ -848,7 +848,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
               <div className="flex items-center justify-between border-b border-teal-200/60 pb-2">
                 <div className="font-black text-gray-900 text-sm flex items-center gap-1.5">
                   <span>🐂</span>
-                  <span>Breeding Bulls (سانڈ)</span>
+                  <span>Breeding Bulls</span>
                 </div>
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-teal-100 text-teal-800">
                   Reproductive
@@ -861,7 +861,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
                 <li><strong className="text-teal-900">Hoof Trimming:</strong> Every 6 months.</li>
               </ul>
               <div className="text-[11px] text-gray-500 italic pt-1 border-t border-teal-200/40 font-['Noto_Nastaliq_Urdu']">
-                افزائشی سانڈ کی صحت پورے ریوڑ کے حمل کے تناسب پر اثر انداز ہوتی ہے۔
+                The health of breeding bulls affects the herd's conception rate.
               </div>
             </div>
 
@@ -902,11 +902,11 @@ export const HealthTab: React.FC<HealthTabProps> = ({
               onChange={(e) => setStatusFilter(e.target.value)}
               className="px-2.5 py-1.5 rounded-xl border border-gray-200 text-xs font-semibold text-gray-700 bg-white outline-none focus:ring-2 focus:ring-[#1B5E20]"
             >
-              <option value="All">All Statuses (تمام حالتیں)</option>
-              <option value="Due Soon">Due Soon (قریب المیعاد)</option>
-              <option value="Overdue">Overdue (تاخیر شدہ)</option>
-              <option value="Upcoming">Upcoming (آنے والی)</option>
-              <option value="Completed">Completed (مکمل)</option>
+              <option value="All">All Statuses</option>
+              <option value="Due Soon">Due Soon</option>
+              <option value="Overdue">Overdue</option>
+              <option value="Upcoming">Upcoming</option>
+              <option value="Completed">Completed</option>
             </select>
 
             {/* Breed Filter */}
@@ -915,12 +915,12 @@ export const HealthTab: React.FC<HealthTabProps> = ({
               onChange={(e) => setBreedFilter(e.target.value)}
               className="px-2.5 py-1.5 rounded-xl border border-gray-200 text-xs font-semibold text-gray-700 bg-white outline-none focus:ring-2 focus:ring-[#1B5E20]"
             >
-              <option value="All">All Breeds (تمام نسلیں)</option>
-              <option value="Sahiwal">Sahiwal Cattle (ساہیوال)</option>
-              <option value="Nili Ravi">Nili Ravi Buffalo (نیلی راوی)</option>
-              <option value="Cholistani">Cholistani (چولستانی)</option>
-              <option value="Friesian">Friesian Cross (فریزن)</option>
-              <option value="Calf">Calves (بچھڑے)</option>
+              <option value="All">All Breeds</option>
+              <option value="Sahiwal">Sahiwal Cattle</option>
+              <option value="Nili Ravi">Nili Ravi Buffalo</option>
+              <option value="Cholistani">Cholistani</option>
+              <option value="Friesian">Friesian Cross</option>
+              <option value="Calf">Calves</option>
             </select>
           </div>
         </div>
@@ -1001,7 +1001,7 @@ export const HealthTab: React.FC<HealthTabProps> = ({
                     <button
                       onClick={() => onAdministerVaccine(rec.id)}
                       className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#1B5E20] hover:bg-[#2e7d32] text-white shadow-xs transition inline-flex items-center gap-1 cursor-pointer"
-                      title="Mark as Administered / ٹیکہ لگ گیا"
+                      title="Mark as Administered"
                     >
                       <Check className="w-3.5 h-3.5" />
                       <span>Administer</span>

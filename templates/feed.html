@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}چارہ اور ونڈا اسٹاک (Feed Management){% endblock %}
+{% block title %}Feed and Fodder Management{% endblock %}
 
 {% block content %}
 <div class="space-y-6">
@@ -8,40 +8,40 @@
   <!-- ہیڈر ٹائٹل اور بٹن -->
   <div class="flex flex-wrap items-center justify-between gap-4">
     <div>
-      <h2 class="text-2xl font-bold text-[#1B5E20] urdu-font">ماڈیول 6: چارہ و خوراک کا اسٹاک (Feed & Fodder)</h2>
-      <p class="text-xs text-gray-500">سبز چارہ، تُوڑی، سائیلج، ونڈا کا روزانہ استعمال، باقی اسٹاک اور فیڈ کنورژن ریشو (FCR)</p>
+      <h2 class="text-2xl font-bold text-[#1B5E20] urdu-font">Module 6: Feed and Fodder Stock</h2>
+      <p class="text-xs text-gray-500">Daily use of green fodder, straw, silage, and feed, remaining stock, and feed conversion ratio (FCR)</p>
     </div>
     <button onclick="document.getElementById('addFeedModal').classList.remove('hidden')" class="btn-farm-primary urdu-font">
       <span>🌾</span>
-      <span>خوراک کا اندراج کریں (Add Feed Entry)</span>
+      <span>Add feed entry</span>
     </button>
   </div>
 
   <!-- سمری کارڈز بشمول FCR -->
   <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
     <div class="glass-card p-5 border-r-4 border-r-emerald-600">
-      <span class="kpi-title urdu-font">فیڈ کنورژن ریشو (FCR)</span>
+      <span class="kpi-title urdu-font">Feed conversion ratio (FCR)</span>
       <div class="kpi-value text-emerald-800 mt-1">
-        {{ fcr }} <span class="text-sm font-normal text-gray-500">کلو فیڈ / لیٹر دودھ</span>
+        {{ fcr }} <span class="text-sm font-normal text-gray-500">kg of feed per liter of milk</span>
       </div>
-      <p class="text-xs text-gray-500 mt-1">کتنے کلو خوراک کے بدلے ایک لیٹر دودھ مل رہا ہے</p>
+      <p class="text-xs text-gray-500 mt-1">Kilograms of feed used per liter of milk produced</p>
     </div>
 
     <div class="glass-card p-5 border-r-4 border-r-blue-600">
-      <span class="kpi-title urdu-font">کل ریکارڈ شدہ فیڈ استعمال</span>
+      <span class="kpi-title urdu-font">Total feed used</span>
       <div class="kpi-value text-blue-900 mt-1">
-        {{ "{:,.0f}".format(total_feed_kg) }} <span class="text-sm font-normal text-gray-500">کلوگرام</span>
+        {{ "{:,.0f}".format(total_feed_kg) }} <span class="text-sm font-normal text-gray-500">kg</span>
       </div>
-      <p class="text-xs text-gray-500 mt-1">سبز چارہ، خشک بھوسہ اور کمرشل ونڈا</p>
+      <p class="text-xs text-gray-500 mt-1">Green fodder, dry straw, and commercial feed</p>
     </div>
 
     <div class="glass-card p-5 border-r-4 border-r-amber-500">
-      <span class="kpi-title urdu-font">اسٹاک الرٹ انڈیکیٹر</span>
+      <span class="kpi-title urdu-font">Stock alert indicator</span>
       <div class="text-lg font-bold text-amber-800 mt-2 flex items-center gap-2">
         <span>📦</span>
-        <span>ونڈا اسٹاک: تسلی بخش</span>
+        <span>Feed stock: satisfactory</span>
       </div>
-      <p class="text-xs text-gray-500 mt-1">کم از کم 15 دن کا خشک چارہ ہمیشہ موجود رکھیں</p>
+      <p class="text-xs text-gray-500 mt-1">Always keep at least 15 days of dry fodder in stock</p>
     </div>
   </div>
 
@@ -51,14 +51,14 @@
       <table class="farm-table">
         <thead>
           <tr>
-            <th>تاریخ (Date)</th>
-            <th>خوراک کی قسم (Feed Type)</th>
-            <th>روزانہ استعمال (Kg)</th>
-            <th>باقی اسٹاک (Stock Remaining)</th>
-            <th>بوریوں کی تعداد</th>
-            <th>فی جانور مقدار (Kg/Head)</th>
-            <th>روزانہ خرچ (PKR)</th>
-            <th class="text-center">حذف</th>
+            <th>Date</th>
+            <th>Feed type</th>
+            <th>Daily use (Kg)</th>
+            <th>Remaining stock (Stock Remaining)</th>
+            <th>Number of bags</th>
+            <th>Amount per animal (kg/head)</th>
+            <th>Daily cost (PKR)</th>
+            <th class="text-center">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -66,22 +66,22 @@
           <tr>
             <td class="font-bold text-gray-700">{{ f.tarikh }}</td>
             <td class="font-bold text-[#1B5E20]">{{ f.feed_type }}</td>
-            <td><strong>{{ f.rozana_miqdar_kg }}</strong> کلو</td>
-            <td class="text-emerald-800 font-semibold">{{ f.stock_baqaya_kg }} کلو</td>
-            <td>{% if f.bori_count > 0 %}{{ f.bori_count }} بوری{% else %}-{% endif %}</td>
-            <td>{{ f.fi_janwar_kg }} کلو</td>
-            <td class="font-bold text-gray-900">{{ "{:,.0f}".format(f.feed_cost) }} روپے</td>
+            <td><strong>{{ f.rozana_miqdar_kg }}</strong> kg</td>
+            <td class="text-emerald-800 font-semibold">{{ f.stock_baqaya_kg }} kg</td>
+            <td>{% if f.bori_count > 0 %}{{ f.bori_count }} bags{% else %}-{% endif %}</td>
+            <td>{{ f.fi_janwar_kg }} kg</td>
+            <td class="font-bold text-gray-900">{{ "{:,.0f}".format(f.feed_cost) }} PKR</td>
             <td class="text-center">
-              <form method="POST" action="{{ url_for('delete_feed', id=f.id) }}" onsubmit="return confirm('کیا آپ یہ ریکارڈ حذف کرنا چاہتے ہیں؟');" class="inline">
+              <form method="POST" action="{{ url_for('delete_feed', id=f.id) }}" onsubmit="return confirm('Are you sure you want to delete this feed record?');" class="inline">
                 <button type="submit" class="text-red-500 hover:text-red-700 text-xs font-bold p-1">
-                  حذف 🗑️
+                  Delete 🗑️
                 </button>
               </form>
             </td>
           </tr>
           {% else %}
           <tr>
-            <td colspan="8" class="text-center py-8 text-gray-400 urdu-font">کوئی فیڈ ریکارڈ نہیں ملا</td>
+            <td colspan="8" class="text-center py-8 text-gray-400 urdu-font">No feed records found</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -95,54 +95,54 @@
 <div id="addFeedModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
   <div class="glass-card max-w-lg w-full p-6 bg-white overflow-y-auto max-h-[90vh]">
     <div class="flex items-center justify-between border-b pb-3 mb-4">
-      <h3 class="text-lg font-bold text-[#1B5E20] urdu-font">خوراک اور اسٹاک اندراج (Add Feed Record)</h3>
+      <h3 class="text-lg font-bold text-[#1B5E20] urdu-font">Add feed record</h3>
       <button onclick="document.getElementById('addFeedModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700 text-xl font-bold">&times;</button>
     </div>
 
     <form method="POST" action="{{ url_for('feed') }}" class="space-y-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">تاریخ (Date):</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Date:</label>
           <input type="date" name="tarikh" value="{{ today_date }}" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">خوراک کی قسم (Feed Type)*:</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Feed type*:</label>
           <select name="feed_type" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
-            <option value="سبز چارہ (برسیم / جوار / مکئی)">سبز چارہ (برسیم / جوار / مکئی)</option>
-            <option value="خشک چارہ (گندم کا بھوسہ / تُوڑی)">خشک چارہ (گندم کا بھوسہ / تُوڑی)</option>
-            <option value="دودھ والا ونڈا (Dairy Wanda)">دودھ والا ونڈا (Dairy Wanda)</option>
-            <option value="سائیلج (Corn Silage)">سائیلج (Corn Silage)</option>
-            <option value="کھل بنولہ / سرسوں">کھل بنولہ / سرسوں</option>
-            <option value="منرل مکسچر و نمک">منرل مکسچر و نمک</option>
+            <option value="سبز چارہ (برسیم / جوار / مکئی)">Green fodder (berseem / sorghum / corn)</option>
+            <option value="خشک چارہ (گندم کا بھوسہ / تُوڑی)">Dry fodder (wheat straw)</option>
+            <option value="دودھ والا ونڈا (Dairy Wanda)">Dairy feed (Dairy Wanda)</option>
+            <option value="سائیلج (Corn Silage)">Silage (corn silage)</option>
+            <option value="کھل بنولہ / سرسوں">Cottonseed / mustard cake</option>
+            <option value="منرل مکسچر و نمک">Mineral mix and salt</option>
           </select>
         </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">روزانہ استعمال مقدار کلو (Kg)*:</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Daily quantity used (kg)*:</label>
           <input type="number" step="0.5" name="rozana_miqdar_kg" required placeholder="300" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">باقی اسٹاک کلو (Stock Remaining):</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Remaining stock (kg) (Stock Remaining):</label>
           <input type="number" step="1" name="stock_baqaya_kg" required placeholder="1500" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">بوریوں کی تعداد (اگر ونڈا ہے):</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Number of bags (if feed):</label>
           <input type="number" name="bori_count" value="0" placeholder="20" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">روزانہ تخمینہ خرچ (PKR):</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Estimated daily cost (PKR):</label>
           <input type="number" name="feed_cost" placeholder="8500" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
       </div>
 
       <div class="flex justify-end gap-2 pt-3 border-t">
-        <button type="button" onclick="document.getElementById('addFeedModal').classList.add('hidden')" class="px-4 py-2 border rounded-xl text-gray-600 hover:bg-gray-100 urdu-font">منسوخ کریں</button>
-        <button type="submit" class="btn-farm-primary urdu-font">محفوظ کریں (Save)</button>
+        <button type="button" onclick="document.getElementById('addFeedModal').classList.add('hidden')" class="px-4 py-2 border rounded-xl text-gray-600 hover:bg-gray-100 urdu-font">Cancel</button>
+        <button type="submit" class="btn-farm-primary urdu-font">Save</button>
       </div>
     </form>
   </div>

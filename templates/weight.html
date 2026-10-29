@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}وزن اور گروتھ ٹریکنگ (Weight & ADG){% endblock %}
+{% block title %}Weight and Growth Tracking (ADG){% endblock %}
 
 {% block content %}
 <div class="space-y-6">
@@ -8,12 +8,12 @@
   <!-- ہیڈر ٹائٹل اور بٹن -->
   <div class="flex flex-wrap items-center justify-between gap-4">
     <div>
-      <h2 class="text-2xl font-bold text-[#1B5E20] urdu-font">ماڈیول 9: وزن اور گروتھ ٹریکنگ (Average Daily Gain - ADG)</h2>
-      <p class="text-xs text-gray-500">بچھڑوں اور افزائشی جانوروں کے وزن کی پیمائش اور یومیہ اوسط اضافہ (گرام فی دن)</p>
+      <h2 class="text-2xl font-bold text-[#1B5E20] urdu-font">Module 9: Weight and Growth Tracking (ADG)</h2>
+      <p class="text-xs text-gray-500">Measure calf and young-stock weights and average daily gain (grams per day)</p>
     </div>
     <button onclick="document.getElementById('addWeightModal').classList.remove('hidden')" class="btn-farm-primary urdu-font">
       <span>⚖️</span>
-      <span>وزن کا اندراج کریں (Add Weight Log)</span>
+      <span>Record weight</span>
     </button>
   </div>
 
@@ -23,18 +23,18 @@
       <div class="flex items-center gap-3">
         <span class="text-3xl">📈</span>
         <div>
-          <h4 class="font-bold text-[#1B5E20] urdu-font text-base">ADG فارمولا (Average Daily Gain):</h4>
+          <h4 class="font-bold text-[#1B5E20] urdu-font text-base">ADG formula (average daily gain):</h4>
           <p class="text-xs text-gray-700 mt-0.5">
-            <strong>ADG = ((موجودہ وزن - پچھلا وزن) ÷ دنوں کا فرق) × 1000</strong>
+            <strong>ADG = ((current weight - previous weight) ÷ number of days) × 1000</strong>
           </p>
           <p class="text-xs text-emerald-800 mt-1">
-            اچھی نسل کے بچھڑے کا روزانہ <strong>700 تا 1000 گرام</strong> اضافہ مثالی مانا جاتا ہے۔
+            A healthy-breed calf’s daily gain of <strong>700–1,000 grams</strong> is considered ideal.
           </p>
         </div>
       </div>
       <div class="p-3 bg-white rounded-xl shadow-sm border text-center">
-        <span class="text-xs text-gray-500 font-semibold urdu-font">ہدف گوشت بچھڑے</span>
-        <div class="text-lg font-bold text-[#1B5E20]">800g+ / دن</div>
+        <span class="text-xs text-gray-500 font-semibold urdu-font">Target for beef calves</span>
+        <div class="text-lg font-bold text-[#1B5E20]">800g+ / days</div>
       </div>
     </div>
   </div>
@@ -45,14 +45,14 @@
       <table class="farm-table">
         <thead>
           <tr>
-            <th>ٹیگ نمبر (Tag No)</th>
-            <th>تاریخ پیمائش (Date)</th>
-            <th>موجودہ وزن (Weight Kg)</th>
-            <th>پچھلا وزن (Prev Kg)</th>
-            <th>دنوں کا وقفہ (Days)</th>
-            <th>روزانہ اوسط اضافہ (ADG g/day)</th>
-            <th>اضافی نوٹس / خوراک</th>
-            <th class="text-center">حذف</th>
+            <th>Tag number</th>
+            <th>Measurement date</th>
+            <th>Current weight (kg)</th>
+            <th>Previous weight (kg)</th>
+            <th>Days between measurements</th>
+            <th>Average daily gain (ADG g/day)</th>
+            <th>Additional notes / feed</th>
+            <th class="text-center">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -60,29 +60,29 @@
           <tr>
             <td class="font-bold text-[#1B5E20] text-base">{{ w.tag_no }}</td>
             <td class="text-gray-700 font-medium">{{ w.tarikh }}</td>
-            <td class="font-bold text-gray-900">{{ w.wazan_kg }} کلو</td>
-            <td class="text-gray-500">{{ w.pichla_wazan_kg }} کلو</td>
-            <td>{{ w.dino_ka_farq }} دن</td>
+            <td class="font-bold text-gray-900">{{ w.wazan_kg }} kg</td>
+            <td class="text-gray-500">{{ w.pichla_wazan_kg }} kg</td>
+            <td>{{ w.dino_ka_farq }} days</td>
             <td>
               <span class="px-3 py-1 rounded-full text-xs font-bold
                 {% if w.adg_grams >= 700 %}bg-emerald-100 text-emerald-800 border border-emerald-300
                 {% elif w.adg_grams > 0 %}bg-amber-100 text-amber-800
                 {% else %}bg-gray-100 text-gray-700{% endif %}">
-                +{{ w.adg_grams }} گرام/دن
+                +{{ w.adg_grams }} grams/days
               </span>
             </td>
             <td class="text-xs text-gray-500">{{ w.notes or '-' }}</td>
             <td class="text-center">
-              <form method="POST" action="{{ url_for('delete_weight', id=w.id) }}" onsubmit="return confirm('کیا آپ یہ ریکارڈ حذف کرنا چاہتے ہیں؟');" class="inline">
+              <form method="POST" action="{{ url_for('delete_weight', id=w.id) }}" onsubmit="return confirm('Are you sure you want to delete this weight record?');" class="inline">
                 <button type="submit" class="text-red-500 hover:text-red-700 text-xs font-bold p-1">
-                  حذف 🗑️
+                  Delete 🗑️
                 </button>
               </form>
             </td>
           </tr>
           {% else %}
           <tr>
-            <td colspan="8" class="text-center py-8 text-gray-400 urdu-font">کوئی وزن ریکارڈ نہیں ملا</td>
+            <td colspan="8" class="text-center py-8 text-gray-400 urdu-font">No weight records found</td>
           </tr>
           {% endfor %}
         </tbody>
@@ -96,49 +96,49 @@
 <div id="addWeightModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
   <div class="glass-card max-w-lg w-full p-6 bg-white overflow-y-auto max-h-[90vh]">
     <div class="flex items-center justify-between border-b pb-3 mb-4">
-      <h3 class="text-lg font-bold text-[#1B5E20] urdu-font">وزن کا نیا اندراج (Add Weight Entry)</h3>
+      <h3 class="text-lg font-bold text-[#1B5E20] urdu-font">Add weight entry</h3>
       <button onclick="document.getElementById('addWeightModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700 text-xl font-bold">&times;</button>
     </div>
 
     <form method="POST" action="{{ url_for('weight') }}" class="space-y-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">جانور کا ٹیگ نمبر*:</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Animal tag number*:</label>
           <select name="tag_no" id="weight_tag_select" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
             {% for a in animals %}
-              <option value="{{ a.tag_no }}" data-wazan="{{ a.wazan }}">{{ a.tag_no }} ({{ a.nasal }}) - پچھلا وزن: {{ a.wazan }}kg</option>
+              <option value="{{ a.tag_no }}" data-wazan="{{ a.wazan }}">{{ a.tag_no }} ({{ a.nasal }}) - Previous weight: {{ a.wazan }}kg</option>
             {% endfor %}
           </select>
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">تاریخ پیمائش*:</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Measurement date*:</label>
           <input type="date" name="tarikh" value="{{ today_date }}" required class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">موجودہ وزن کلو*:</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Current weight (kg)*:</label>
           <input type="number" step="0.5" id="curr_wazan" name="wazan_kg" required placeholder="140" class="w-full px-3 py-2 border rounded-xl font-bold text-[#1B5E20] outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">پچھلا وزن کلو:</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Previous weight (kg):</label>
           <input type="number" step="0.5" id="prev_wazan" name="pichla_wazan_kg" placeholder="115" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">کتنے دنوں بعد (Days):</label>
+          <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Days since last measurement:</label>
           <input type="number" id="days_gap" name="dino_ka_farq" value="30" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
         </div>
       </div>
 
       <div>
-        <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">خوراک و اضافی نوٹس:</label>
-        <input type="text" name="notes" placeholder="کاف اسٹارٹر ونڈا اور چارہ کی مقدار..." class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
+        <label class="block text-xs font-semibold text-gray-700 mb-1 urdu-font">Feed and additional notes:</label>
+        <input type="text" name="notes" placeholder="Calf starter feed and fodder quantity..." class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-[#1B5E20]">
       </div>
 
       <div class="flex justify-end gap-2 pt-3 border-t">
-        <button type="button" onclick="document.getElementById('addWeightModal').classList.add('hidden')" class="px-4 py-2 border rounded-xl text-gray-600 hover:bg-gray-100 urdu-font">منسوخ کریں</button>
-        <button type="submit" class="btn-farm-primary urdu-font">محفوظ کریں (Save)</button>
+        <button type="button" onclick="document.getElementById('addWeightModal').classList.add('hidden')" class="px-4 py-2 border rounded-xl text-gray-600 hover:bg-gray-100 urdu-font">Cancel</button>
+        <button type="submit" class="btn-farm-primary urdu-font">Save</button>
       </div>
     </form>
   </div>

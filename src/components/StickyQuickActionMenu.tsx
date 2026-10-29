@@ -24,7 +24,7 @@ export const StickyQuickActionMenu: React.FC<StickyQuickActionMenuProps> = ({
     {
       id: 'milk' as const,
       title: 'Milk Entry',
-      titleUrdu: 'دودھ اندراج',
+      titleUrdu: 'Milk entry',
       icon: Milk,
       bgGradient: 'from-emerald-700 to-[#1B5E20]',
       hoverBorder: 'hover:border-emerald-400',
@@ -35,7 +35,7 @@ export const StickyQuickActionMenu: React.FC<StickyQuickActionMenuProps> = ({
     {
       id: 'expense' as const,
       title: 'Expense',
-      titleUrdu: 'خرچہ اندراج',
+      titleUrdu: 'Expense entry',
       icon: DollarSign,
       bgGradient: 'from-amber-700 to-[#b45309]',
       hoverBorder: 'hover:border-amber-400',
@@ -46,7 +46,7 @@ export const StickyQuickActionMenu: React.FC<StickyQuickActionMenuProps> = ({
     {
       id: 'feed' as const,
       title: 'Feed & Winda',
-      titleUrdu: 'ونڈا و چارہ',
+      titleUrdu: 'Feed and fodder',
       icon: Wheat,
       bgGradient: 'from-teal-800 to-[#0f766e]',
       hoverBorder: 'hover:border-teal-400',
@@ -57,7 +57,7 @@ export const StickyQuickActionMenu: React.FC<StickyQuickActionMenuProps> = ({
     {
       id: 'health' as const,
       title: 'Health / Disease',
-      titleUrdu: 'بیماری و ویکسین',
+      titleUrdu: 'Illness and vaccination',
       icon: Stethoscope,
       bgGradient: 'from-rose-800 to-[#9f1239]',
       hoverBorder: 'hover:border-rose-400',
@@ -68,7 +68,7 @@ export const StickyQuickActionMenu: React.FC<StickyQuickActionMenuProps> = ({
     {
       id: 'breeding' as const,
       title: 'Breeding & AI',
-      titleUrdu: 'بریڈنگ و ٹیکہ',
+      titleUrdu: 'Breeding and insemination',
       icon: Dna,
       bgGradient: 'from-purple-800 to-[#6b21a8]',
       hoverBorder: 'hover:border-purple-400',
@@ -79,7 +79,7 @@ export const StickyQuickActionMenu: React.FC<StickyQuickActionMenuProps> = ({
     {
       id: 'sale' as const,
       title: 'Animal Sale',
-      titleUrdu: 'جانور فروخت',
+      titleUrdu: 'Animal sale',
       icon: ShoppingCart,
       bgGradient: 'from-[#1e3a5f] to-[#0f2942]',
       hoverBorder: 'hover:border-blue-400',
@@ -100,7 +100,7 @@ export const StickyQuickActionMenu: React.FC<StickyQuickActionMenuProps> = ({
             </span>
             <span className="text-gray-300">•</span>
             <span className="text-xs text-[#1B5E20] font-['Noto_Nastaliq_Urdu'] font-bold">
-              فوری کارروائی مینیو (ایک کلک پر اندراج)
+              Quick action menu (one-click entry)
             </span>
           </div>
           <span className="text-[11px] text-gray-500 hidden sm:inline-block">

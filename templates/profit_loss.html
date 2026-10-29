@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}منافع اور نقصان (Profit & Loss Statement){% endblock %}
+{% block title %}Profit & Loss Statement{% endblock %}
 
 {% block content %}
 <div class="space-y-6">
@@ -8,45 +8,45 @@
   <!-- ہیڈر ٹائٹل اور بٹن -->
   <div class="flex flex-wrap items-center justify-between gap-4">
     <div>
-      <h2 class="text-2xl font-bold text-[#1B5E20] urdu-font">ماڈیول 5: نفع و نقصان کا خودکار حساب (Profit & Loss)</h2>
-      <p class="text-xs text-gray-500">فارم کے مالی گوشوارے، فی لیٹر پیداواری لاگت، فی لیٹر منافع اور فی جانور روزانہ خرچ کا تفصیلی تجزیہ</p>
+      <h2 class="text-2xl font-bold text-[#1B5E20] urdu-font">Module 5: Profit and Loss</h2>
+      <p class="text-xs text-gray-500">Farm financial statements, production cost and profit per liter, and daily cost per animal</p>
     </div>
     <button onclick="window.print()" class="px-4 py-2 bg-gray-800 text-white font-bold rounded-xl text-xs hover:bg-black transition flex items-center gap-1.5 urdu-font">
       <span>🖨️</span>
-      <span>رپورٹ پرنٹ کریں (Print Statement)</span>
+      <span>Print report (Print Statement)</span>
     </button>
   </div>
 
   <!-- مین مالی کارڈز -->
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
     <div class="glass-card p-5 border-t-4 border-t-emerald-600">
-      <span class="kpi-title urdu-font">کل آمدنی (Total Income)</span>
+      <span class="kpi-title urdu-font">Total income (Total Income)</span>
       <div class="text-2xl font-bold text-emerald-800 mt-1">
-        {{ "{:,.0f}".format(total_income) }} <span class="text-xs font-normal text-gray-400">روپے</span>
+        {{ "{:,.0f}".format(total_income) }} <span class="text-xs font-normal text-gray-400">PKR</span>
       </div>
     </div>
 
     <div class="glass-card p-5 border-t-4 border-t-red-600">
-      <span class="kpi-title urdu-font">کل اخراجات (Total Expenses)</span>
+      <span class="kpi-title urdu-font">Total expenses</span>
       <div class="text-2xl font-bold text-red-700 mt-1">
-        {{ "{:,.0f}".format(total_expenses) }} <span class="text-xs font-normal text-gray-400">روپے</span>
+        {{ "{:,.0f}".format(total_expenses) }} <span class="text-xs font-normal text-gray-400">PKR</span>
       </div>
     </div>
 
     <div class="glass-card p-5 border-t-4 border-t-[#FF8F00] bg-[#FFF8E1]/60">
-      <span class="kpi-title urdu-font">خالص منافع (Net Profit)</span>
+      <span class="kpi-title urdu-font">Net profit (Net Profit)</span>
       <div class="text-2xl font-extrabold {% if net_profit >= 0 %}text-[#1B5E20]{% else %}text-red-700{% endif %} mt-1">
-        {{ "{:,.0f}".format(net_profit) }} <span class="text-xs font-normal text-gray-500">روپے</span>
+        {{ "{:,.0f}".format(net_profit) }} <span class="text-xs font-normal text-gray-500">PKR</span>
       </div>
-      <div class="text-[11px] text-gray-500 mt-1">آمدنی منفی اخراجات</div>
+      <div class="text-[11px] text-gray-500 mt-1">Income minus expenses</div>
     </div>
 
     <div class="glass-card p-5 border-t-4 border-t-blue-600">
-      <span class="kpi-title urdu-font">منافع کا تناسب (Profit Margin)</span>
+      <span class="kpi-title urdu-font">Profit margin (Profit Margin)</span>
       <div class="text-2xl font-bold text-blue-900 mt-1">
         {{ profit_margin }}%
       </div>
-      <div class="text-[11px] text-gray-500 mt-1">(منافع / آمدنی) × 100</div>
+      <div class="text-[11px] text-gray-500 mt-1">(profit / income) × 100</div>
     </div>
   </div>
 
@@ -54,32 +54,32 @@
   <div class="glass-card p-6">
     <h3 class="font-bold text-gray-800 urdu-font text-lg mb-4 flex items-center gap-2">
       <span>📐</span>
-      <span>یونٹ اکنامکس اور فی یونٹ تجزیہ (Unit Economics & Costing)</span>
+      <span>Unit economics and per-unit analysis (Unit Economics & Costing)</span>
     </h3>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200">
-        <span class="text-xs text-emerald-800 font-semibold urdu-font">فی لیٹر پیداواری لاگت:</span>
-        <div class="text-2xl font-bold text-emerald-900 mt-1">{{ cost_per_liter }} روپے</div>
-        <p class="text-[11px] text-gray-500 mt-1">فارم کے اخراجات بمقابلہ کل دودھ لیٹر</p>
+        <span class="text-xs text-emerald-800 font-semibold urdu-font">Production cost per liter:</span>
+        <div class="text-2xl font-bold text-emerald-900 mt-1">{{ cost_per_liter }} PKR</div>
+        <p class="text-[11px] text-gray-500 mt-1">Farm expenses compared with total liters of milk</p>
       </div>
 
       <div class="p-4 bg-blue-50 rounded-2xl border border-blue-200">
-        <span class="text-xs text-blue-800 font-semibold urdu-font">فی لیٹر اوسط وصولی:</span>
-        <div class="text-2xl font-bold text-blue-900 mt-1">{{ income_per_liter }} روپے</div>
-        <p class="text-[11px] text-gray-500 mt-1">کل آمدنی بمقابلہ دودھ پیداوار</p>
+        <span class="text-xs text-blue-800 font-semibold urdu-font">Average revenue per liter:</span>
+        <div class="text-2xl font-bold text-blue-900 mt-1">{{ income_per_liter }} PKR</div>
+        <p class="text-[11px] text-gray-500 mt-1">Total income compared with milk production</p>
       </div>
 
       <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200">
-        <span class="text-xs text-amber-900 font-semibold urdu-font">فی لیٹر خالص منافع:</span>
-        <div class="text-2xl font-bold text-amber-900 mt-1">{{ profit_per_liter }} روپے</div>
-        <p class="text-[11px] text-gray-500 mt-1">ہر لیٹر پر کتنا بچ رہا ہے</p>
+        <span class="text-xs text-amber-900 font-semibold urdu-font">Net profit per liter:</span>
+        <div class="text-2xl font-bold text-amber-900 mt-1">{{ profit_per_liter }} PKR</div>
+        <p class="text-[11px] text-gray-500 mt-1">Amount retained per liter</p>
       </div>
 
       <div class="p-4 bg-purple-50 rounded-2xl border border-purple-200">
-        <span class="text-xs text-purple-800 font-semibold urdu-font">فی جانور روزانہ لاگت:</span>
-        <div class="text-2xl font-bold text-purple-900 mt-1">{{ cost_per_animal_daily }} روپے</div>
-        <p class="text-[11px] text-gray-500 mt-1">ایک جانور کی خوراک، مزدوری اور نگہداشت</p>
+        <span class="text-xs text-purple-800 font-semibold urdu-font">Daily cost per animal:</span>
+        <div class="text-2xl font-bold text-purple-900 mt-1">{{ cost_per_animal_daily }} PKR</div>
+        <p class="text-[11px] text-gray-500 mt-1">Feed, labor, and care for one animal</p>
       </div>
     </div>
   </div>
@@ -87,16 +87,16 @@
   <!-- اخراجات کی بریک ڈاؤن ٹیبل -->
   <div class="glass-card overflow-hidden">
     <div class="p-4 border-b bg-gray-50/50">
-      <h3 class="font-bold text-gray-800 urdu-font">اخراجات کی مد وار تفصیل (Cost Center Breakdown)</h3>
+      <h3 class="font-bold text-gray-800 urdu-font">Expense breakdown by category (Cost Center Breakdown)</h3>
     </div>
     <div class="overflow-x-auto">
       <table class="farm-table">
         <thead>
           <tr>
-            <th>خرچ کی مد (Cost Center)</th>
-            <th>کل ادا شدہ رقم (PKR)</th>
-            <th>کل اخراجات کا حصہ (%)</th>
-            <th>کیفیت / تبصرہ</th>
+            <th>Expense category (cost center)</th>
+            <th>Total amount paid (PKR)</th>
+            <th>Share of total expenses (%)</th>
+            <th>Quality / comments</th>
           </tr>
         </thead>
         <tbody>
@@ -104,7 +104,7 @@
           {% set pct = ((c.total / total_expenses * 100)|round(1)) if total_expenses > 0 else 0 %}
           <tr>
             <td class="font-bold text-gray-800">{{ c.mad }}</td>
-            <td class="font-bold text-red-700">{{ "{:,.0f}".format(c.total) }} روپے</td>
+            <td class="font-bold text-red-700">{{ "{:,.0f}".format(c.total) }} PKR</td>
             <td>
               <div class="flex items-center gap-2">
                 <div class="w-32 bg-gray-200 rounded-full h-2.5 overflow-hidden">
@@ -115,13 +115,13 @@
             </td>
             <td class="text-xs text-gray-500">
               {% if c.mad == 'Chara/Wanda' %}
-                فارم کا بنیادی اور سب سے بڑا خرچ (چارہ و فیڈ)
+                The farm’s largest expense: feed and fodder
               {% elif c.mad == 'Mazdoori' %}
-                ملازمین کی ماہانہ تنخواہیں اور کھانا
+                Monthly staff wages and meals
               {% elif c.mad == 'Dawaiyan/Doctor' %}
-                ویٹرنری ادویات اور حفاظتی ٹیکے
+                Veterinary medicines and vaccines
               {% else %}
-                عام انتظامی و فارم اخراجات
+                General administration and farm expenses
               {% endif %}
             </td>
           </tr>

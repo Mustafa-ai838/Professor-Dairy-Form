@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}ڈیری فارم مینجمنٹ سسٹم{% endblock %} - Dairy Farm Management</title>
+  <title>{% block title %}Dairy Farm Management System{% endblock %} - Dairy Farm Management</title>
   
   <!-- گوگل فونٹس: Noto Nastaliq Urdu اور Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +26,7 @@
       <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#FFF8E1] text-[#1B5E20] shadow-md mb-2">
         <span class="text-3xl">🥛</span>
       </div>
-      <h1 class="text-xl font-bold tracking-wide text-white urdu-font">ڈیری فارم مینجمنٹ</h1>
+      <h1 class="text-xl font-bold tracking-wide text-white urdu-font">Dairy Farm Management</h1>
       <p class="text-xs text-[#FFF8E1]/80 font-medium tracking-wider">DAIRY FARM ERP PAKISTAN</p>
     </div>
 
@@ -35,8 +35,8 @@
         👤
       </div>
       <div class="overflow-hidden">
-        <p class="text-xs text-white/70">لاگ اِن صارف:</p>
-        <p class="text-sm font-semibold text-white truncate urdu-font">{{ session.get('full_name', 'ایڈمن') }}</p>
+        <p class="text-xs text-white/70">Signed-in user:</p>
+        <p class="text-sm font-semibold text-white truncate urdu-font">{{ session.get('full_name', 'Admin') }}</p>
       </div>
     </div>
 
@@ -45,77 +45,77 @@
       <a href="{{ url_for('dashboard') }}" class="nav-link-custom {% if request.endpoint == 'dashboard' %}active{% endif %}">
         <span class="flex items-center gap-2.5">
           <span class="text-lg">📊</span>
-          <span class="urdu-font">مین ڈیش بورڈ (Dashboard)</span>
+          <span class="urdu-font">Dashboard</span>
         </span>
       </a>
 
       <a href="{{ url_for('herd') }}" class="nav-link-custom {% if request.endpoint == 'herd' %}active{% endif %}">
         <span class="flex items-center gap-2.5">
           <span class="text-lg">🐄</span>
-          <span class="urdu-font">1. ریورڈ و جانور (Herd)</span>
+          <span class="urdu-font">1. Herd</span>
         </span>
       </a>
 
       <a href="{{ url_for('milk') }}" class="nav-link-custom {% if request.endpoint == 'milk' %}active{% endif %}">
         <span class="flex items-center gap-2.5">
           <span class="text-lg">🥛</span>
-          <span class="urdu-font">2. دودھ کی پیداوار (Milk)</span>
+          <span class="urdu-font">2. Milk production</span>
         </span>
       </a>
 
       <a href="{{ url_for('income') }}" class="nav-link-custom {% if request.endpoint == 'income' %}active{% endif %}">
         <span class="flex items-center gap-2.5">
           <span class="text-lg">💰</span>
-          <span class="urdu-font">3. آمدنی کا کھاتہ (Income)</span>
+          <span class="urdu-font">3. Income ledger</span>
         </span>
       </a>
 
       <a href="{{ url_for('expenses') }}" class="nav-link-custom {% if request.endpoint == 'expenses' %}active{% endif %}">
         <span class="flex items-center gap-2.5">
           <span class="text-lg">📉</span>
-          <span class="urdu-font">4. فارم اخراجات (Expenses)</span>
+          <span class="urdu-font">4. Farm expenses</span>
         </span>
       </a>
 
       <a href="{{ url_for('profit_loss') }}" class="nav-link-custom {% if request.endpoint == 'profit_loss' %}active{% endif %}">
         <span class="flex items-center gap-2.5">
           <span class="text-lg">⚖️</span>
-          <span class="urdu-font">5. نفع و نقصان (Profit & Loss)</span>
+          <span class="urdu-font">5. Profit & Loss</span>
         </span>
       </a>
 
       <a href="{{ url_for('feed') }}" class="nav-link-custom {% if request.endpoint == 'feed' %}active{% endif %}">
         <span class="flex items-center gap-2.5">
           <span class="text-lg">🌾</span>
-          <span class="urdu-font">6. چارہ اور ونڈا (Feed Stock)</span>
+          <span class="urdu-font">6. Feed stock</span>
         </span>
       </a>
 
       <a href="{{ url_for('breeding') }}" class="nav-link-custom {% if request.endpoint == 'breeding' %}active{% endif %}">
         <span class="flex items-center gap-2.5">
           <span class="text-lg">🧬</span>
-          <span class="urdu-font">7. بریڈنگ و ولادت (Reproduction)</span>
+          <span class="urdu-font">7. Breeding and calving</span>
         </span>
       </a>
 
       <a href="{{ url_for('health') }}" class="nav-link-custom {% if request.endpoint == 'health' %}active{% endif %}">
         <span class="flex items-center gap-2.5">
           <span class="text-lg">🩺</span>
-          <span class="urdu-font">8. صحت و ویکسین (Health)</span>
+          <span class="urdu-font">8. Health and vaccines</span>
         </span>
       </a>
 
       <a href="{{ url_for('weight') }}" class="nav-link-custom {% if request.endpoint == 'weight' %}active{% endif %}">
         <span class="flex items-center gap-2.5">
           <span class="text-lg">⚖️</span>
-          <span class="urdu-font">9. وزن و گروتھ (Weight ADG)</span>
+          <span class="urdu-font">9. Weight and growth (ADG)</span>
         </span>
       </a>
 
       <a href="{{ url_for('customers') }}" class="nav-link-custom {% if request.endpoint == 'customers' %}active{% endif %}">
         <span class="flex items-center gap-2.5">
           <span class="text-lg">👥</span>
-          <span class="urdu-font">10. گاہک و ادھار کھاتہ (Khata)</span>
+          <span class="urdu-font">10. Customer ledger</span>
         </span>
       </a>
     </nav>
@@ -123,7 +123,7 @@
     <div class="pt-6 mt-6 border-t border-white/10">
       <a href="{{ url_for('logout') }}" class="flex items-center justify-center gap-2 w-full py-2.5 bg-red-600/80 hover:bg-red-600 text-white font-medium rounded-xl transition shadow">
         <span>🚪</span>
-        <span class="urdu-font">لاگ آؤٹ کریں (Logout)</span>
+        <span class="urdu-font">Log out</span>
       </a>
     </div>
   </aside>
@@ -139,9 +139,9 @@
         <span class="text-2xl">🌱</span>
         <div>
           <h2 class="text-lg font-bold text-[#1B5E20] urdu-font leading-snug">
-            چوہدری ڈیری فارمز، پنجاب پاکستان
+            Chaudhry Dairy Farms, Punjab, Pakistan
           </h2>
-          <p class="text-xs text-gray-500">تاریخ: {{ today_date }} | سسٹم حالت: بہترین و فعال</p>
+          <p class="text-xs text-gray-500">Date: {{ today_date }} | System status: Excellent and active</p>
         </div>
       </div>
 
@@ -149,11 +149,11 @@
       <div class="flex items-center gap-2 flex-wrap">
         <div class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold {% if space_info.is_low %}bg-red-100 text-red-700 border border-red-300 animate-pulse{% else %}bg-emerald-50 text-[#1B5E20] border border-emerald-200{% endif %}">
           <span>💻</span>
-          <span>لیپ ٹاپ فری سپیس: <strong>{{ space_info.free_mb }} MB</strong> ({{ space_info.free_gb }} GB دستیاب)</span>
+          <span>Laptop free space: <strong>{{ space_info.free_mb }} MB</strong> ({{ space_info.free_gb }} GB available)</span>
         </div>
 
-        <a href="{{ url_for('simulate_warning') }}" title="وارننگ ٹیسٹ کریں" class="px-2.5 py-1 text-xs bg-amber-500/15 text-[#e65100] border border-amber-300 rounded-lg hover:bg-amber-500/25 transition">
-          ⚠️ وارننگ ٹیسٹ
+        <a href="{{ url_for('simulate_warning') }}" title="Test warning" class="px-2.5 py-1 text-xs bg-amber-500/15 text-[#e65100] border border-amber-300 rounded-lg hover:bg-amber-500/25 transition">
+          ⚠️ Warning test
         </a>
       </div>
     </header>
@@ -165,9 +165,9 @@
       <div class="flex items-center gap-3">
         <span class="text-2xl">⚠️</span>
         <div>
-          <div class="text-base font-bold urdu-font">وارننگ: جگہ کم ہے، پرانا ڈیٹا ڈیلیٹ کریں!</div>
+          <div class="text-base font-bold urdu-font">Warning: Low disk space. Delete old data!</div>
           <div class="text-xs text-white/90">
-            آپ کے سسٹم میں صرف {{ space_info.free_mb }}MB جگہ باقی رہ گئی ہے (500MB سے کم)۔ نیا ڈیٹا محفوظ کرنے سے پہلے فالتو فائلیں ڈیلیٹ کریں۔
+            Your system has only {{ space_info.free_mb }}MB of space remaining (below 500 MB). Delete unnecessary files before saving new data.
           </div>
         </div>
       </div>
@@ -203,24 +203,24 @@
   <!-- فوٹر بار برائے لیپ ٹاپ فری سپیس اور معلومات -->
   <footer class="footer-bar mt-auto">
     <div class="flex items-center gap-2">
-      <span class="text-emerald-700 font-semibold urdu-font">ڈیری فارم مینجمنٹ سسٹم</span>
+      <span class="text-emerald-700 font-semibold urdu-font">Dairy Farm Management System</span>
       <span class="text-gray-400">|</span>
-      <span class="text-xs text-gray-500">پائیتھن فلاسک اور سنگل SQLite فائل (farm.db)</span>
+      <span class="text-xs text-gray-500">Python Flask and a single SQLite file (farm.db)</span>
     </div>
 
     <!-- لیپ ٹاپ فری سپیس ڈسپلے فوٹر پر (Requirement 4) -->
     <div class="flex items-center gap-3 text-xs">
       <span class="font-medium text-gray-700">
-        💻 لیپ ٹاپ فری ہارڈ ڈسک: 
+        💻 Laptop free disk space:
         <strong class="{% if space_info.is_low %}text-red-600{% else %}text-emerald-700{% endif %}">
           {{ space_info.free_mb }} MB
         </strong>
         ({{ space_info.free_gb }} GB / {{ space_info.total_gb }} GB)
       </span>
       {% if space_info.is_low %}
-        <span class="px-2 py-0.5 rounded bg-red-100 text-red-700 font-bold">جگہ کم ہے!</span>
+        <span class="px-2 py-0.5 rounded bg-red-100 text-red-700 font-bold">Low disk space!</span>
       {% else %}
-        <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 font-bold">محفوظ جگہ</span>
+        <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 font-bold">Space available</span>
       {% endif %}
     </div>
   </footer>

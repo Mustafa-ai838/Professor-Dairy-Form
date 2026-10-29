@@ -57,19 +57,19 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
   const [milkFat, setMilkFat] = useState<number>(5.8);
 
   // Expense state
-  const [expenseCategory, setExpenseCategory] = useState<string>('Feed & Winda (ونڈا و چارہ)');
+  const [expenseCategory, setExpenseCategory] = useState<string>('Feed & Winda');
   const [expenseAmount, setExpenseAmount] = useState<number>(15000);
   const [expenseNotes, setExpenseNotes] = useState<string>('');
 
   // Feed state
-  const [feedType, setFeedType] = useState<string>('Vanda 22% CP (متوازن ونڈا)');
+  const [feedType, setFeedType] = useState<string>('Balanced Vanda 22% CP');
   const [feedQty, setFeedQty] = useState<number>(200);
   const [feedCost, setFeedCost] = useState<number>(18000);
   const [feedNotes, setFeedNotes] = useState<string>('4 Bags from Supreme Feed Mill');
 
   // Health state
   const [healthAnimalTag, setHealthAnimalTag] = useState<string>(preselectedAnimalTag || animals[0]?.tagNo || 'PK-101');
-  const [healthDiagnosis, setHealthDiagnosis] = useState<string>('Mastitis Screening (ساڑو چیک)');
+  const [healthDiagnosis, setHealthDiagnosis] = useState<string>('Mastitis Screening');
   const [healthSeverity, setHealthSeverity] = useState<'Mild' | 'Moderate' | 'Critical'>('Mild');
   const [healthTemp, setHealthTemp] = useState<number>(101.8);
   const [healthTreatment, setHealthTreatment] = useState<string>('Antibiotic intramammary infusion + anti-inflammatory');
@@ -96,22 +96,22 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
   const [calfWeight, setCalfWeight] = useState<number>(28);
   const [calfTag, setCalfTag] = useState<string>(`PK-${110 + animals.length}`);
   const [calvingDate, setCalvingDate] = useState<string>('2026-10-21');
-  const [calvingEase, setCalvingEase] = useState<string>('Normal / خودکار آسان ولادت');
+  const [calvingEase, setCalvingEase] = useState<string>('Normal / Unassisted Calving');
   const [colostrumFed, setColostrumFed] = useState<boolean>(true);
 
   // Vitals state
   const [vitalsAnimalTag, setVitalsAnimalTag] = useState<string>(preselectedAnimalTag || 'PK-106');
   const [vitalsTemp, setVitalsTemp] = useState<number>(101.6);
-  const [vitalsFetalMovement, setVitalsFetalMovement] = useState<string>('Strong & Active (متحرک و واضح حرکت)');
+  const [vitalsFetalMovement, setVitalsFetalMovement] = useState<string>('Strong & Active');
   const [vitalsRumination, setVitalsRumination] = useState<string>('Normal (3 cycles per 2 mins)');
   const [vitalsBcs, setVitalsBcs] = useState<number>(3.5);
   const [vitalsNotes, setVitalsNotes] = useState<string>('Healthy dam in 3rd trimester. Good appetite.');
 
   // Vaccine state
   const [vacAnimalTag, setVacAnimalTag] = useState<string>(preselectedAnimalTag || animals[0]?.tagNo || 'PK-101');
-  const [vacName, setVacName] = useState<string>('FMD Polyvalent Vaccine (منہ کھر)');
+  const [vacName, setVacName] = useState<string>('FMD Polyvalent Vaccine');
   const [vacDisease, setVacDisease] = useState<string>('Foot and Mouth Disease');
-  const [vacDiseaseUrdu, setVacDiseaseUrdu] = useState<string>('منہ کھر کی بیماری');
+  const [vacDiseaseUrdu, setVacDiseaseUrdu] = useState<string>('Foot and Mouth Disease');
   const [vacDose, setVacDose] = useState<string>('5ml S/C');
   const [vacDueDate, setVacDueDate] = useState<string>('2026-11-15');
   const [vacBatch, setVacBatch] = useState<string>('VRI-BATCH-99');
@@ -140,18 +140,18 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
             </div>
             <div>
               <h3 className="font-extrabold text-base leading-tight">
-                {activeModal === 'milk' && 'Quick Milk Entry (دودھ اندراج)'}
-                {activeModal === 'expense' && 'Quick Expense Log (کھرچہ اندراج)'}
-                {activeModal === 'feed' && 'Quick Feed & Winda (ونڈا و چارہ اندراج)'}
-                {activeModal === 'health' && 'Quick Health & Illness Check (بیماری و علاج)'}
-                {activeModal === 'breeding' && 'Quick Breeding & Heat Log (بریڈنگ اندراج)'}
-                {activeModal === 'sale' && 'Quick Animal Sale (جانور فروخت اندراج)'}
-                {activeModal === 'calved' && 'Mark as Calved & Register Newborn (ولادت مبارک)'}
-                {activeModal === 'vitals' && 'Quick Log Animal Vitals (جانور وائٹلز اندراج)'}
-                {activeModal === 'vaccine' && 'Schedule Vaccination Dose (حفاظتی ٹیکہ شیڈول)'}
+                {activeModal === 'milk' && 'Quick Milk Entry'}
+                {activeModal === 'expense' && 'Quick Expense Log'}
+                {activeModal === 'feed' && 'Quick Feed & Winda'}
+                {activeModal === 'health' && 'Quick Health & Illness Check'}
+                {activeModal === 'breeding' && 'Quick Breeding & Heat Log'}
+                {activeModal === 'sale' && 'Quick Animal Sale'}
+                {activeModal === 'calved' && 'Mark as Calved & Register Newborn'}
+                {activeModal === 'vitals' && 'Quick Animal Vitals Log'}
+                {activeModal === 'vaccine' && 'Schedule Vaccination Dose'}
               </h3>
               <p className="text-xs text-emerald-200 font-['Noto_Nastaliq_Urdu']">
-                فوری اندراج • خودکار محفوظ کاری ڈیٹابیس
+                Quick entry • automatically saved to the database
               </p>
             </div>
           </div>
@@ -176,7 +176,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
             }} className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Morning Milk (صبح کا دودھ)*:</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Morning Milk*:</label>
                   <input
                     type="number"
                     step="0.5"
@@ -187,7 +187,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Evening Milk (شام کا دودھ)*:</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Evening Milk*:</label>
                   <input
                     type="number"
                     step="0.5"
@@ -201,7 +201,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Rate per Liter (ریٹ فی لیٹر):</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Rate per Liter:</label>
                   <input
                     type="number"
                     value={milkRate}
@@ -210,7 +210,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Average Fat % (فیٹ فیصد):</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Average Fat %:</label>
                   <input
                     type="number"
                     step="0.1"
@@ -228,11 +228,11 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
 
               <div className="flex justify-end gap-2 pt-2 border-t">
                 <button type="button" onClick={onClose} className="px-4 py-2 border rounded-xl text-xs font-semibold text-gray-600 hover:bg-gray-100 cursor-pointer">
-                  Cancel (منسوخ)
+                  Cancel
                 </button>
                 <button type="submit" className="px-5 py-2 bg-[#1B5E20] hover:bg-[#2e7d32] text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1.5">
                   <Check className="w-4 h-4" />
-                  <span>Save Milk Record (محفوظ کریں)</span>
+                  <span>Save Milk Record</span>
                 </button>
               </div>
             </form>
@@ -246,23 +246,23 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
               onClose();
             }} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Expense Category (خرچ کی قسم)*:</label>
+                <label className="block text-xs font-bold text-gray-700 mb-1">Expense Category*:</label>
                 <select
                   value={expenseCategory}
                   onChange={(e) => setExpenseCategory(e.target.value)}
                   className="w-full px-3 py-2 border rounded-xl text-xs font-bold text-gray-800 focus:ring-2 focus:ring-[#1B5E20] outline-none"
                 >
-                  <option>Feed & Winda (ونڈا، چارہ و سائیلج)</option>
-                  <option>Veterinary & Medicines (ادویات، ٹیکے و ڈاکٹر فیس)</option>
-                  <option>Labor & Farm Staff (ملازمین کی تنخواہ)</option>
-                  <option>Electricity & Diesel (بجلی بل و ڈیزل جنریٹر)</option>
-                  <option>Shed Maintenance & Repair (شیڈ مرمت و صفائی)</option>
-                  <option>Miscellaneous (متفرق اخراجات)</option>
+                  <option>Feed & Winda, Fodder, and Silage</option>
+                  <option>Veterinary Care, Medicines, Vaccines, and Fees</option>
+                  <option>Labor & Farm Staff Wages</option>
+                  <option>Electricity & Generator Diesel</option>
+                  <option>Shed Maintenance & Repair</option>
+                  <option>Miscellaneous</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Amount PKR (رقم روپے)*:</label>
+                <label className="block text-xs font-bold text-gray-700 mb-1">Amount (PKR)*:</label>
                 <input
                   type="number"
                   required
@@ -273,7 +273,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Payment Notes / Paid To (تفصیل):</label>
+                <label className="block text-xs font-bold text-gray-700 mb-1">Payment Notes / Paid To:</label>
                 <input
                   type="text"
                   placeholder="e.g. 5 bags Khal Binola from Sabzi Mandi supplier"
@@ -289,7 +289,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                 </button>
                 <button type="submit" className="px-5 py-2 bg-[#FF8F00] hover:bg-[#e65100] text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1.5">
                   <Check className="w-4 h-4" />
-                  <span>Save Expense (خرچ درج کریں)</span>
+                  <span>Save Expense</span>
                 </button>
               </div>
             </form>
@@ -303,18 +303,18 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
               onClose();
             }} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Feed Type (چارہ و ونڈا قسم)*:</label>
+                <label className="block text-xs font-bold text-gray-700 mb-1">Feed Type*:</label>
                 <select
                   value={feedType}
                   onChange={(e) => setFeedType(e.target.value)}
                   className="w-full px-3 py-2 border rounded-xl text-xs font-bold text-gray-800 focus:ring-2 focus:ring-[#1B5E20] outline-none"
                 >
-                  <option>Vanda 22% CP (متوازن ونڈا)</option>
-                  <option>Corn Silage (مکئی کا سائیلج)</option>
-                  <option>Wheat Straw / Toori (گندم کا بھوسہ)</option>
-                  <option>Khal Binola (بنولہ کھل)</option>
-                  <option>Rhodes Grass Hay (روڈس گھاس ہے)</option>
-                  <option>Mineral Mixture & Salts (منرل و نمکیات)</option>
+                  <option>Balanced Vanda 22% CP</option>
+                  <option>Corn Silage</option>
+                  <option>Wheat Straw</option>
+                  <option>Binola Cake</option>
+                  <option>Rhodes Grass Hay</option>
+                  <option>Mineral Mixture & Salts</option>
                 </select>
               </div>
 
@@ -330,7 +330,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Total Cost PKR (کل قیمت روپے)*:</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Total Cost (PKR)*:</label>
                   <input
                     type="number"
                     value={feedCost}
@@ -342,7 +342,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Supplier / Notes (سپلائر یا کوالٹی نوٹ):</label>
+                <label className="block text-xs font-bold text-gray-700 mb-1">Supplier / Quality Notes:</label>
                 <input
                   type="text"
                   value={feedNotes}
@@ -357,7 +357,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                 </button>
                 <button type="submit" className="px-5 py-2 bg-[#1B5E20] hover:bg-[#2e7d32] text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1.5">
                   <Check className="w-4 h-4" />
-                  <span>Log Feed Entry (ونڈا درج کریں)</span>
+                  <span>Log Feed Entry</span>
                 </button>
               </div>
             </form>
@@ -371,7 +371,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                 animalTag: healthAnimalTag,
                 date: new Date().toISOString().split('T')[0],
                 diagnosis: healthDiagnosis,
-                diagnosisUrdu: healthDiagnosis.includes('Mastitis') ? 'ساڑو کی علامت' : 'طبی معائنہ و علاج',
+                diagnosisUrdu: healthDiagnosis.includes('Mastitis') ? 'Signs of mastitis' : 'Medical examination and treatment',
                 severity: healthSeverity,
                 temperature: healthTemp,
                 treatment: healthTreatment,
@@ -384,7 +384,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
             }} className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Select Animal (جانور منتخب کریں)*:</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Select Animal*:</label>
                   <select
                     value={healthAnimalTag}
                     onChange={(e) => setHealthAnimalTag(e.target.value)}
@@ -396,7 +396,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Body Temp °F (درجہ حرارت):</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Body Temperature (°F):</label>
                   <input
                     type="number"
                     step="0.1"
@@ -408,7 +408,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Illness / Diagnosis (بیماری یا علامت)*:</label>
+                <label className="block text-xs font-bold text-gray-700 mb-1">Illness / Diagnosis*:</label>
                 <input
                   type="text"
                   value={healthDiagnosis}
@@ -421,19 +421,19 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Severity (شدت):</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Severity:</label>
                   <select
                     value={healthSeverity}
                     onChange={(e) => setHealthSeverity(e.target.value as any)}
                     className="w-full px-3 py-2 border rounded-xl text-xs font-semibold focus:ring-2 focus:ring-[#1B5E20] outline-none"
                   >
-                    <option value="Mild">Mild (معمولی)</option>
-                    <option value="Moderate">Moderate (درمیانی)</option>
-                    <option value="Critical">Critical (سنگین / فوری)</option>
+                    <option value="Mild">Mild</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Critical">Critical</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Estimated Cost PKR (خرچ):</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Estimated Cost (PKR):</label>
                   <input
                     type="number"
                     value={healthCost}
@@ -444,7 +444,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Treatment / Medicine Given (دی گئی دوا):</label>
+                <label className="block text-xs font-bold text-gray-700 mb-1">Treatment / Medicine Given:</label>
                 <textarea
                   rows={2}
                   value={healthTreatment}
@@ -459,7 +459,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                 </button>
                 <button type="submit" className="px-5 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1.5">
                   <Check className="w-4 h-4" />
-                  <span>Log Illness (بیماری درج کریں)</span>
+                  <span>Log Illness</span>
                 </button>
               </div>
             </form>
@@ -491,7 +491,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
               onClose();
             }} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Select Animal (جانور منتخب کریں)*:</label>
+                <label className="block text-xs font-bold text-gray-700 mb-1">Select Animal*:</label>
                 <select
                   value={breedingAnimalTag}
                   onChange={(e) => setBreedingAnimalTag(e.target.value)}
@@ -505,7 +505,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Heat Date (ہیٹ تاریخ):</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Heat Date:</label>
                   <input
                     type="date"
                     value={breedingHeatDate}
@@ -514,7 +514,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">AI / Insemination Date (ٹیکہ تاریخ)*:</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">AI / Insemination Date*:</label>
                   <input
                     type="date"
                     required
@@ -526,7 +526,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Semen / Bull Details (سیمن یا سانڈ کی تفصیل):</label>
+                <label className="block text-xs font-bold text-gray-700 mb-1">Semen / Bull Details:</label>
                 <input
                   type="text"
                   value={breedingSemen}
@@ -552,7 +552,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                 </button>
                 <button type="submit" className="px-5 py-2 bg-[#1B5E20] hover:bg-[#2e7d32] text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1.5">
                   <Check className="w-4 h-4" />
-                  <span>Save Breeding (بریڈنگ محفوظ کریں)</span>
+                  <span>Save Breeding</span>
                 </button>
               </div>
             </form>
@@ -566,7 +566,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
               onClose();
             }} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Animal for Sale (فروخت جانور)*:</label>
+                <label className="block text-xs font-bold text-gray-700 mb-1">Animal for Sale*:</label>
                 <select
                   value={saleAnimalTag}
                   onChange={(e) => setSaleAnimalTag(e.target.value)}
@@ -580,7 +580,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Buyer Name (خریدار کا نام)*:</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Buyer Name*:</label>
                   <input
                     type="text"
                     required
@@ -590,7 +590,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Agreed Price PKR (سودا رقم)*:</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Agreed Price (PKR)*:</label>
                   <input
                     type="number"
                     required
@@ -617,7 +617,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                 </button>
                 <button type="submit" className="px-5 py-2 bg-[#FF8F00] hover:bg-[#e65100] text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1.5">
                   <Check className="w-4 h-4" />
-                  <span>Record Sale (فروخت درج کریں)</span>
+                  <span>Record Sale</span>
                 </button>
               </div>
             </form>
@@ -633,7 +633,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
               <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-emerald-900 space-y-1">
                 <div className="font-bold flex items-center gap-1.5 text-[#1B5E20]">
                   <Baby className="w-4 h-4" />
-                  <span>Congratulations on New Calf Arrival! (مبارک ہو، ولادت مکمل)</span>
+                  <span>Congratulations on the New Calf!</span>
                 </div>
                 <p className="text-[11px] text-emerald-800">
                   Mother will automatically be marked as <strong>'Doodh wali' (Milking)</strong>, breeding record will be updated, and the newborn calf will be added to herd.
@@ -642,7 +642,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Mother Cow/Dam (والدہ گائے/بھینس)*:</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Mother Cow / Dam*:</label>
                   <select
                     value={calvedMotherTag}
                     onChange={(e) => setCalvedMotherTag(e.target.value)}
@@ -654,7 +654,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Calving Date (ولادت تاریخ)*:</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Calving Date*:</label>
                   <input
                     type="date"
                     required
@@ -667,18 +667,18 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
 
               <div className="grid grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Calf Gender (جنس):</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Calf Gender:</label>
                   <select
                     value={calfGender}
                     onChange={(e) => setCalfGender(e.target.value as any)}
                     className="w-full px-3 py-2 border rounded-xl text-xs font-bold text-gray-800 focus:ring-2 focus:ring-[#1B5E20] outline-none"
                   >
-                    <option value="Female">Female (بچھڑی / کٹی)</option>
-                    <option value="Male">Male (بچھڑا / کٹا)</option>
+                    <option value="Female">Female Calf</option>
+                    <option value="Male">Male Calf</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">New Tag # (ٹیگ نمبر):</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">New Tag #:</label>
                   <input
                     type="text"
                     required
@@ -699,15 +699,15 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Calving Ease (ولادت کی آسانی):</label>
+                <label className="block text-xs font-bold text-gray-700 mb-1">Calving Ease:</label>
                 <select
                   value={calvingEase}
                   onChange={(e) => setCalvingEase(e.target.value)}
                   className="w-full px-3 py-2 border rounded-xl text-xs font-bold text-gray-800 focus:ring-2 focus:ring-[#1B5E20] outline-none"
                 >
-                  <option>Normal / Unassisted (خودکار بغیر مدد کے ولادت)</option>
-                  <option>Slight Assistance (معمولی مدد کے ساتھ)</option>
-                  <option>Veterinary Assisted (ڈاکٹری مدد / ڈسٹوکیا)</option>
+                  <option>Normal / Unassisted</option>
+                  <option>Slight Assistance</option>
+                  <option>Veterinary Assisted</option>
                 </select>
               </div>
 
@@ -720,7 +720,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                   className="w-4 h-4 text-[#1B5E20] rounded"
                 />
                 <label htmlFor="colostrum" className="text-xs font-bold text-gray-800">
-                  Colostrum (بولی) fed within first 2 hours (10% body weight)
+                  Colostrum fed within the first 2 hours (10% of body weight)
                 </label>
               </div>
 
@@ -730,7 +730,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                 </button>
                 <button type="submit" className="px-5 py-2 bg-[#1B5E20] hover:bg-[#2e7d32] text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1.5">
                   <Check className="w-4 h-4" />
-                  <span>Register Calving & Newborn (محفوظ کریں)</span>
+                  <span>Register Calving & Newborn</span>
                 </button>
               </div>
             </form>
@@ -745,7 +745,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
             }} className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Pregnant Animal (جانور)*:</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Pregnant Animal*:</label>
                   <select
                     value={vitalsAnimalTag}
                     onChange={(e) => setVitalsAnimalTag(e.target.value)}
@@ -757,7 +757,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Body Temp °F (درجہ حرارت)*:</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Body Temperature (°F)*:</label>
                   <input
                     type="number"
                     step="0.1"
@@ -771,15 +771,15 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Fetal Movement (بچے کی حرکت):</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Fetal Movement:</label>
                   <select
                     value={vitalsFetalMovement}
                     onChange={(e) => setVitalsFetalMovement(e.target.value)}
                     className="w-full px-3 py-2 border rounded-xl text-xs font-bold text-gray-800 focus:ring-2 focus:ring-[#1B5E20] outline-none"
                   >
-                    <option>Strong & Active (متحرک و واضح حرکت)</option>
-                    <option>Normal (معمول کے مطابق)</option>
-                    <option>Weak / Sluggish (ہلکی حرکت)</option>
+                    <option>Strong & Active</option>
+                    <option>Normal</option>
+                    <option>Weak / Sluggish</option>
                   </select>
                 </div>
                 <div>
@@ -797,7 +797,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Rumination / Appetite (جگالی و خوراک):</label>
+                <label className="block text-xs font-bold text-gray-700 mb-1">Rumination / Appetite:</label>
                 <input
                   type="text"
                   value={vitalsRumination}
@@ -807,7 +807,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Veterinary / Observation Notes (ملاحظات):</label>
+                <label className="block text-xs font-bold text-gray-700 mb-1">Veterinary / Observation Notes:</label>
                 <textarea
                   rows={2}
                   value={vitalsNotes}
@@ -822,7 +822,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                 </button>
                 <button type="submit" className="px-5 py-2 bg-[#1B5E20] hover:bg-[#2e7d32] text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1.5">
                   <Check className="w-4 h-4" />
-                  <span>Save Vitals Log (وائٹلز محفوظ کریں)</span>
+                  <span>Save Vitals Log</span>
                 </button>
               </div>
             </form>
@@ -836,7 +836,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
               onAddVaccine({
                 animalTag: vacAnimalTag,
                 animalName: `${vacAnimalTag} (${animal?.breed || 'Dairy Cattle'})`,
-                breed: animal?.breed || 'ساہیوال گائے (Sahiwal)',
+                breed: animal?.breed || 'Sahiwal Cow',
                 vaccineName: vacName,
                 disease: vacDisease,
                 diseaseUrdu: vacDiseaseUrdu,
@@ -854,7 +854,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
             }} className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Select Animal (جانور منتخب کریں)*:</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Select Animal*:</label>
                   <select
                     value={vacAnimalTag}
                     onChange={(e) => setVacAnimalTag(e.target.value)}
@@ -866,7 +866,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Next Due Date (اگلی تاریخ)*:</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Next Due Date*:</label>
                   <input
                     type="date"
                     required
@@ -878,43 +878,43 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Vaccine Name (ویکسین کا نام)*:</label>
+                <label className="block text-xs font-bold text-gray-700 mb-1">Vaccine Name*:</label>
                 <select
                   value={vacName}
                   onChange={(e) => {
                     setVacName(e.target.value);
                     if (e.target.value.includes('FMD')) {
                       setVacDisease('Foot and Mouth Disease');
-                      setVacDiseaseUrdu('منہ کھر کی بیماری');
+                      setVacDiseaseUrdu('Foot and Mouth Disease');
                       setVacDose('5ml S/C');
                     } else if (e.target.value.includes('HS')) {
                       setVacDisease('Hemorrhagic Septicemia');
-                      setVacDiseaseUrdu('گل گھوٹو');
+                      setVacDiseaseUrdu('Hemorrhagic Septicemia');
                       setVacDose('5ml S/C');
                     } else if (e.target.value.includes('Anthrax')) {
                       setVacDisease('Anthrax');
-                      setVacDiseaseUrdu('اینتھراکس');
+                      setVacDiseaseUrdu('Anthrax');
                       setVacDose('1ml S/C');
                     } else if (e.target.value.includes('Deworming')) {
                       setVacDisease('Gastrointestinal Parasites');
-                      setVacDiseaseUrdu('پیٹ کے کیڑے');
+                      setVacDiseaseUrdu('Intestinal worms');
                       setVacDose('100ml Oral');
                     }
                   }}
                   className="w-full px-3 py-2 border rounded-xl text-xs font-bold text-gray-800 focus:ring-2 focus:ring-[#1B5E20] outline-none"
                 >
-                  <option>FMD Polyvalent Vaccine (منہ کھر)</option>
-                  <option>HS Alum Precipitated Vaccine (گل گھوٹو)</option>
-                  <option>Anthrax Spore Vaccine (اینتھراکس)</option>
-                  <option>Blackleg Vaccine - BQ (چوڑیا)</option>
-                  <option>Quarterly Deworming (پیٹ کے کیڑوں کا شربت)</option>
-                  <option>Theileriosis Prophylaxis (چچڑی بخار)</option>
+                  <option>FMD Polyvalent Vaccine</option>
+                  <option>HS Alum Precipitated Vaccine</option>
+                  <option>Anthrax Spore Vaccine</option>
+                  <option>Blackleg Vaccine - BQ</option>
+                  <option>Quarterly Deworming</option>
+                  <option>Theileriosis Prophylaxis</option>
                 </select>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 mb-1">Dose & Route (خوراک و طریقہ):</label>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Dose & Route:</label>
                   <input
                     type="text"
                     value={vacDose}
@@ -949,7 +949,7 @@ export const QuickActionModals: React.FC<QuickActionModalsProps> = ({
                 </button>
                 <button type="submit" className="px-5 py-2 bg-[#1B5E20] hover:bg-[#2e7d32] text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1.5">
                   <Check className="w-4 h-4" />
-                  <span>Save Vaccine (ویکسین محفوظ کریں)</span>
+                  <span>Save Vaccine</span>
                 </button>
               </div>
             </form>
